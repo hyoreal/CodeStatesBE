@@ -54,11 +54,7 @@ public class CoffeeController {
     @GetMapping
     public ResponseEntity getCoffees() {
         List<Coffee> coffees = coffeeService.findCoffees();
-
-        List<CoffeeResponseDto> response =
-                coffees.stream()
-                        .map(coffee -> mapper.coffeeToCoffeeResponseDto(coffee))
-                        .collect(Collectors.toList());
+        List<CoffeeResponseDto> response = mapper.coffeesToCoffeeResponseDtos(coffees);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

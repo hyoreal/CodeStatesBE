@@ -70,6 +70,7 @@ public class MemberController {
                 members.stream()
                         .map(member -> mapper.memberToMemberResponseDto(member))
                         .collect(Collectors.toList());
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
