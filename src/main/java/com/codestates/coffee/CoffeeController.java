@@ -20,7 +20,7 @@ public class CoffeeController {
         map.put("price", price);
 
 
-        return new ResponseEntity<Map>(map, HttpStatus.CREATED);
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
     @GetMapping("/{coffee-id}")
@@ -29,7 +29,7 @@ public class CoffeeController {
 
         // not implementation
 
-        return new ResponseEntity<Map>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
@@ -38,7 +38,7 @@ public class CoffeeController {
 
         // not implementation
 
-        return new ResponseEntity<Map>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //---------------- 여기서 부터 아래에 코드를 구현하세요! -------------------//
@@ -52,7 +52,7 @@ public class CoffeeController {
         body.put("korName", korName);
         body.put("engName", "Vanilla Latte");
         body.put("price", price);
-        return new ResponseEntity(body, HttpStatus.OK);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     // 2. 커피피 정보 삭제를 위한 핸들러 서드 구현
@@ -60,6 +60,6 @@ public class CoffeeController {
     public ResponseEntity deleteCoffee(@PathVariable("coffee-id") long coffeeId) {
         // No need business logic
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

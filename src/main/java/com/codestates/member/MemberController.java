@@ -19,7 +19,7 @@ public class MemberController {
         map.put("name", name);
         map.put("phone", phone);
 
-        return new ResponseEntity<Map>(map, HttpStatus.CREATED);
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
     @GetMapping("/{member-id}")
@@ -27,7 +27,7 @@ public class MemberController {
         System.out.println("# memberId: " + memberId);
 
         // not implementation
-        return new ResponseEntity<Map>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
@@ -36,7 +36,7 @@ public class MemberController {
 
         // not implementation
 
-        return new ResponseEntity<Map>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
@@ -53,7 +53,7 @@ public class MemberController {
 
         // No need Business logic
 
-        return new ResponseEntity<Map>(body, HttpStatus.OK);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     // 2. 회원 정보 삭제를 위한 핸들러 메서드 구현
@@ -61,6 +61,6 @@ public class MemberController {
     public ResponseEntity deleteMember(@PathVariable("member-id") long memberId) {
         // No need business logic
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
