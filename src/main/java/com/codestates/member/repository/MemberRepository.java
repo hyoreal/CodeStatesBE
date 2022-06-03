@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Optional;
 
-// 페이지네이션을 적용 완료!
+// 페이지네이션 적용 완료!
 public interface MemberRepository extends PagingAndSortingRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
 }

@@ -49,7 +49,7 @@ public class MemberService {
     }
 
     public Page<Member> findMembers(int page, int size) {
-        // 페이지네이션을 적용 완료!
+        // 페이지네이션 적용 완료!
         return memberRepository.findAll(PageRequest.of(page, size,
                                     Sort.by("memberId").descending()));
     }

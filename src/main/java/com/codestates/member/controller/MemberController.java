@@ -68,7 +68,7 @@ public class MemberController {
     @GetMapping
     public ResponseEntity getMembers(@Positive @RequestParam int page,
                                      @Positive @RequestParam int size) {
-        // 페이지네이션을 적용 완료!
+        // 페이지네이션 적용 완료!
         Page<Member> pageMembers = memberService.findMembers(page - 1, size);
         return new ResponseEntity<>(new MultiResponseDto<>(pageMembers),
                 HttpStatus.OK);
