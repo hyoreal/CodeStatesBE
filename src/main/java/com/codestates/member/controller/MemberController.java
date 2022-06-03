@@ -1,13 +1,13 @@
 package com.codestates.member.controller;
 
 import com.codestates.dto.MultiResponseDto;
+import com.codestates.dto.SingleResponseDto;
 import com.codestates.member.dto.MemberPatchDto;
 import com.codestates.member.dto.MemberPostDto;
 import com.codestates.member.entity.Member;
 import com.codestates.member.mapper.MemberMapper;
 import com.codestates.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +40,7 @@ public class MemberController {
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberDto) {
         Member member =
                 memberService.createMember(mapper.memberPostDtoToMember(memberDto));
-
-        return new ResponseEntity<>(mapper.memberToSingleResponseDto(member),
+        return new ResponseEntity<>(new SingleResponseDto<>(member),
                 HttpStatus.CREATED);
     }
 
@@ -54,7 +53,7 @@ public class MemberController {
         Member member =
                 memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
 
-        return new ResponseEntity<>(mapper.memberToSingleResponseDto(member),
+        return new ResponseEntity<>(new SingleResponseDto<>(member),
                 HttpStatus.OK);
     }
 
@@ -62,7 +61,7 @@ public class MemberController {
     public ResponseEntity getMember(
             @PathVariable("member-id") @Positive long memberId) {
         Member member = memberService.findMember(memberId);
-        return new ResponseEntity<>(mapper.memberToSingleResponseDto(member)
+        return new ResponseEntity<>(new SingleResponseDto<>(member)
                 , HttpStatus.OK);
     }
 
@@ -71,8 +70,8 @@ public class MemberController {
                                      @Positive @RequestParam int size) {
         // 페이지네이션을 적용 완료!
         Page<Member> pageMembers = memberService.findMembers(page - 1, size);
-        MultiResponseDto response = mapper.membersToMultiResponseDto(pageMembers);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto<>(pageMembers),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("/{member-id}")
