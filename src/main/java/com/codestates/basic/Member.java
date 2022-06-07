@@ -1,18 +1,20 @@
 package com.codestates.basic;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long memberId;
 
-    @Column(length = 100)
     private String email;
 
     public Member(String email) {

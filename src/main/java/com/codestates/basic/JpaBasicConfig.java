@@ -22,12 +22,14 @@ public class JpaBasicConfig {
         this.em = emFactory.createEntityManager();
         this.tx = em.getTransaction();
 
-        System.out.println("# Active Profile: many-to-one");
+        System.out.println("# Active Profile: basic");
         return args -> {
-			persistGeneratedAUTO();
-			persistGeneratedIdentity();
-			persistAndCommitGeneratedIdentity();
-			insertLazilyEagerly();
+//			persistGeneratedAUTO();
+//			persistGeneratedIdentity();
+//			persistAndCommitGeneratedIdentity();
+//			insertLazilyEagerly();
+//            updateEntity();
+//            deleteEntity();
         };
     }
 
@@ -47,7 +49,8 @@ public class JpaBasicConfig {
         System.out.println("------------------------------");
 
         Member resultMember = em.find(Member.class, 1L);
-        System.out.println("Id: " + resultMember.getMemberId() + ", email: " + resultMember.getEmail());
+        System.out.println("Id: " + resultMember.getMemberId() + ", email: " +
+                resultMember.getEmail());
         System.out.println("------------------------------");
     }
 
@@ -73,7 +76,8 @@ public class JpaBasicConfig {
         Member resultMember = em.find(Member.class, 1L);
 
         // 따라서 NullPointerException 발생
-        System.out.println("Id: " + resultMember.getMemberId() + ", email: " + resultMember.getEmail());
+        System.out.println("Id: " + resultMember.getMemberId() + ", email: " +
+                resultMember.getEmail());
         System.out.println("------------------------------");
     }
 
@@ -120,8 +124,8 @@ public class JpaBasicConfig {
         //
         //
         System.out.println("TX begin: ------------------------------");
-        Member member1 = new Member("hgd@gmail.com");
-        Member member2 = new Member("hgd@gmail.com");
+        Member member1 = new Member("hgd1@gmail.com");
+        Member member2 = new Member("hgd2@gmail.com");
 
         em.persist(member1);
         em.persist(member2);
@@ -129,5 +133,40 @@ public class JpaBasicConfig {
         System.out.println("persisted: ------------------------------");
         tx.commit();
         System.out.println("TX committed: ------------------------------");
+    }
+
+    private void updateEntity() {
+        tx.begin();
+
+        System.out.println("TX1 began: ------------------------------");
+        em.persist(new Member("hgd1@gmail.com"));
+        System.out.println("persisted: ------------------------------");
+        tx.commit();
+        System.out.println("TX1 committed: ------------------------------");
+
+        tx.begin();
+        System.out.println("TX2 began: ------------------------------");
+        Member member1 = em.find(Member.class, 1L);
+        member1.setEmail("hgd1@yahoo.co.kr");
+
+        tx.commit();
+        System.out.println("TX2 committed: ------------------------------");
+    }
+
+    private void deleteEntity() {
+        tx.begin();
+
+        System.out.println("TX1 began: ------------------------------");
+        em.persist(new Member("hgd1@gmail.com"));
+        System.out.println("persisted: ------------------------------");
+        tx.commit();
+        System.out.println("TX1 committed: ------------------------------");
+
+        tx.begin();
+        System.out.println("TX2 began: ------------------------------");
+        Member member1 = em.find(Member.class, 1L);
+        em.remove(member1);
+        tx.commit();
+        System.out.println("TX2 committed: ------------------------------");
     }
 }
