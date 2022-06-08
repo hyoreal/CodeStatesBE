@@ -1,4 +1,4 @@
-package com.codestates.many_to_one;
+package com.codestates.entity_mapping.many_to_one;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
