@@ -1,4 +1,4 @@
-package com.codestates.entity_mapping.many_to_one;
+package com.codestates.entity_mapping.many_to_one_unidirection;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -10,10 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-@Profile("many-to-one")
-@EntityScan(basePackageClasses = {JpaManyToOneConfig.class})
+@Profile("many-to-one-uni")
+@EntityScan(basePackageClasses = {JpaManyToOneUniDirectionConfig.class})
 @Configuration
-public class JpaManyToOneConfig {
+public class JpaManyToOneUniDirectionConfig {
     private EntityManager em;
     private EntityTransaction tx;
 
@@ -21,16 +21,17 @@ public class JpaManyToOneConfig {
     public CommandLineRunner testJpaManyToOneRunner(EntityManagerFactory emFactory) {
         this.em = emFactory.createEntityManager();
         this.tx = em.getTransaction();
-        System.out.println("# Active Profile: many-to-one");
+        System.out.println("# Active Profile: many-to-one-uni");
 
         return args -> {
-            mappingManyToOne();
+            mappingManyToOneUniDirection();
         };
     }
 
-    private void mappingManyToOne() {
+    private void mappingManyToOneUniDirection() {
         tx.begin();
-        Member member = new Member("hgd@gmail.com");
+        Member member = new Member("hgd@gmail.com", "Hond Gil Dong",
+                "010-1111-1111");
         em.persist(member);
 
         System.out.println("member persisted: ------------------------------");
@@ -50,7 +51,7 @@ public class JpaManyToOneConfig {
         Order findOrder = em.find(Order.class, 1L);
 
         // 주문한 회원의 회원 정보는 가져올 수 있다.
-        System.out.println("findOrder: " + findOrder.getMember().getMemberId() +
+        System.out.println("findMember: " + findOrder.getMember().getMemberId() +
                         ", " + findOrder.getMember().getEmail());
 
         /**
