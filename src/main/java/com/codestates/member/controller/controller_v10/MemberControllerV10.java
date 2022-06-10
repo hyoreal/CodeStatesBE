@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * - DI 적용
  * - Mapstruct Mapper 적용
- * - @ExceptionHandler 적용
+ * - @ExceptionHandler 적용.
  */
 @RestController
 @RequestMapping("/v10/members")
