@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 
 /**
@@ -40,7 +41,7 @@ public class MemberController {
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberDto) {
         Member member =
                 memberService.createMember(mapper.memberPostDtoToMember(memberDto));
-        return new ResponseEntity<>(new SingleResponseDto<>(member),
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
                 HttpStatus.CREATED);
     }
 
@@ -53,7 +54,7 @@ public class MemberController {
         Member member =
                 memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(member),
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
                 HttpStatus.OK);
     }
 
@@ -61,7 +62,8 @@ public class MemberController {
     public ResponseEntity getMember(
             @PathVariable("member-id") @Positive long memberId) {
         Member member = memberService.findMember(memberId);
-        return new ResponseEntity<>(new SingleResponseDto<>(member)
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponseDto(member))
                 , HttpStatus.OK);
     }
 
@@ -70,7 +72,10 @@ public class MemberController {
                                      @Positive @RequestParam int size) {
         // 페이지네이션 적용 완료!
         Page<Member> pageMembers = memberService.findMembers(page - 1, size);
-        return new ResponseEntity<>(new MultiResponseDto<>(pageMembers),
+        List<Member> members = pageMembers.getContent();
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.membersToMemberResponseDtos(members),
+                        pageMembers),
                 HttpStatus.OK);
     }
 
