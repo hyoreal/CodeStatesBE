@@ -38,7 +38,7 @@ public class JpaManyToOneBiDirectionConfig {
 
         em.persist(member);
 
-        System.out.println("member persisted: ------------------------------");
+        System.out.println("member persisted: -------------------------------");
 
 
         em.persist(order);
