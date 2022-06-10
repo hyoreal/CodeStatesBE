@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 /**
- * MemberService 클래스 연동 없음.
+ * MemberService 클래스 연동 없음
  */
 @RestController
 @RequestMapping("/v1/members")
