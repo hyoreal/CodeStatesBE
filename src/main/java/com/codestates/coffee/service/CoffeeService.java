@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CoffeeService {
-    private CoffeeRepository coffeeRepository;
+    private final CoffeeRepository coffeeRepository;
 
     public CoffeeService(CoffeeRepository coffeeRepository) {
         this.coffeeRepository = coffeeRepository;
@@ -81,7 +81,7 @@ public class CoffeeService {
     }
 
     private Coffee findVerifiedCoffeeByQuery(long coffeeId) {
-        Optional<Coffee> optionalCoffee = coffeeRepository.findById(coffeeId);
+        Optional<Coffee> optionalCoffee = coffeeRepository.findByCoffeeId(coffeeId);
         Coffee findCoffee =
                 optionalCoffee.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.COFFEE_NOT_FOUND));

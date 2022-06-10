@@ -41,7 +41,8 @@ public class MemberController {
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberDto) {
         Member member =
                 memberService.createMember(mapper.memberPostDtoToMember(memberDto));
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
                 HttpStatus.CREATED);
     }
 
@@ -54,7 +55,8 @@ public class MemberController {
         Member member =
                 memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
                 HttpStatus.OK);
     }
 
