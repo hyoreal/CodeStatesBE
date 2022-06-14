@@ -4,13 +4,10 @@ import com.codestates.coffee.entity.Coffee;
 import com.codestates.coffee.repository.CoffeeRepository;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
-import com.codestates.order.entity.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,7 +40,7 @@ public class CoffeeService {
         Optional.ofNullable(coffee.getPrice())
                 .ifPresent(price -> findCoffee.setPrice(price));
 
-        // TODO 추가된 부분
+        // 추가된 부분
         Optional.ofNullable(coffee.getCoffeeStatus())
                 .ifPresent(coffeeStatus -> findCoffee.setCoffeeStatus(coffeeStatus));
 
@@ -52,12 +49,6 @@ public class CoffeeService {
 
     public Coffee findCoffee(long coffeeId) {
         return findVerifiedCoffeeByQuery(coffeeId);
-    }
-
-    // 주문에 해당하는 커피 정보 조회
-    public List<Coffee> findOrderedCoffees(Order order) {
-        // TODO
-        throw new BusinessLogicException(ExceptionCode.NOT_IMPLEMENTATION);
     }
 
     public Page<Coffee> findCoffees(int page, int size) {
@@ -86,7 +77,7 @@ public class CoffeeService {
     }
 
     private Coffee findVerifiedCoffeeByQuery(long coffeeId) {
-        Optional<Coffee> optionalCoffee = coffeeRepository.findByCoffeeId(coffeeId);
+        Optional<Coffee> optionalCoffee = coffeeRepository.findByCoffee(coffeeId);
         Coffee findCoffee =
                 optionalCoffee.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.COFFEE_NOT_FOUND));

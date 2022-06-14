@@ -11,13 +11,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class OrderService {
     private final MemberService memberService;
     private final OrderRepository orderRepository;
+
     public OrderService(MemberService memberService,
                         OrderRepository orderRepository) {
         this.memberService = memberService;
@@ -28,12 +28,12 @@ public class OrderService {
         // 회원이 존재하는지 확인
         memberService.findVerifiedMember(order.getMember().getMemberId());
 
-        // TODO 커피가 존재하는지 조회해야 됨
+        // TODO 커피가 존재하는지 검증 필요
 
         return orderRepository.save(order);
     }
 
-    // TODO 주문 상태 처리를 위한 updateOrder() 메서드 추가
+    // 주문 상태 처리를 위한 updateOrder() 메서드 추가
     public Order updateOrder(Order order) {
         Order findOrder = findVerifiedOrder(order.getOrderId());
 
@@ -42,6 +42,7 @@ public class OrderService {
         findOrder.setModifiedAt(LocalDateTime.now());
         return orderRepository.save(findOrder);
     }
+
     public Order findOrder(long orderId) {
         return findVerifiedOrder(orderId);
     }

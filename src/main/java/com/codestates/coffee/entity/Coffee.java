@@ -28,7 +28,7 @@ public class Coffee {
     @Column(length = 3, nullable = false, unique = true)
     private String coffeeCode;
 
-    // TODO 추가된 부분
+    // 추가된 부분
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20, nullable = false)
     private CoffeeStatus coffeeStatus = CoffeeStatus.COFFEE_FOR_SALE;
@@ -39,10 +39,10 @@ public class Coffee {
     @Column(nullable = false, name = "LAST_MODIFIED_AT")
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
-    // TODO 추가 된 부분
+    // 추가 된 부분
     public enum CoffeeStatus {
         COFFEE_FOR_SALE("판매중"),
-        COFFEE_SOLD_OUT("매진");
+        COFFEE_SOLD_OUT("판매중지");
 
         @Getter
         private String status;

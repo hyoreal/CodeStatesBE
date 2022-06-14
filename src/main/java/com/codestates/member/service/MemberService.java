@@ -10,11 +10,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 /**
- * V2
  *  - 메서드 구현
  *  - DI 적용
  *  - Spring Data JPA 적용
@@ -41,7 +39,7 @@ public class MemberService {
                 .ifPresent(name -> findMember.setName(name));
         Optional.ofNullable(member.getPhone())
                 .ifPresent(phone -> findMember.setPhone(phone));
-        // TODO 추가된 부분
+        // 추가된 부분
         Optional.ofNullable(member.getMemberStatus())
                 .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
         findMember.setModifiedAt(LocalDateTime.now());
