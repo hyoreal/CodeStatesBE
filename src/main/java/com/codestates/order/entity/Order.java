@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-// TODO V10
 @Getter
 @Setter
 @Table("ORDERS")
