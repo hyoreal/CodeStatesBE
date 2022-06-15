@@ -1,5 +1,6 @@
-package com.codestates.stamp.entity;
+package com.codestates.stamp;
 
+import com.codestates.audit.Auditable;
 import com.codestates.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Stamp {
+public class Stamp extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stampId;

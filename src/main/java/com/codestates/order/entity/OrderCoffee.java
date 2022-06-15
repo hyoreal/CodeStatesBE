@@ -1,5 +1,6 @@
 package com.codestates.order.entity;
 
+import com.codestates.audit.Auditable;
 import com.codestates.coffee.entity.Coffee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-public class OrderCoffee { // homework solution 추가
+public class OrderCoffee extends Auditable { // homework solution 추가
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderCoffeeId;

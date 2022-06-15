@@ -20,7 +20,7 @@ public class CoffeePatchDto {
 
     private Optional<@Range(min= 100, max= 50000) Integer> price = Optional.empty();
 
-    // TODO 추가된 부분. 커피 상태 값을 사전에 체크하는 Custom Validator를 만들수도 있다.
+    // 추가된 부분. 커피 상태 값을 사전에 체크하는 Custom Validator를 만들수도 있다.
     private Coffee.CoffeeStatus coffeeStatus;
 
     public void setCoffeeId(long coffeeId) {

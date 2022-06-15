@@ -2,13 +2,12 @@ package com.codestates.member.entity;
 
 import com.codestates.audit.Auditable;
 import com.codestates.order.entity.Order;
-import com.codestates.stamp.entity.Stamp;
+import com.codestates.stamp.Stamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,12 +33,6 @@ public class Member extends Auditable {
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20, nullable = false)
     private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
-
-//    @Column(nullable = false)
-//    private LocalDateTime createdAt = LocalDateTime.now();
-//
-//    @Column(nullable = false, name = "LAST_MODIFIED_AT")
-//    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     // homework solution 추가
     @OneToMany(mappedBy = "member")

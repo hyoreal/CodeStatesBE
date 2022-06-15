@@ -1,5 +1,6 @@
 package com.codestates.coffee.entity;
 
+import com.codestates.audit.Auditable;
 import com.codestates.order.entity.OrderCoffee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Coffee {
+public class Coffee extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long coffeeId;
@@ -35,12 +36,6 @@ public class Coffee {
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20, nullable = false)
     private CoffeeStatus coffeeStatus = CoffeeStatus.COFFEE_FOR_SALE;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false, name = "LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     // homework solution 추가
     @OneToMany(mappedBy = "coffee")

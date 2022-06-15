@@ -1,7 +1,7 @@
 package com.codestates.member.dto;
 
 import com.codestates.member.entity.Member;
-import com.codestates.stamp.entity.Stamp;
+import com.codestates.stamp.Stamp;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -9,7 +9,7 @@ import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.entity.Order;
 import com.codestates.order.mapper.OrderMapper;
 import com.codestates.order.service.OrderService;
-import com.codestates.stamp.entity.Stamp;
+import com.codestates.stamp.Stamp;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
