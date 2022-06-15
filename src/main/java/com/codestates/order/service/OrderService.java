@@ -40,7 +40,6 @@ public class OrderService {
 
         Optional.ofNullable(order.getOrderStatus())
                 .ifPresent(orderStatus -> findOrder.setOrderStatus(orderStatus));
-        findOrder.setModifiedAt(LocalDateTime.now());
         return orderRepository.save(findOrder);
     }
 
@@ -62,7 +61,6 @@ public class OrderService {
             throw new BusinessLogicException(ExceptionCode.CANNOT_CHANGE_ORDER);
         }
         findOrder.setOrderStatus(Order.OrderStatus.ORDER_CANCEL);
-        findOrder.setModifiedAt(LocalDateTime.now());
         orderRepository.save(findOrder);
     }
 
