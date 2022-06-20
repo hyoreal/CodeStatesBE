@@ -41,9 +41,6 @@ public class OrderController {
         Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderPostDto));
 
         // homework solution 추가
-        updateStamp(order);
-
-        // homework solution 추가
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
                 HttpStatus.CREATED);

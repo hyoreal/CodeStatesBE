@@ -3,9 +3,11 @@ package com.codestates.order.service;
 import com.codestates.coffee.service.CoffeeService;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
+import com.codestates.member.entity.Member;
 import com.codestates.member.service.MemberService;
 import com.codestates.order.entity.Order;
 import com.codestates.order.repository.OrderRepository;
+import com.codestates.stamp.Stamp;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -28,10 +30,13 @@ public class OrderService {
     }
 
     public Order createOrder(Order order) {
-        // homework solution 추가
         verifyOrder(order);
+        Order savedOrder = saveOrder(order);
 
-        return orderRepository.save(order);
+        // homework solution 추가
+        updateStamp(savedOrder);
+
+        return savedOrder;
     }
 
     // 메서드 추가
@@ -40,7 +45,7 @@ public class OrderService {
 
         Optional.ofNullable(order.getOrderStatus())
                 .ifPresent(orderStatus -> findOrder.setOrderStatus(orderStatus));
-        return orderRepository.save(findOrder);
+        return saveOrder(findOrder);
     }
 
     public Order findOrder(long orderId) {
@@ -80,5 +85,29 @@ public class OrderService {
         order.getOrderCoffees().stream()
                 .forEach(orderCoffee -> coffeeService.
                         findVerifiedCoffee(orderCoffee.getCoffee().getCoffeeId()));
+    }
+
+    // homework solution 추가
+    private void updateStamp(Order order) {
+        Member member = memberService.findMember(order.getMember().getMemberId());
+        int stampCount = calculateStampCount(order);
+
+        Stamp stamp = member.getStamp();
+        stamp.setStampCount(stamp.getStampCount() + stampCount);
+        member.setStamp(stamp);
+
+        memberService.updateMember(member);
+    }
+
+    // homework solution 추가
+    private int calculateStampCount(Order order) {
+        return order.getOrderCoffees().stream()
+                .map(orderCoffee -> orderCoffee.getQuantity())
+                .mapToInt(quantity -> quantity)
+                .sum();
+    }
+
+    private Order saveOrder(Order order) {
+        return orderRepository.save(order);
     }
 }
