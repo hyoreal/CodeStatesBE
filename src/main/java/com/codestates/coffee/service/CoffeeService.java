@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -48,7 +49,8 @@ public class CoffeeService {
     }
 
     public Coffee findCoffee(long coffeeId) {
-        return findVerifiedCoffeeByQuery(coffeeId);
+         findVerifiedCoffeeByQuery(coffeeId);
+        throw new RuntimeException("tx aspect test2");
     }
 
     public Page<Coffee> findCoffees(int page, int size) {

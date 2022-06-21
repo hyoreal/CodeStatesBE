@@ -8,6 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,6 +19,7 @@ import java.util.Optional;
  *  - DI 적용
  *  - Spring Data JPA 적용
  */
+@Transactional
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -31,6 +35,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
@@ -44,6 +49,7 @@ public class MemberService {
         return memberRepository.save(findMember);
     }
 
+    @Transactional(readOnly = true)
     public Member findMember(long memberId) {
         return findVerifiedMember(memberId);
     }
@@ -59,6 +65,7 @@ public class MemberService {
         memberRepository.delete(findMember);
     }
 
+    @Transactional(readOnly = true)
     public Member findVerifiedMember(long memberId) {
         Optional<Member> optionalMember =
                 memberRepository.findById(memberId);

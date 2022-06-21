@@ -40,25 +40,9 @@ public class OrderController {
     public ResponseEntity postOrder(@Valid @RequestBody OrderPostDto orderPostDto) {
         Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderPostDto));
 
-        updateStamp(order);
-
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
                 HttpStatus.CREATED);
-    }
-
-    private void updateStamp(Order order) {
-        Member member = memberService.findMember(order.getMember().getMemberId());
-        int stampCount =
-                order.getOrderCoffees().stream()
-                        .map(orderCoffee -> orderCoffee.getQuantity())
-                        .mapToInt(quantity -> quantity)
-                        .sum();
-        Stamp stamp = member.getStamp();
-        stamp.setStampCount(stamp.getStampCount() + stampCount);
-        member.setStamp(stamp);
-
-        memberService.updateMember(member);
     }
 
     @PatchMapping("/{order-id}")
