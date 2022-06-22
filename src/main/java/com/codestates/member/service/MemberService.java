@@ -18,6 +18,7 @@ import java.util.Optional;
  *  - 메서드 구현
  *  - DI 적용
  *  - Spring Data JPA 적용
+ *  - 트랜잭션 적용
  */
 @Transactional
 @Service
