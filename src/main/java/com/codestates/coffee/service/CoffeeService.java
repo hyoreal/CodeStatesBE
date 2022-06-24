@@ -48,8 +48,7 @@ public class CoffeeService {
     }
 
     public Coffee findCoffee(long coffeeId) {
-         findVerifiedCoffeeByQuery(coffeeId);
-        throw new RuntimeException("tx aspect test2");
+         return findVerifiedCoffeeByQuery(coffeeId);
     }
 
     public Page<Coffee> findCoffees(int page, int size) {
