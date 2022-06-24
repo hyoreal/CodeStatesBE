@@ -51,8 +51,7 @@ public class CoffeeService {
 
     @Transactional(readOnly = true)
     public Coffee findCoffee(long coffeeId) {
-         findVerifiedCoffeeByQuery(coffeeId);
-        throw new RuntimeException("tx aspect test2");
+         return findVerifiedCoffeeByQuery(coffeeId);
     }
 
     @Transactional(readOnly = true)
