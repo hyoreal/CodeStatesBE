@@ -1,5 +1,6 @@
 package com.codestates.member.mapper;
 
+import com.codestates.member.dto.MemberDto;
 import com.codestates.member.dto.MemberPatchDto;
 import com.codestates.member.dto.MemberPostDto;
 import com.codestates.member.dto.MemberResponseDto;
@@ -10,8 +11,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
-    Member memberPostDtoToMember(MemberPostDto memberPostDto);
-    Member memberPatchDtoToMember(MemberPatchDto memberPatchDto);
-    MemberResponseDto memberToMemberResponseDto(Member member);
-    List<MemberResponseDto> membersToMemberResponseDtos(List<Member> members);
+    Member memberPostToMember(MemberDto.Post requestBody);
+    Member memberPatchToMember(MemberDto.Patch requestBody);
+    MemberDto.response memberToMemberResponse(Member member);
+    List<MemberDto.response> membersToMemberResponses(List<Member> members);
 }

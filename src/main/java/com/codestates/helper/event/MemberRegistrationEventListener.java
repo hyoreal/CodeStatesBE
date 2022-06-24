@@ -33,7 +33,8 @@ public class MemberRegistrationEventListener {
             String message = "any email message";
             emailSender.sendEmail(message);
         } catch (MailSendException e) {
-            log.error("MailSendException: rollback for Member Registration");
+            e.printStackTrace();
+            log.error("MailSendException: rollback for Member Registration:");
             Member member = event.getMember();
             memberService.deleteMember(member.getMemberId());
         }

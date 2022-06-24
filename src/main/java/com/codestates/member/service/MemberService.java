@@ -39,6 +39,8 @@ public class MemberService {
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
         Member savedMember = memberRepository.save(member);
+
+        // 추가된 부분
         publisher.publishEvent(new MemberRegistrationApplicationEvent(this, savedMember));
         return savedMember;
     }
