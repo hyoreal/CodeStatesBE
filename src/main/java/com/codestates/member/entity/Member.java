@@ -10,8 +10,6 @@ import lombok.Setter;
  *  - lombok 추가
  */
 @Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Member {
     private long memberId;
