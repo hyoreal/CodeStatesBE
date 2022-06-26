@@ -32,23 +32,11 @@ public class CoffeePatchDto {
         return korName;
     }
 
-    public void setKorName(String korName) {
-        this.korName = korName;
-    }
-
     public String getEngName() {
         return engName;
     }
 
-    public void setEngName(String engName) {
-        this.engName = engName;
-    }
-
     public Optional<Integer> getPrice() {
         return price;
-    }
-
-    public void setPrice(Optional<Integer> price) {
-        this.price = price;
     }
 }
