@@ -40,16 +40,18 @@ public class OrderController {
     public ResponseEntity getOrders() {
         List<Order> orders = orderService.findOrders();
 
-        List<OrderResponseDto> response = orders.stream()
-                                                .map(order -> mapper.orderToOrderResponseDto(order))
-                                                .collect(Collectors.toList());
+        List<OrderResponseDto> response =
+                orders.stream()
+                        .map(order -> mapper.orderToOrderResponseDto(order))
+                        .collect(Collectors.toList());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{order-id}")
-    public void cancelOrder(@PathVariable("order-id") long orderId) {
+    public ResponseEntity cancelOrder(@PathVariable("order-id") long orderId) {
         System.out.println("# cancel order");
         orderService.cancelOrder();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
