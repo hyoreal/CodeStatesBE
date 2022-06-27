@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolationException;
 
+// ConstraintViolationException 처리 추가. ErrorResponse.of() 사용
 //@RestControllerAdvice
 public class GlobalExceptionAdviceV2 {
     @ExceptionHandler

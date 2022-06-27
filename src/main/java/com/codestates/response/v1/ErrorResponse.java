@@ -2,7 +2,6 @@ package com.codestates.response.v1;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 

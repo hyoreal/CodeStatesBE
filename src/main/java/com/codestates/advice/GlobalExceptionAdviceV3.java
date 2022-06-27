@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolationException;
 
+// 비즈니스 로직 예외 처리(RuntimeException) 정의만. 미처리
 //@RestControllerAdvice
 public class GlobalExceptionAdviceV3 {
     @ExceptionHandler

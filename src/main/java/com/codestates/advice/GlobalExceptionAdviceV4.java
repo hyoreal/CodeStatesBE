@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolationException;
 
+// BusinessLogicException 정의. 미처리
 //@RestControllerAdvice
 public class GlobalExceptionAdviceV4 {
     @ExceptionHandler

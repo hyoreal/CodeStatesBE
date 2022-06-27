@@ -12,6 +12,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// ConstraintViolationException 미처리
 //@RestControllerAdvice
 public class GlobalExceptionAdviceV1 {
     @ExceptionHandler
