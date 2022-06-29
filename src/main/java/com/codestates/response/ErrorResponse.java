@@ -22,8 +22,8 @@ public class ErrorResponse {
         this.message = message;
     }
 
-    private ErrorResponse(final List<FieldError> fieldErrors,
-                          final List<ConstraintViolationError> violationErrors) {
+    private ErrorResponse(List<FieldError> fieldErrors,
+                          List<ConstraintViolationError> violationErrors) {
         this.fieldErrors = fieldErrors;
         this.violationErrors = violationErrors;
     }
@@ -56,7 +56,7 @@ public class ErrorResponse {
             this.reason = reason;
         }
 
-        public static List<FieldError> of(BindingResult bindingResult) {
+        private static List<FieldError> of(BindingResult bindingResult) {
             final List<org.springframework.validation.FieldError> fieldErrors =
                                                         bindingResult.getFieldErrors();
             return fieldErrors.stream()
@@ -82,7 +82,7 @@ public class ErrorResponse {
             this.reason = reason;
         }
 
-        public static List<ConstraintViolationError> of(
+        private static List<ConstraintViolationError> of(
                 Set<ConstraintViolation<?>> constraintViolations) {
             return constraintViolations.stream()
                     .map(constraintViolation -> new ConstraintViolationError(
