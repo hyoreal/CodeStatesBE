@@ -30,7 +30,7 @@ public class MemberService {
     private final ApplicationEventPublisher publisher;
 
     public MemberService(MemberRepository memberRepository,
-                         EmailSender emailSender, ApplicationEventPublisher publisher) {
+                         ApplicationEventPublisher publisher) {
         this.memberRepository = memberRepository;
         this.publisher = publisher;
 

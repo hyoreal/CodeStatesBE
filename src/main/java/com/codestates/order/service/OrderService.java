@@ -3,6 +3,7 @@ package com.codestates.order.service;
 import com.codestates.coffee.service.CoffeeService;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
+import com.codestates.helper.StampCalculator;
 import com.codestates.member.entity.Member;
 import com.codestates.member.service.MemberService;
 import com.codestates.order.entity.Order;
@@ -87,10 +88,12 @@ public class OrderService {
 
     private void updateStamp(Order order) {
         Member member = memberService.findMember(order.getMember().getMemberId());
-        int stampCount = calculateStampCount(order);
+        int earnedStampCount = StampCalculator.calculateEarnedStampCount(order);
 
         Stamp stamp = member.getStamp();
-        stamp.setStampCount(stamp.getStampCount() + stampCount);
+        stamp.setStampCount(
+                StampCalculator.calculateStampCount(stamp.getStampCount(),
+                                                            earnedStampCount));
         member.setStamp(stamp);
 
         memberService.updateMember(member);
