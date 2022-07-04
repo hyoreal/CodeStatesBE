@@ -26,7 +26,7 @@ public class JpaBasicConfig {
         return args -> {
 //			persistGeneratedAUTO();
 //			persistGeneratedIdentity();
-//			persistAndCommitGeneratedIdentity();
+			persistAndCommitGeneratedIdentity();
 //			insertLazilyEagerly();
 //            updateEntity();
 //            deleteEntity();
@@ -101,10 +101,10 @@ public class JpaBasicConfig {
          * - 그래서 1차 캐시에서 조회한다.
          * - 쿼리가 실행되지 않는다.
          */
-        Member resultMember = em.find(Member.class, 1L);
+        Member resultMember1 = em.find(Member.class, 1L);
         System.out.println(" ------------------------------ 3");
 
-        System.out.println("Id: " + resultMember.getMemberId() + ", email: " + resultMember.getEmail());
+        System.out.println("Id: " + resultMember1.getMemberId() + ", email: " + resultMember1.getEmail());
         System.out.println(" ------------------------------ 4");
 
         Member resultMember2 = em.find(Member.class, 2L);
@@ -164,8 +164,8 @@ public class JpaBasicConfig {
 
         tx.begin();
         System.out.println("TX2 began: ------------------------------");
-        Member member1 = em.find(Member.class, 1L);
-        em.remove(member1);
+        Member member = em.find(Member.class, 1L);
+        em.remove(member);
         tx.commit();
         System.out.println("TX2 committed: ------------------------------");
     }
