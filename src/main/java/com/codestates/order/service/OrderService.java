@@ -33,7 +33,7 @@ public class OrderService {
         order.getOrderCoffees()
                 .stream()
                 .forEach(coffeeRef -> {
-                    coffeeService.findVerifiedCoffee(coffeeRef.getCoffeeId());
+                    coffeeService.findVerifiedCoffee(coffeeRef.getCoffeeId().getId());
                 });
         return orderRepository.save(order);
     }
