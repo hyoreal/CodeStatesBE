@@ -1,5 +1,6 @@
 package com.codestates.order.entity;
 
+import com.codestates.coffee.entity.CoffeeRef;
 import com.codestates.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
