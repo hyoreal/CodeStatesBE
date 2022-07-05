@@ -30,7 +30,7 @@ public class JpaManyToOneUniDirectionConfig {
 
     private void mappingManyToOneUniDirection() {
         tx.begin();
-        Member member = new Member("hgd@gmail.com", "Hond Gil Dong",
+        Member member = new Member("hgd@gmail.com", "Hong Gil Dong",
                 "010-1111-1111");
         em.persist(member);
 
@@ -50,7 +50,7 @@ public class JpaManyToOneUniDirectionConfig {
 
         Order findOrder = em.find(Order.class, 1L);
 
-        // 주문한 회원의 회원 정보는 가져올 수 있다.
+        // 주문한 회원의 회원 정보를 가져올 수 있다.
         System.out.println("findMember: " + findOrder.getMember().getMemberId() +
                         ", " + findOrder.getMember().getEmail());
 
