@@ -21,12 +21,12 @@ public interface OrderMapper {
     default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
         Order order = new Order();
         order.setMemberId(new AggregateReference.IdOnlyAggregateReference(orderPostDto.getMemberId()));
-        Set<CoffeeRef> orderCoffees =
+        List<CoffeeRef> orderCoffees =
                 orderPostDto.getOrderCoffees()
                         .stream()
                         .map(orderCoffeeDto ->
                                 new CoffeeRef(orderCoffeeDto.getCoffeeId(), orderCoffeeDto.getQuantity()))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         order.setOrderCoffees(orderCoffees);
 
         return order;
@@ -54,7 +54,7 @@ public interface OrderMapper {
 
     default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(
                                                         CoffeeService coffeeService,
-                                                        Set<CoffeeRef> orderCoffees) {
+                                                        List<CoffeeRef> orderCoffees) {
         return orderCoffees.stream()
                 .map(coffeeRef -> {
                     Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId());
