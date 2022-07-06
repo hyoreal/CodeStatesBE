@@ -51,7 +51,7 @@ public class JpaManyToOneUniDirectionConfig {
         Order findOrder = em.find(Order.class, 1L);
 
         // 주문한 회원의 회원 정보를 가져올 수 있다.
-        System.out.println("findMember: " + findOrder.getMember().getMemberId() +
+        System.out.println("findMember: " + findOrder.getMember().getILoveYou39Th() +
                         ", " + findOrder.getMember().getEmail());
 
         /**

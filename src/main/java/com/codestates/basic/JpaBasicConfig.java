@@ -24,9 +24,9 @@ public class JpaBasicConfig {
 
         System.out.println("# Active Profile: basic");
         return args -> {
-//			persistGeneratedAUTO();
+			persistGeneratedAUTO();
 //			persistGeneratedIdentity();
-			persistAndCommitGeneratedIdentity();
+//			persistAndCommitGeneratedIdentity();
 //			insertLazilyEagerly();
 //            updateEntity();
 //            deleteEntity();
