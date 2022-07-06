@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 public class Member {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
     private String email;
@@ -20,4 +20,5 @@ public class Member {
     public Member(String email) {
         this.email = email;
     }
+
 }

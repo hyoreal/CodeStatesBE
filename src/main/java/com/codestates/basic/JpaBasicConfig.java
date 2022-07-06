@@ -24,8 +24,8 @@ public class JpaBasicConfig {
 
         System.out.println("# Active Profile: basic");
         return args -> {
-			persistGeneratedAUTO();
-//			persistGeneratedIdentity();
+//			persistGeneratedAUTO();
+			persistGeneratedIdentity();
 //			persistAndCommitGeneratedIdentity();
 //			insertLazilyEagerly();
 //            updateEntity();
@@ -44,18 +44,18 @@ public class JpaBasicConfig {
          * Hibernate: call next value for hibernate_sequence 테이블에서 식별자용 시퀀스를 가져와서 1차
          * 캐시에 채운다.
          */
+        System.out.println("persist: ------------------------------");
         em.persist(member);
 
-        System.out.println("------------------------------");
 
         Member resultMember = em.find(Member.class, 1L);
         System.out.println("Id: " + resultMember.getMemberId() + ", email: " +
                 resultMember.getEmail());
-        System.out.println("------------------------------");
+        System.out.println("completed: ------------------------------");
     }
 
     private void persistGeneratedIdentity() {
-        System.out.println("------------------------------");
+        System.out.println("No TX ---------------------------");
         Member member = new Member("hgd@gmail.com");
 
         /**
@@ -64,9 +64,9 @@ public class JpaBasicConfig {
          * 테이블에 저장하기 전까지는 식별자를 알 수 없다.
          * - memberId가 비어 있는 상태로 저장된다.
          */
+        System.out.println("persist: ------------------------------");
         em.persist(member);
 
-        System.out.println("------------------------------");
 
         /**
          * - 식별자가 없으므로, memberId는 비어 있다. 따라서 1차 캐시에 원하는 데이터가 없다.
@@ -78,23 +78,23 @@ public class JpaBasicConfig {
         // 따라서 NullPointerException 발생
         System.out.println("Id: " + resultMember.getMemberId() + ", email: " +
                 resultMember.getEmail());
-        System.out.println("------------------------------");
     }
 
     private void persistAndCommitGeneratedIdentity() {
+        System.out.println(" TX Begin: ------------------------------ ");
         tx.begin();
-        System.out.println(" ------------------------------ 1");
         Member member = new Member("hgd@gmail.com");
 
         /**
-         * - commit을 했으므로 테이블에 저장이 되고, 1차 캐시에 저장된다.
-         * @GeneratedValue(strategy = GenerationType.IDENTITY)이므로,
-         * 테이블에 저장했으므로 식별자까지 1차 캐시에 저장된다.
-         * - memberId가 비어 있는 상태로 저장된다.
+         * - IDENTITY 전략은 persist() 실행 시, 1차 캐시에 식별자가 없는 상태로 저장.
+         * - commit이 없어도 테이블에 저장.
+         * - 식별자를 1차 캐시에 업데이트.
          */
+        System.out.println("Persist: ------------------------------ ");
         em.persist(member);
+
+        System.out.println("Commit: ------------------------------ ");
         tx.commit();
-        System.out.println(" ------------------------------ 2");
 
         /**
          * - 식별자가 있다. memberId가 1차 캐시에 채워져있다.
@@ -102,71 +102,79 @@ public class JpaBasicConfig {
          * - 쿼리가 실행되지 않는다.
          */
         Member resultMember1 = em.find(Member.class, 1L);
-        System.out.println(" ------------------------------ 3");
 
+        System.out.println("Find from 1th Cache: ------------------------------ ");
         System.out.println("Id: " + resultMember1.getMemberId() + ", email: " + resultMember1.getEmail());
-        System.out.println(" ------------------------------ 4");
 
+        System.out.println("Find from DB: ------------------------------ ");
         Member resultMember2 = em.find(Member.class, 2L);
         System.out.println(resultMember2 == null);
-        System.out.println(" ------------------------------ 5");
+
     }
 
     private void insertLazilyEagerly() {
+        System.out.println("TX begin: ------------------------------");
         //엔티티 매니저는 데이터 변경시 트랜잭션을 시작해야 한다.
         tx.begin();
         /**
-         * - Strategy AUTO일 경우 아래와 같이 동작, 그런데 IDENTITY 일 경우는 식별자 때문에 persist하면 테이블에
-         * insert한다.
-         * - 이유는 엔티티가 영속상태가 되려면 식별자가 필요하기 때문에 persist()하면 commit안해도 insert한다.
+         * - Strategy AUTO일 경우 코드 작성 순서대로 동작한다.
+         * - 그런데 IDENTITY 일 경우는 persist()하면 식별자를 테이블에서 가져와야 하므로, 식별자 없이 1차 캐시에 저장
+         * 후, 테이블에 insert한다. (commit 안해도 됨)
+         * - insert 후, 식별자를 1차 캐시에 업데이트 한다.
          * - 따라서 쓰기 지연 안됨.
          */
-        //
-        //
-        System.out.println("TX begin: ------------------------------");
         Member member1 = new Member("hgd1@gmail.com");
         Member member2 = new Member("hgd2@gmail.com");
 
+        System.out.println("persist: ------------------------------");
         em.persist(member1);
         em.persist(member2);
-        //여기까지 INSERT SQL을 데이터베이스에 보내지 않는다. 쓰기 지연 SQL 저장소에 모아둔다.
-        System.out.println("persisted: ------------------------------");
+
+        // GenerationType.AUTO 일 경우, 여기까지 INSERT SQL을 데이터베이스에 보내지 않는다. 쓰기 지연 SQL 저장소에
+        // 모아둔다.
+        System.out.println("TX commit: ------------------------------");
         tx.commit();
         System.out.println("TX committed: ------------------------------");
     }
 
     private void updateEntity() {
+        System.out.println("TX1 begin: ------------------------------");
         tx.begin();
 
-        System.out.println("TX1 began: ------------------------------");
+        System.out.println("Persist: ------------------------------");
         em.persist(new Member("hgd1@gmail.com"));
-        System.out.println("persisted: ------------------------------");
-        tx.commit();
-        System.out.println("TX1 committed: ------------------------------");
 
+        System.out.println("TX1 Commit: ------------------------------");
+        tx.commit();
+
+        System.out.println("TX2 begin: ------------------------------");
         tx.begin();
-        System.out.println("TX2 began: ------------------------------");
+
         Member member1 = em.find(Member.class, 1L);
         member1.setEmail("hgd1@yahoo.co.kr");
 
+        System.out.println("TX2 commit: ------------------------------");
         tx.commit();
-        System.out.println("TX2 committed: ------------------------------");
     }
 
     private void deleteEntity() {
+        System.out.println("TX1 begin: ------------------------------");
         tx.begin();
 
-        System.out.println("TX1 began: ------------------------------");
+        System.out.println("Persist: ------------------------------");
         em.persist(new Member("hgd1@gmail.com"));
-        System.out.println("persisted: ------------------------------");
-        tx.commit();
-        System.out.println("TX1 committed: ------------------------------");
 
+        System.out.println("TX1 commit: ------------------------------");
+        tx.commit();
+
+        System.out.println("TX2 begin: ------------------------------");
         tx.begin();
-        System.out.println("TX2 began: ------------------------------");
+
         Member member = em.find(Member.class, 1L);
         em.remove(member);
+
+        System.out.println("TX2 commit: ------------------------------");
         tx.commit();
-        System.out.println("TX2 committed: ------------------------------");
+
     }
 }
