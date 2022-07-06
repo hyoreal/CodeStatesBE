@@ -5,14 +5,54 @@ public class Calculator {
   public static void main(String[] args) {
     System.out.println("===Java Calculator===");
 
+   // ¿©·¯ ¹øÀÇ ÀÔ·ÂÀ» ¹Ş°í, ÀÔ·Â¹ŞÀº ¸¸Å­ °è»êÀ» ÇÒ ¼ö ÀÖ¾î¾ß ÇÕ´Ï´Ù.
+   // ¹İº¹¹®À» ÅëÇØ ¿©·¯ ¹øÀÇ ÀÔ·ÂÀ» ¹ŞÀ» ¼ö ÀÖ½À´Ï´Ù.
+   // »ç¿ëÀÚ°¡ Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÑ °æ¿ì, »ç¿ëÀÚ¿¡°Ô ÇÇµå¹éÀ» ÁÙ ¼ö ÀÖ½À´Ï´Ù.
+   // ¿¹¸¦ µé¾î »çÄ¢¿¬»ê ¿¬»êÀÚ(+, -, *, /)°¡ ¾Æ´Ñ ´Ù¸¥ ±âÈ£°¡ µé¾î¿Â °æ¿ì, Àß¸øµÈ ÀÔ·ÂÀÌ¶ó´Â ÇÇµå¹éÀ» ÁÙ ¼ö ÀÖ¾î¾ß ÇÕ´Ï´Ù.
+
+    op op = new op();
+
+    while(true) {
     Scanner input = new Scanner(System.in);
-        /*
-            ìš”êµ¬ ì‚¬í•­ì— ë”°ë¼ ê°„ë‹¨í•œ ê³„ì‚°ê¸°ë¥¼ ë§Œë“¤ì–´ì£¼ì„¸ìš”.
-            1. ì‚¬ìš©ìì˜ ì…ë ¥ìœ¼ë¡œ ì²« ë²ˆì§¸ ìˆ«ì, ì—°ì‚°ì, ë‘ ë²ˆì§¸ ìˆ«ìë¥¼ ë°›ì•„ì•¼ í•©ë‹ˆë‹¤.
-            2. ì—°ì‚°ìì˜ ì¢…ë¥˜ëŠ” +, -, *, / ì…ë‹ˆë‹¤.
-            3. ì†Œìˆ˜ì  ì—°ì‚°ì„ ìˆ˜í–‰í•  ìˆ˜ ìˆì–´ì•¼ í•©ë‹ˆë‹¤.
-            4. ì—°ì‚° ê²°ê³¼ë¥¼ ì½˜ì†”ì— ì¶œë ¥í•©ë‹ˆë‹¤.
-        */
-    // TODO...
+    double num1, num2 ,choice;
+    char Op;
+
+      System.out.println("0À» ´©¸£¸é Á¾·áµË´Ï´Ù. °è¼ÓÇÏ½Ã·Á¸é ´Ù¸¥ ¼ıÀÚ¸¦ ´­·¯ÁÖ¼¼¿ä.");
+      choice = input.nextInt();
+
+      if(choice == 0){
+        System.out.println("Á¾·áµÇ¾ú½À´Ï´Ù.");
+        break;
+      }
+      if(choice != 1){
+        continue;
+      }
+
+      System.out.println("Ã¹¹øÂ° ¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+      num1 = input.nextDouble();
+
+      System.out.println("¿¬»êÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+      Op = input.next().charAt(0);
+
+      System.out.println("µÎ¹øÂ° ¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+      num2 = input.nextDouble();
+
+      double result;
+      if (Op == '+') {
+        result = op.plus(num1, num2);
+      } else if (Op == '-') {
+        result = op.minus(num1, num2);
+      } else if (Op == '*') {
+        result = op.multiple(num1, num2);
+      } else if (Op == '/') {
+        result = op.division(num1, num2);
+      } else {
+        System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+        continue;
+      }
+
+      System.out.println(result);
+    }
+
   }
 }
