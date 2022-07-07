@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,22 +15,25 @@ import javax.persistence.EntityTransaction;
 @EntityScan(basePackageClasses = {JpaBasicConfig.class})
 @Configuration
 public class JpaBasicConfig {
+    private EntityManagerFactory emf;
     private EntityManager em;
     private EntityTransaction tx;
 
     @Bean
     public CommandLineRunner testJpaBasicRunner(EntityManagerFactory emFactory) {
+        this.emf = emFactory;
         this.em = emFactory.createEntityManager();
         this.tx = em.getTransaction();
 
         System.out.println("# Active Profile: basic");
         return args -> {
 //			persistGeneratedAUTO();
-			persistGeneratedIdentity();
+//			persistGeneratedIdentity();
 //			persistAndCommitGeneratedIdentity();
 //			insertLazilyEagerly();
 //            updateEntity();
 //            deleteEntity();
+//            analyzePersistContextExpiration();
         };
     }
 
@@ -176,5 +180,28 @@ public class JpaBasicConfig {
         System.out.println("TX2 commit: ------------------------------");
         tx.commit();
 
+    }
+
+    // tx 범위와 영속성 컨텍스트(EntityManager) 생존 범위가 같다????
+    private void analyzePersistContextExpiration() {
+        Member member = new Member("hgd@gmail.com");
+
+        EntityManager em = createMember(member);
+        System.out.println("find ------------------------------");
+        Member resultMember2 = em.find(Member.class, 1L);
+        System.out.println("resultMember2: " + resultMember2.getEmail());
+    }
+
+    private EntityManager createMember(Member member) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        tx.begin();
+        em.persist(member);
+
+        tx.commit();
+        Member foundMember = em.find(Member.class, member.getMemberId());
+        System.out.println("foundMember: " + foundMember.getEmail());
+        return em;
     }
 }
