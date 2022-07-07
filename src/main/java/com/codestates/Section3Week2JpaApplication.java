@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Section3Week2JpaApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("spring.profiles.active", "basic");
+//		System.setProperty("spring.profiles.active", "basic");
 //		System.setProperty("spring.profiles.active", "table");
 //		System.setProperty("spring.profiles.active", "column");
 //		System.setProperty("spring.profiles.active", "id-direct");
@@ -16,7 +16,7 @@ public class Section3Week2JpaApplication {
 //		System.setProperty("spring.profiles.active", "one-to-many-uni");
 //		System.setProperty("spring.profiles.active", "many-to-many-bi");
 //		System.setProperty("spring.profiles.active", "many-to-one-uni");
-//		System.setProperty("spring.profiles.active", "many-to-one-bi");
+		System.setProperty("spring.profiles.active", "many-to-one-bi");
 
 		SpringApplication.run(Section3Week2JpaApplication.class, args);
 	}
