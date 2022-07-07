@@ -1,4 +1,4 @@
-package com.codestates.slice.repository.coffee;
+package com.codestates.homework.coffee;
 
 import com.codestates.coffee.repository.CoffeeRepository;
 import org.junit.jupiter.api.Test;
