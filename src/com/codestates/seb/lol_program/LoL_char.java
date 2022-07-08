@@ -60,10 +60,24 @@ class LoL_char {
   void user_print(String[] user) {
     //TODO:
     System.out.println("[안내] 생성된 유닛 정보는 다음과 같습니다.");
+
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+
     System.out.println("[안내] " + user[0] + " 유닛이 게임에 참여하였습니다.");
     System.out.println("[공격력] : " + user[1]);
     System.out.println("[방어력] : " + user[2]);
     System.out.println("[체력] : " + user[3]);
+
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+
   }
 
   /**
@@ -93,20 +107,63 @@ class LoL_char {
     //TODO:
     do {
       System.out.println("----------------------------------------");
+
       System.out.println("[안내] [" + name + "]유닛이 [공격] 하였습니다.");
+
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
 
       if (enemy[2] > 0) {
         enemy[2] -= me_info_int[0] / enemy[1];
         System.out.println("[안내] 상대 유닛의 남은 [체력]은 " + enemy[2] + " 입니다.");
       } else {
+
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+
         System.out.println("----------------------------------------");
+
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+
         System.out.println("[안내] 더 이상 공격할 수 없습니다.");
+        System.out.println("\n");
+
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+
         System.out.println("[안내] 상대 유닛이 제거되었습니다.");
       }
     } while (enemy[2] > 0);
     System.out.println("----------------------------------------");
+
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+
     System.out.println("[안내] 더 이상 공격할 수 없습니다.");
     System.out.println("\n");
+
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+
     System.out.println("[안내] 상대 유닛이 제거되었습니다.");
 
   }
