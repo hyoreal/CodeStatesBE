@@ -136,13 +136,16 @@ class LoL_char {
         }
 
         System.out.println("[안내] 더 이상 공격할 수 없습니다.");
-        System.out.println("\n");
+
 
         try {
           Thread.sleep(1000);
         } catch (InterruptedException e) {
           throw new RuntimeException(e);
         }
+
+
+        System.out.println("\n");
 
         System.out.println("[안내] 상대 유닛이 제거되었습니다.");
       }
