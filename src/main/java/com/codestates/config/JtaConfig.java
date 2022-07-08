@@ -13,14 +13,14 @@ import javax.transaction.UserTransaction;
 
 @Configuration
 public class JtaConfig {
-    @Bean
+    @Bean(name = "userTransaction")
     public UserTransaction userTransaction() throws Throwable {
         UserTransactionImp userTransactionImp = new UserTransactionImp();
         userTransactionImp.setTransactionTimeout(10000);
         return userTransactionImp;
     }
 
-    @Bean
+    @Bean(name = "atomikosTransactionManager")
     public TransactionManager atomikosTransactionManager() throws Throwable {
         UserTransactionManager userTransactionManager = new UserTransactionManager();
         userTransactionManager.setForceShutdown(false);
@@ -30,7 +30,7 @@ public class JtaConfig {
         return userTransactionManager;
     }
 
-    @Bean
+    @Bean(name = "transactionManager")
     @DependsOn({ "userTransaction", "atomikosTransactionManager" })
     public PlatformTransactionManager transactionManager() throws Throwable {
         UserTransaction userTransaction = userTransaction();

@@ -1,2 +1,0 @@
-{"id":"192.168.0.14.tm165726549031700001","wasCommitted":true,"participants":[{"uri":"192.168.0.14.tm1","state":"COMMITTING","expires":1657265500241,"resourceName":"xaCoffeeOrder"}]}
-{"id":"192.168.0.14.tm165726549031700001","wasCommitted":true,"participants":[{"uri":"192.168.0.14.tm1","state":"TERMINATED","expires":1657265500397,"resourceName":"xaCoffeeOrder"}]}
