@@ -101,6 +101,7 @@ class LoL_char {
       } else {
         System.out.println("----------------------------------------");
         System.out.println("[안내] 더 이상 공격할 수 없습니다.");
+        System.out,println("\n");
         System.out.println("[안내] 상대 유닛이 제거되었습니다.");
       }
     } while (enemy[2] > 0);
