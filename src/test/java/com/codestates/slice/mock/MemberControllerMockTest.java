@@ -47,9 +47,10 @@ class MemberControllerMockTest {
                                                     "010-1234-5678");
 
         Member member = mapper.memberPostToMember(post);
-        member.setStamp(new Stamp());
+        member.setStamp(new Stamp());  // DTO로 변환될 때 필요하다.
 
-        given(memberService.createMember(Mockito.any()))
+        // Stubbing by Mockito
+        given(memberService.createMember(Mockito.any(Member.class)))
                 .willReturn(member);
 
         String content = gson.toJson(post);
