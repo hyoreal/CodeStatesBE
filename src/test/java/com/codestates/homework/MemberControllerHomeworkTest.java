@@ -58,12 +58,13 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
         // init()
 
         // then
-        this.postResultActions
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.data.email").value(this.post.getEmail()))
-                .andExpect(jsonPath("$.data.name").value(this.post.getName()))
-                .andExpect(jsonPath("$.data.phone").value(this.post.getPhone()))
-                .andReturn();
+        MvcResult result =
+                this.postResultActions
+                                    .andExpect(status().isCreated())
+                                    .andExpect(jsonPath("$.data.email").value(this.post.getEmail()))
+                                    .andExpect(jsonPath("$.data.name").value(this.post.getName()))
+                                    .andExpect(jsonPath("$.data.phone").value(this.post.getPhone()))
+                                    .andReturn();
 
 //        System.out.println(result.getResponse().getContentAsString());
     }
