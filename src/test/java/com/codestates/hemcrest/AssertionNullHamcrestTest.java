@@ -1,19 +1,21 @@
-package com.codestates.basic;
+package com.codestates.hemcrest;
 
 import com.codestates.CryptoCurrency;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
-public class AssertionNullTest {
+public class AssertionNullHamcrestTest {
 
     @DisplayName("AssertionNull() Test")
     @Test
     public void assertNotNullTest() {
         String currencyName = getCryptoCurrency("ETH");
 
-        assertNotNull(currencyName, "should be not null");
+        assertThat(currencyName, is(notNullValue()));
+//        assertThat(currencyName, is(nullValue()));
     }
 
     private String getCryptoCurrency(String unit) {

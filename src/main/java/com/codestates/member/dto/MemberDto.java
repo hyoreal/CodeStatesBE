@@ -12,6 +12,7 @@ import javax.validation.constraints.Pattern;
 
 public class MemberDto {
     @Getter
+    @AllArgsConstructor // TODO 테스트를 위해 추가됨
     public static class Post {
         @NotBlank
         @Email
