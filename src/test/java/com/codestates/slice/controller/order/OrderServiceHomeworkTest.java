@@ -1,4 +1,4 @@
-package com.codestates.homework;
+package com.codestates.slice.controller.order;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.helper.StubData;

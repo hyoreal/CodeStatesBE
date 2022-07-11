@@ -29,7 +29,16 @@ public class StubData {
             return stubRequestBody.get(method);
         }
 
-        public static Page<Member> getResponseBody() {
+        public static Member getSingleResponseBody() {
+            Member member = new Member("hgd1@gmail.com", "홍길동1", "010-1111-1111");
+            member.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
+            member.setStamp(new Stamp());
+
+
+            return member;
+        }
+
+        public static Page<Member> getMultiResponseBody() {
             Member member1 = new Member("hgd1@gmail.com", "홍길동1", "010-1111-1111");
             member1.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
             member1.setStamp(new Stamp());
@@ -43,7 +52,7 @@ public class StubData {
                     2);
         }
 
-        public static Member getResponseBody(long memberId) {
+        public static Member getMultiResponseBody(long memberId) {
             Member member = new Member("hgd@gmail.com", "홍길동", "010-1111-1111");
             member.setMemberId(memberId);
             member.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
@@ -51,7 +60,7 @@ public class StubData {
             return member;
         }
 
-        public static Member getResponseBody(long memberId, Map<String, String> updatedInfo) {
+        public static Member getMultiResponseBody(long memberId, Map<String, String> updatedInfo) {
             String name = Optional.ofNullable(updatedInfo.get("name")).orElse("홍길동");
             String phone = Optional.ofNullable(updatedInfo.get("phone")).orElse("010-1111-1111");
             Member member = new Member("hgd@gmail.com", name, phone);

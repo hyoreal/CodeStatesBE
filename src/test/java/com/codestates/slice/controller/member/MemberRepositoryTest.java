@@ -1,4 +1,4 @@
-package com.codestates.slice.repository.member;
+package com.codestates.slice.controller.member;
 
 import com.codestates.member.entity.Member;
 import com.codestates.member.repository.MemberRepository;

@@ -1,4 +1,4 @@
-package com.codestates.homework;
+package com.codestates.slice.controller.member;
 
 import com.codestates.helper.MemberControllerTestHelper;
 import com.codestates.helper.StubData;
@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MemberControllerHomeworkTest implements MemberControllerTestHelper {
+public class MemberControllerTest4 implements MemberControllerTestHelper {
     @Autowired
     private MockMvc mockMvc;
 
@@ -55,7 +55,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     void postMemberTest() throws Exception {
         // given
         MemberDto.Post post = (MemberDto.Post) StubData.MockMember.getRequestBody(HttpMethod.POST);
-        Member member = StubData.MockMember.getResponseBody(1L);
+        Member member = StubData.MockMember.getMultiResponseBody(1L);
 
         // Stubbing by Mockito
         given(memberService.createMember(Mockito.any(Member.class))).willReturn(member);
@@ -85,7 +85,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
         updatedInfo.put("phone", "010-2222-2222");
 
         MemberDto.Patch patch = (MemberDto.Patch) StubData.MockMember.getRequestBody(HttpMethod.PATCH);
-        Member member = StubData.MockMember.getResponseBody(memberId, updatedInfo);
+        Member member = StubData.MockMember.getMultiResponseBody(memberId, updatedInfo);
 
 
         // Stubbing by Mockito
@@ -106,7 +106,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     void getMemberTest() throws Exception {
         // given
         long memberId = 1L;
-        Member member = StubData.MockMember.getResponseBody(memberId);
+        Member member = StubData.MockMember.getMultiResponseBody(memberId);
 
         // Stubbing by Mockito
         given(memberService.findMember(Mockito.anyLong())).willReturn(member);
@@ -126,7 +126,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     @Test
     void getMembersTest() throws Exception {
         // given
-        Page<Member> members = StubData.MockMember.getResponseBody();
+        Page<Member> members = StubData.MockMember.getMultiResponseBody();
 
         // Stubbing by Mockito
         given(memberService.findMembers(Mockito.anyInt(), Mockito.anyInt())).willReturn(members);
