@@ -1,6 +1,5 @@
 package com.codestates.helper.email;
 
-import com.codestates.helper.email.EmailSendable;
 import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Service;
 
