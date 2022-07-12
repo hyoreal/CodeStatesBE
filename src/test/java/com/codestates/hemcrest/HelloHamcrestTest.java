@@ -8,14 +8,14 @@ import static org.hamcrest.Matchers.*;
 
 public class HelloHamcrestTest {
 
-    @DisplayName("Hello Junit Test using hamcrest")
+    @DisplayName("Hello JUnit Test using hamcrest")
     @Test
     public void assertionTest() {
-        String expected = "Hello, World";
+        String expected = "Hello, JUnit";
         String actual = "Hello, JUnit";
 
 
-//        assertThat(actual, is(equalTo(expected)));
-        assertThat(actual, is(not(equalTo(expected))));
+        assertThat(actual, is(equalTo(expected)));
+//        assertThat(actual, is(not(equalTo(expected))));
     }
 }
