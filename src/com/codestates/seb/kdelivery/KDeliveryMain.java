@@ -113,8 +113,8 @@ public class KDeliveryMain {
      */
     System.out.println("[안내] 반갑습니다. 가맹주님!");
     System.out.println("[안내] 음식점 상호는 무엇인가요?");
-    String shopName = s.nextLine();
-    Shop shop = new Shop();
+//    String shopName = s.nextLine();
+    Shop shop = new Shop(s.nextLine());
 
     System.out.println("[안내] 대표 메뉴 이름은 무엇인가요?");
     String foodName = s.nextLine();
@@ -124,7 +124,7 @@ public class KDeliveryMain {
     shop.addFood(foodName, foodPrice);
 
 
-    System.out.println("[안내]"+ shopName + "에 음식(" + foodName + ", " + foodPrice +") 추가되었습니다.");
+    System.out.println("[안내]"+ shop + "에 음식(" + foodName + ", " + foodPrice +") 추가되었습니다.");
     System.out.println("[시스템] 가게 등록이 정상 처리되었습니다.");
 
   }

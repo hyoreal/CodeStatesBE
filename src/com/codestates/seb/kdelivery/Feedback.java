@@ -11,6 +11,7 @@ public class Feedback {
    */
   Feedback(){}
 
+
   public void setCustomerName(String customerName) {
     this.customerName = customerName;
   }
@@ -29,6 +30,7 @@ public class Feedback {
 
   /**
    * @getStars() : 사용자가 입력한 점수가 별점으로 전환
+  }
    */
   private String getStars(){
     String stars = " ";

@@ -22,9 +22,12 @@ public class Shop {
    * 매장만 먼저 입력받도록 합니다.
    * 나머지 변수는 initValues() 에서 정의합니다.
    * */
- public Shop(){
-    initValues();
+ public Shop(String shop) {
+     this.shopName = shop;
+     initValues();
   }
+
+  public String toString(){return shopName;};
 
   /**
    * @initValues() : 메뉴명와 가격정보를 담는 배열 생성 및 초기화
