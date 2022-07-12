@@ -2,7 +2,6 @@ package com.codestates.homework;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.helper.StubData;
-import com.codestates.member.entity.Member;
 import com.codestates.order.entity.Order;
 import com.codestates.order.repository.OrderRepository;
 import com.codestates.order.service.OrderService;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -31,7 +29,7 @@ public class OrderServiceHomeworkTest {
     public void cancelOrderTest() {
         // given
         long orderId = 1L;
-        Order order = StubData.MockOrder.getResponseBody(orderId);
+        Order order = StubData.MockOrder.getSingleResponseBody(orderId);
 
         // Stubbing by Mockito
         given(orderRepository.findById(orderId)).willReturn(Optional.of(order));

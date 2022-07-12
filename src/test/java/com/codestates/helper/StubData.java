@@ -29,7 +29,7 @@ public class StubData {
             return stubRequestBody.get(method);
         }
 
-        public static Page<Member> getResponseBody() {
+        public static Page<Member> getSingleResponseBody() {
             Member member1 = new Member("hgd1@gmail.com", "홍길동1", "010-1111-1111");
             member1.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
             member1.setStamp(new Stamp());
@@ -43,7 +43,7 @@ public class StubData {
                     2);
         }
 
-        public static Member getResponseBody(long memberId) {
+        public static Member getSingleResponseBody(long memberId) {
             Member member = new Member("hgd@gmail.com", "홍길동", "010-1111-1111");
             member.setMemberId(memberId);
             member.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
@@ -51,7 +51,7 @@ public class StubData {
             return member;
         }
 
-        public static Member getResponseBody(long memberId, Map<String, String> updatedInfo) {
+        public static Member getSingleResponseBody(long memberId, Map<String, String> updatedInfo) {
             String name = Optional.ofNullable(updatedInfo.get("name")).orElse("홍길동");
             String phone = Optional.ofNullable(updatedInfo.get("phone")).orElse("010-1111-1111");
             Member member = new Member("hgd@gmail.com", name, phone);
@@ -63,7 +63,7 @@ public class StubData {
     }
 
     public static class MockOrder {
-        public static Order getResponseBody(long orderId) {
+        public static Order getSingleResponseBody(long orderId) {
             Order order = new Order();
             order.setOrderId(orderId);
             order.setOrderStatus(Order.OrderStatus.ORDER_CONFIRM);
