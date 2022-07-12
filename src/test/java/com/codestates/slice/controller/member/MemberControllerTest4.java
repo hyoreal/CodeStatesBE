@@ -55,7 +55,7 @@ public class MemberControllerTest4 implements MemberControllerTestHelper {
     void postMemberTest() throws Exception {
         // given
         MemberDto.Post post = (MemberDto.Post) StubData.MockMember.getRequestBody(HttpMethod.POST);
-        Member member = StubData.MockMember.getMultiResponseBody(1L);
+        Member member = StubData.MockMember.getSingleResponseBody(1L);
 
         // Stubbing by Mockito
         given(memberService.createMember(Mockito.any(Member.class))).willReturn(member);
@@ -85,7 +85,7 @@ public class MemberControllerTest4 implements MemberControllerTestHelper {
         updatedInfo.put("phone", "010-2222-2222");
 
         MemberDto.Patch patch = (MemberDto.Patch) StubData.MockMember.getRequestBody(HttpMethod.PATCH);
-        Member member = StubData.MockMember.getMultiResponseBody(memberId, updatedInfo);
+        Member member = StubData.MockMember.getSingleResponseBody(memberId, updatedInfo);
 
 
         // Stubbing by Mockito
@@ -106,7 +106,7 @@ public class MemberControllerTest4 implements MemberControllerTestHelper {
     void getMemberTest() throws Exception {
         // given
         long memberId = 1L;
-        Member member = StubData.MockMember.getMultiResponseBody(memberId);
+        Member member = StubData.MockMember.getSingleResponseBody(memberId);
 
         // Stubbing by Mockito
         given(memberService.findMember(Mockito.anyLong())).willReturn(member);

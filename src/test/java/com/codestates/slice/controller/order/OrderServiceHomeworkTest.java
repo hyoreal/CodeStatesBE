@@ -29,7 +29,7 @@ public class OrderServiceHomeworkTest {
     public void cancelOrderTest() {
         // given
         long orderId = 1L;
-        Order order = StubData.MockOrder.getResponseBody(orderId);
+        Order order = StubData.MockOrder.getSingleResponseBody(orderId);
 
         // Stubbing by Mockito
         given(orderRepository.findById(orderId)).willReturn(Optional.of(order));

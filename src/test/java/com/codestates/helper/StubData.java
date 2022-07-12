@@ -52,7 +52,7 @@ public class StubData {
                     2);
         }
 
-        public static Member getMultiResponseBody(long memberId) {
+        public static Member getSingleResponseBody(long memberId) {
             Member member = new Member("hgd@gmail.com", "홍길동", "010-1111-1111");
             member.setMemberId(memberId);
             member.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
@@ -60,7 +60,7 @@ public class StubData {
             return member;
         }
 
-        public static Member getMultiResponseBody(long memberId, Map<String, String> updatedInfo) {
+        public static Member getSingleResponseBody(long memberId, Map<String, String> updatedInfo) {
             String name = Optional.ofNullable(updatedInfo.get("name")).orElse("홍길동");
             String phone = Optional.ofNullable(updatedInfo.get("phone")).orElse("010-1111-1111");
             Member member = new Member("hgd@gmail.com", name, phone);
@@ -72,7 +72,7 @@ public class StubData {
     }
 
     public static class MockOrder {
-        public static Order getResponseBody(long orderId) {
+        public static Order getSingleResponseBody(long orderId) {
             Order order = new Order();
             order.setOrderId(orderId);
             order.setOrderStatus(Order.OrderStatus.ORDER_CONFIRM);
