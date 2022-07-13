@@ -22,10 +22,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @Transactional
 @SpringBootTest
@@ -52,10 +52,10 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     @Test
     public void postMemberTest() throws Exception {
         // given
-        // init()
+        // init() 에서..
 
         // when
-        // init()
+        // init() 에서..
 
         // then
         MvcResult result =
@@ -72,10 +72,10 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     @Test
     void patchMemberTest() throws Exception {
         // given
+        long memberId = getResponseMemberId();
         MemberDto.Patch patch =
                 (MemberDto.Patch) StubData.MockMember.get(HttpMethod.PATCH);
         String content = gson.toJson(patch);
-        long memberId = getResponseMemberId();
         URI uri = getURI(memberId);
 
         // when
@@ -90,7 +90,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     @Test
     void getMemberTest() throws Exception {
         // given
-        // init()
+        // init() 에서..
 
         // when
         long memberId = getResponseMemberId();
@@ -110,18 +110,24 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
         String content = gson.toJson(new MemberDto.Post("hgd2@gmail.com", "홍길동2",
                 "010-2222-2222"));
         URI uri = getURI();
+
+        // init에서 첫번째 데이터를 DB에 넣어 준 후, 두 번째 데이터 한번 더..
         mockMvc.perform(postRequestBuilder(uri, content));
 
-        // when
+        String page = "1";
+        String size = "10";
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
-        queryParams.add("page", String.valueOf(1));
-        queryParams.add("size", String.valueOf(10));
+        queryParams.add("page", page);
+        queryParams.add("size", size);
+
+        // when
+        ResultActions actions = mockMvc.perform(getRequestBuilder(uri, queryParams));
 
         // then
-        MvcResult result = mockMvc.perform(getRequestBuilder(uri, queryParams))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data").isArray())
-                .andReturn();
+        MvcResult result = actions
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$.data").isArray())
+                                .andReturn();
         List list = JsonPath.parse(result.getResponse().getContentAsString()).read("$.data");
 
         assertThat(list.size(), is(2));
@@ -130,7 +136,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     @Test
     void deleteMemberTest() throws Exception {
         // given
-        // init()
+        // init() 에서 DB에 넣어준다.
 
         // when
         long memberId = getResponseMemberId();
