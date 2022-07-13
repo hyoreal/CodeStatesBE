@@ -467,6 +467,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>v1.0.0, 2022.07.10</p>
 </div>
 <hr>
+<div class="paragraph">
+<p>API 문서 개요</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>이 문서는 39기 백엔드 수강생들과 Spring MVC 기반의 REST API 기반 애플리케이션에 대해 직접 학습하며 만들어 가는 샘플 애플리케이션입니다.
+샘플 애플리케이션을 사용해보고자 하는 분들은 이 문서를 통해 API의 구체적인 사용법을 알 수 있습니다.</pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+이 문서는 학습용으로 일부 기능에 제한이 있습니다. 기능 제한 사항에 대해 알고 싶다면 담당자에게 문의 하세요
+</td>
+</tr>
+</table>
+</div>
+<hr>
 </div>
 </div>
 <div class="sect1">
@@ -476,19 +498,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_회원_등록">1.1. 회원 등록</h3>
 <div class="listingblock">
 <div class="title">curl-request</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/v11/members' -i -X POST \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Accept: application/json' \
-    -d '{
-  "email" : "hgd@gmail.com",
-  "name" : "홍길동",
-  "phone" : "010-1111-1111"
-}'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">http-request</div>
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">POST /v11/members HTTP/1.1
 Content-Type: application/json;charset=UTF-8
@@ -1075,6 +1084,12 @@ Host: localhost:8080</code></pre>
 <pre class="prettyprint highlight nowrap"><code data-lang="http">HTTP/1.1 204 No Content</code></pre>
 </div>
 </div>
+<hr>
+<div class="imageblock">
+<div class="content">
+<img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="spring">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1082,7 +1097,7 @@ Host: localhost:8080</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-07-13 19:32:13 +0900
+Last updated 2022-07-13 23:12:13 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
