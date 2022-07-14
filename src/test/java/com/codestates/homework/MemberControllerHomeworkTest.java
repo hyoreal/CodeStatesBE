@@ -48,17 +48,21 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     @MockBean
     private MemberService memberService;
 
-    @Autowired
+    @MockBean
     private MemberMapper mapper;
 
     @Test
     void postMemberTest() throws Exception {
         // given
         MemberDto.Post post = (MemberDto.Post) StubData.MockMember.getRequestBody(HttpMethod.POST);
-        Member member = StubData.MockMember.getSingleResponseBody(1L);
+        MemberDto.Response responseBody = StubData.MockMember.getSingleResponseBody();
 
         // Stubbing by Mockito
-        given(memberService.createMember(Mockito.any(Member.class))).willReturn(member);
+        given(mapper.memberPostToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
+
+        given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
+
+        given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseBody);
 
         String content = toJsonContent(post);
         URI uri = getURI();
@@ -81,15 +85,19 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     void patchMemberTest() throws Exception {
         // given
         long memberId = 1L;
-        Map<String, String> updatedInfo = new HashMap<>();
-        updatedInfo.put("phone", "010-2222-2222");
 
         MemberDto.Patch patch = (MemberDto.Patch) StubData.MockMember.getRequestBody(HttpMethod.PATCH);
-        Member member = StubData.MockMember.getSingleResponseBody(memberId, updatedInfo);
+
+        MemberDto.Response response =
+                StubData.MockMember.getSingleResponseBody(null, "010-2222-2222", null);
 
 
         // Stubbing by Mockito
-        given(memberService.updateMember(Mockito.any(Member.class))).willReturn(member);
+        given(mapper.memberPatchToMember(Mockito.any(MemberDto.Patch.class))).willReturn(new Member());
+
+        given(memberService.updateMember(Mockito.any(Member.class))).willReturn(new Member());
+
+        given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(response);
 
         String content = toJsonContent(patch);
         URI uri = getURI(memberId);
@@ -99,17 +107,19 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
 
         // then
         actions.andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.phone").value(member.getPhone()));
+                .andExpect(jsonPath("$.data.phone").value(patch.getPhone()));
     }
 
     @Test
     void getMemberTest() throws Exception {
         // given
         long memberId = 1L;
-        Member member = StubData.MockMember.getSingleResponseBody(memberId);
+        Member member = StubData.MockMember.getSingleResultMember(memberId);
+        MemberDto.Response response = StubData.MockMember.getSingleResponseBody();
 
         // Stubbing by Mockito
         given(memberService.findMember(Mockito.anyLong())).willReturn(member);
+        given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(response);
 
         URI uri = getURI(memberId);
 
@@ -126,10 +136,13 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     @Test
     void getMembersTest() throws Exception {
         // given
-        Page<Member> members = StubData.MockMember.getSingleResponseBody();
+        Page<Member> pageMembers = StubData.MockMember.getSingleResultMember();
+
+        List<MemberDto.Response> responses = StubData.MockMember.getMultiResponseBody();
 
         // Stubbing by Mockito
-        given(memberService.findMembers(Mockito.anyInt(), Mockito.anyInt())).willReturn(members);
+        given(memberService.findMembers(Mockito.anyInt(), Mockito.anyInt())).willReturn(pageMembers);
+        given(mapper.membersToMemberResponses(Mockito.anyList())).willReturn(responses);
 
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("page", String.valueOf(1));

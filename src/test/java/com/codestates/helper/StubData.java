@@ -21,7 +21,8 @@ public class StubData {
         stubRequestBody = new HashMap<>();
         stubRequestBody.put(HttpMethod.POST, new MemberDto.Post("hgd@gmail.com","홍길동",
                 "010-1111-1111"));
-        stubRequestBody.put(HttpMethod.PATCH, new MemberDto.Patch(0, null, "010-2222-2222", null));
+        stubRequestBody.put(HttpMethod.PATCH,
+                new MemberDto.Patch(0, "홍길동", "010-2222-2222", Member.MemberStatus.MEMBER_ACTIVE));
     }
 
     public static class MockMember {
@@ -29,7 +30,29 @@ public class StubData {
             return stubRequestBody.get(method);
         }
 
-        public static Page<Member> getSingleResponseBody() {
+        public static MemberDto.Response getSingleResponseBody() {
+            return new MemberDto.Response(1L,
+                    "hgd@gmail.com",
+                    "홍길동",
+                    "010-1111-1111",
+                    Member.MemberStatus.MEMBER_ACTIVE,
+                    new Stamp());
+        }
+
+        public static MemberDto.Response getSingleResponseBody(String name, String phone, Member.MemberStatus memberStatus) {
+            String optionalName = Optional.ofNullable(name).orElse("홍길동");
+            String optionalPhone = Optional.ofNullable(phone).orElse("010-1111-1111");
+            Member.MemberStatus
+                    optionalMemberStatus = Optional.ofNullable(memberStatus).orElse(Member.MemberStatus.MEMBER_ACTIVE);
+            return new MemberDto.Response(1L,
+                    "hgd@gmail.com",
+                    optionalName,
+                    optionalPhone,
+                    optionalMemberStatus,
+                    new Stamp());
+        }
+
+        public static Page<Member> getSingleResultMember() {
             Member member1 = new Member("hgd1@gmail.com", "홍길동1", "010-1111-1111");
             member1.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
             member1.setStamp(new Stamp());
@@ -43,7 +66,7 @@ public class StubData {
                     2);
         }
 
-        public static Member getSingleResponseBody(long memberId) {
+        public static Member getSingleResultMember(long memberId) {
             Member member = new Member("hgd@gmail.com", "홍길동", "010-1111-1111");
             member.setMemberId(memberId);
             member.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
@@ -51,7 +74,7 @@ public class StubData {
             return member;
         }
 
-        public static Member getSingleResponseBody(long memberId, Map<String, String> updatedInfo) {
+        public static Member getSingleResultMember(long memberId, Map<String, String> updatedInfo) {
             String name = Optional.ofNullable(updatedInfo.get("name")).orElse("홍길동");
             String phone = Optional.ofNullable(updatedInfo.get("phone")).orElse("010-1111-1111");
             Member member = new Member("hgd@gmail.com", name, phone);
@@ -59,6 +82,23 @@ public class StubData {
             member.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
             member.setStamp(new Stamp());
             return member;
+        }
+
+        public static List<MemberDto.Response> getMultiResponseBody() {
+            return List.of(
+                    new MemberDto.Response(1L,
+                            "hgd1@gmail.com",
+                            "홍길동1",
+                            "010-1111-1111",
+                            Member.MemberStatus.MEMBER_ACTIVE,
+                            new Stamp()),
+                    new MemberDto.Response(2L,
+                            "hgd2@gmail.com",
+                            "홍길동2",
+                            "010-2222-2222",
+                            Member.MemberStatus.MEMBER_ACTIVE,
+                            new Stamp())
+            );
         }
     }
 
