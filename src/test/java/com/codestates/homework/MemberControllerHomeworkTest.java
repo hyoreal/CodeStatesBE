@@ -19,14 +19,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -35,7 +32,6 @@ import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MemberControllerHomeworkTest implements MemberControllerTestHelper {
@@ -118,7 +114,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
         MemberDto.Response response = StubData.MockMember.getSingleResponseBody();
 
         // Stubbing by Mockito
-        given(memberService.findMember(Mockito.anyLong())).willReturn(member);
+        given(memberService.findMember(Mockito.anyLong())).willReturn(new Member());
         given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(response);
 
         URI uri = getURI(memberId);
@@ -144,9 +140,11 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
         given(memberService.findMembers(Mockito.anyInt(), Mockito.anyInt())).willReturn(pageMembers);
         given(mapper.membersToMemberResponses(Mockito.anyList())).willReturn(responses);
 
+        String page = "1";
+        String size = "10";
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
-        queryParams.add("page", String.valueOf(1));
-        queryParams.add("size", String.valueOf(10));
+        queryParams.add("page", page);
+        queryParams.add("size", size);
 
         URI uri = getURI();
 
