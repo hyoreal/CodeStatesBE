@@ -18,12 +18,12 @@ public class KDeliveryMain {
    * 배열을 담을 수 있는 객체 생성
    * 사용 범위, 객체 타입, 객체 이름
    */
+
   private Shop[] shops;
   private Order[] orders;
   private Feedback[] feedbacks;
 
   // 해당 변수를 제어하는 Idx변수를 정의하고 초기화
-
 
   private static final Scanner s = new Scanner(System.in); // 사용자의 입력을 받는 객체 생성
 
@@ -31,10 +31,10 @@ public class KDeliveryMain {
    * @KDeliveryMainV1() : 매장 정보, 주문 정보, 리뷰 정보 초기화
    * initValues() 메서드 사용
    * */
+
   private void KDeliveryMainV1(){
     initValues();
   }
-
 
   /**
    * @initValues() : 객체에 저장될 수 있는 크기 지정
@@ -47,18 +47,20 @@ public class KDeliveryMain {
     feedbacks = new Feedback[FEEDBACK_MAX];
   }
 
-
   /**
    * @close() : 프로그램 종료를 위해 사용되는 메서드
    * 사용자가 종료를 선언하면 동작합니다.
    * main()에서 활용됩니다.
    * */
-  static void close(){
 
+  static void close(){
+    System.out.println("[안내] 이용해 주셔서 감사합니다.");
   }
+
   /**
    * selectMainMenu() : 기능을 나열하며, 사용자가 원하는 기능을 정수로 받습니다.
    */
+
   private void selectMainMenu(){
     System.out.println("[치킨의 민족 프로그램 V1]");
     System.out.println("-".repeat(30));
@@ -74,33 +76,46 @@ public class KDeliveryMain {
 
   private void chickenProgram(int num){
     switch (num) {
-      case 0 : login(); break;
-      case 1 : joinMenu(); break;
+      case 0 :
+        login();
+        break;
+
+      case 1 :
+        joinMenu();
+        break;
+
       case 2 :
-        selectAddShopMenu(); break;
+        selectAddShopMenu();
+        break;
+
       case 3 :
-        selectDashboardMenu(); break;
+        selectDashboardMenu();
+        break;
+
       case 4 :
-        selectOrderMenu(); break;
+        selectOrderMenu();
+        break;
+
       case 5 :
-        selectFeedbackMenu(); break;
-      case 6 : close(); break;
+        selectFeedbackMenu();
+        break;
+
+      case 6 : close();
+      break;
     }
   }
 
-
   private int selectNumber(){
-    System.out.println("[시스템] 무엇을 도와드릴까요?");
-    return Integer.parseInt(s.nextLine());
+    System.out.printf("[시스템] 무엇을 도와드릴까요?");
+    return Integer.parseInt(s.next());
   }
+
   /**
    * @return
    * @selectAddShopMenu() : 음식점의 정보를 등록합니다.
    * @shops : 가게 정보를 저장합니다.
    * @shopIdx : 가게 정보의 인덱스
    */
-  //회원가입 정보등록
-
 
   private void joinMenu(){
     Login login = new Login();
@@ -108,8 +123,10 @@ public class KDeliveryMain {
     System.out.println("[안내] 회원가입을 시작하겠습니다.");
     System.out.println("[안내] ID를 입력해주세요.");
     String id = s.nextLine();
+
     System.out.println("[안내] 비밀번호를 입력해주세요.");
     String passWord = s.nextLine();
+
     System.out.println("[안내] 비밀번호를 확인하겠습니다. 다시 한번 입력해주세요.");
     String passWordCheck = s.nextLine();
 
@@ -119,7 +136,6 @@ public class KDeliveryMain {
 
     Login.addLoginList(id,passWordCheck);
 
-
     System.out.println("[안내] 회원가입이 완료되었습니다.");
   }
 
@@ -127,6 +143,7 @@ public class KDeliveryMain {
   private void login(){
     System.out.println("[안내] ID를 입력해주세요.");
     String inputID = s.nextLine();
+
     System.out.println("[안내] 비밀번호를 입력해주세요.");
     String inputPassword = s.nextLine();
 
@@ -136,8 +153,7 @@ public class KDeliveryMain {
 
 
 
-  public void selectAddShopMenu() {
-
+  private void selectAddShopMenu() {
     /**
      * @Shop.java 의 Shop 클래스를 활용한 객체 생성
      * @public 클래스 : 동일 패키지 및 다른 패키지에서 사용가능
@@ -145,31 +161,30 @@ public class KDeliveryMain {
      * 해당 메서드는 매장명, 음식명, 가격을 입력받아 객체에 저장
      * 값이 저장될 때 마다 shopIdx 값 증가
      */
+
     System.out.println("[안내] 반갑습니다. 가맹주님!");
     System.out.println("[안내] 음식점 상호는 무엇인가요?");
-//    String shopName = s.nextLine();
     Shop shop = new Shop(s.nextLine());
 
     System.out.println("[안내] 대표 메뉴 이름은 무엇인가요?");
     String foodName = s.nextLine();
+
     System.out.println("[안내] 해당 메뉴 가격은 얼마인가요?");
     int foodPrice = Integer.parseInt(s.nextLine());
 
     shop.addFood(foodName, foodPrice);
-
 
     System.out.println("[안내]"+ shop + "에 음식(" + foodName + ", " + foodPrice +") 추가되었습니다.");
     System.out.println("[시스템] 가게 등록이 정상 처리되었습니다.");
 
   }
 
-
   /**
    * @selectDashboardMenu() : 해당 메서드는 등록된 가게 정보를 출력합니다.
    * Feedback.java 파일의 클래스 및 메서드를 활용합니다.
    * */
 
-  public void selectDashboardMenu(){
+  private void selectDashboardMenu(){
     for(Feedback feedback : feedbacks){
       if(feedback != null) {
         feedback.printInfo();
@@ -177,20 +192,21 @@ public class KDeliveryMain {
     }
   }
 
-
-
   /**
    * @selectOrderMenu() : 주문 기능
    * 사용자의 입력을 받아 orders 객체에 저장
    * */
 
-  public void selectOrderMenu(){
+  private void selectOrderMenu(){
     Order order = new Order();
+
     System.out.println("[안내] 고객님! 메뉴 주문을 진행하겠습니다!");
     System.out.println("[안내] 주문자 이름을 알려주세요!");
     String customerName = s.nextLine();
+
     System.out.println("[안내] 주문할 음식점 상호는 무엇인가요?");
     String shopName = s.nextLine();
+
     System.out.println("[안내] 주문할 메뉴 이름을 알려주세요!");
     String foodName = s.nextLine();
 
@@ -216,18 +232,23 @@ public class KDeliveryMain {
   /**
    * @selectFeedbackMenu() : 메뉴의 피드백을 입력받는 기능
    * */
+
   private void selectFeedbackMenu(){
     System.out.println("[안내] 고객님! 별점 등록을 진행합니다.");
     System.out.println("[안내] 주문자 이름은 무엇인가요?");
     String customerName = s.nextLine();
+
     System.out.println("[안내] 음식점 상호는 무엇인가요?");
     String shopName = s.nextLine();
+
     System.out.println("[안내] 주문하신 음식 이름은 무엇인가요?");
     String foodName = s.nextLine();
+
     System.out.println("[안내] 음식맛은 어떠셨나요? (1점 ~ 5점)");
     int grade = Integer.parseInt(s.nextLine());
 
     Feedback feedback = new Feedback();
+
     feedback.setCustomerName(customerName);
     feedback.setShopName(shopName);
     feedback.setFoodName(foodName);

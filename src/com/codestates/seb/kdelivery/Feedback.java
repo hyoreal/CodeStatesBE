@@ -9,8 +9,8 @@ public class Feedback {
   /**
    * @Feedback() : 정보를 저장합니다
    */
-  Feedback(){}
 
+  Feedback(){}
 
   public void setCustomerName(String customerName) {
     this.customerName = customerName;
@@ -32,6 +32,7 @@ public class Feedback {
    * @getStars() : 사용자가 입력한 점수가 별점으로 전환
   }
    */
+
   private String getStars(){
     String stars = " ";
     for(int i = 0; i < grade; i++){
@@ -43,7 +44,8 @@ public class Feedback {
   /**
    * @printInfo() : 출력
    */
-  public void printInfo(){
+
+  void printInfo(){
     System.out.println(customerName + " [고객님]");
     System.out.println("-".repeat(30));
     System.out.println("주문 매장 : " + shopName);
