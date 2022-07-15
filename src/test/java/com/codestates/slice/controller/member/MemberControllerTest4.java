@@ -53,7 +53,7 @@ public class MemberControllerTest4 implements MemberControllerTestHelper {
 
     @Test
     void postMemberTest() throws Exception {
-        // given
+        // given.
         MemberDto.Post post = (MemberDto.Post) StubData.MockMember.getRequestBody(HttpMethod.POST);
         Member member = StubData.MockMember.getSingleResponseBody(1L);
 
