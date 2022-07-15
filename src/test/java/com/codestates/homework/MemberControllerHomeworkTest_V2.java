@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MemberControllerHomeworkTest implements MemberControllerTestHelper {
+public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelper {
     @Autowired
     private MockMvc mockMvc;
 
