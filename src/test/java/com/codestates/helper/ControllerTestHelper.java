@@ -91,7 +91,6 @@ public interface ControllerTestHelper<T> {
     default List<FieldDescriptor> getDefaultResponseDescriptors(JsonFieldType jsonFieldTypeForData) {
         return Arrays.asList(
                 fieldWithPath("data").type(jsonFieldTypeForData).description("결과 데이터").optional()
-//                fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보").optional()
         );
     }
 

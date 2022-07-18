@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MemberController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
-public class MemberControllerDocumentationHomeworkTest implements MemberControllerTestHelper {
+public class MemberControllerDocumentationHomeworkTest_V2 implements MemberControllerTestHelper {
     @Autowired
     private MockMvc mockMvc;
 
@@ -67,7 +67,7 @@ public class MemberControllerDocumentationHomeworkTest implements MemberControll
 
         // when
         ResultActions actions =
-                mockMvc.perform(postRequestBuilder("/v11/members", content));
+                mockMvc.perform(postRequestBuilder(getUrl(), content));
 
         // then
         actions
