@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>커피 등록</title>
+    <style>
+        #coffeeList {
+            border: 1px solid #8F8F8F;
+            width: 500px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            border: 1px solid #8F8F8F;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="coffee.js"></script>
+</head>
+<body>
+    <h3>커피 등록</h3>
+    <div>
+        <form id="coffeeForm" method="POST" action="/coffee">
+            <div>
+                <label for="korName">커피명(한글):</label><br/>
+                <input type="text" name="korName" id="korName" value=""/>
+            </div>
+            <br/>
+            <div>
+                <label for="korName">커피명(영문):</label><br/>
+                <input type="text" name="engName" id="engName" value=""/>
+            </div>
+            <br/>
+            <div>
+                <label for="korName">가격:</label><br/>
+                <input type="number" step="1000" name="price" id="price" value=""/>
+            </div>
+            <br/>
+            <div>
+                <label for="korName">커피 코드:</label><br/>
+                <input type="text" name="coffeeCode" id="coffeeCode" value=""/>
+            </div>
+            <br/>
+            <div>
+                <input type="button" id="btnReg" value="등록"/>&nbsp;<input type="button" id="btnOther" value="다른 작업"/>
+            </div>
+            <div id="message">
+
+            </div>
+        </form>
+    </div>
+    <div>
+        <h4>커피 목록</h4>
+        <table id="coffeeList">
+            <thead>
+                <tr>
+                    <td align="center">커피 이름</td>
+                    <td align="center">가격</td>
+                    <td align="center">판매 상태</td>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody id="coffeeContents"></tbody>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
