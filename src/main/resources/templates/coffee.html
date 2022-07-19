@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>커피 등록</title>
+    <style>
+        #coffeeList {
+            border: 1px solid #8F8F8F;
+            width: 500px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            border: 1px solid #8F8F8F;
+        }
+    </style>
+    <script>
+        function registerCoffee(){
+            let korName = document.getElementById("korName").value;
+            let engName = document.getElementById("engName").value;
+            let price = document.getElementById("price").value;
+            let coffeeCode = document.getElementById("coffeeCode").value;
+
+            if(!korName){
+                alert("커피 이름(한글)을 입력해주세요.");
+                return false;
+            }
+
+            if(!engName){
+                alert("커피 이름(영문)을 입력해주세요.");
+                return false;
+            }
+
+            if(!price){
+                alert("가격을 입력해주세요.");
+                return false;
+            }
+
+            if(!coffeeCode){
+                alert("커피 코드를 입력해주세요.");
+                return false;
+            }
+
+            var form = document.getElementById("coffeeForm");
+            form.submit();
+
+        }
+    </script>
+</head>
+<body>
+    <h3>커피 등록</h3>
+    <div>
+        <form id="coffeeForm" method="POST" action="/coffee">
+            <div>
+                <label for="korName">커피명(한글):</label><br/>
+                <input type="text" name="korName" id="korName" value=""/>
+            </div>
+            <br/>
+            <div>
+                <label for="korName">커피명(영문):</label><br/>
+                <input type="text" name="engName" id="engName" value=""/>
+            </div>
+            <br/>
+            <div>
+                <label for="korName">가격:</label><br/>
+                <input type="number" step="1000" name="price" id="price" value=""/>
+            </div>
+            <br/>
+            <div>
+                <label for="korName">커피 코드:</label><br/>
+                <input type="text" name="coffeeCode" id="coffeeCode" value=""/>
+            </div>
+            <br/>
+            <div>
+                <input type="button" id="btnReg" value="등록" onclick="registerCoffee()"/>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h4>커피 목록</h4>
+        <table id="coffeeList">
+            <thead>
+                <tr>
+                    <td align="center">커피 이름</td>
+                    <td align="center">가격</td>
+                    <td align="center">판매 상태</td>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${coffees == null || coffees.size == 0}">
+                <td align="center" colspan="3">등록된 커피가 없습니다.</td>
+            </tr>
+            <tr th:each="coffee: ${coffees}">
+                <td th:text="|${coffee.korName}(${coffee.engName})|"></td>
+                <td th:text="${coffee.price}"></td>
+                <td th:text="${coffee.coffeeStatus}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
