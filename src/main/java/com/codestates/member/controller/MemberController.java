@@ -53,7 +53,7 @@ public class MemberController {
         memberPatchDto.setMemberId(memberId);
 
         Member member =
-                memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
+                memberService.updateMemberV2(mapper.memberPatchDtoToMember(memberPatchDto));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
