@@ -47,16 +47,51 @@ public class stringifyJSON {
   public String stringify(Object data) {
 
     //입력된 값이 문자열일 경우
+    if(data instanceof String) {
+      return "\"" + String.valueOf(data) + "\"";
+    }
 
     //입력된 값이 Integer일 경우
+    if(data instanceof Integer) {
+      return "\"" + Integer.parseInt(String.valueOf(data)) + "\"";
+    }
 
     //입력된 값이 Boolean일 경우
+    if(data instanceof Boolean) {
+      return "" + data ;
+    }
 
     //입력된 값이 Object[]일 경우
+    if(data instanceof Object[]) {
+      Object[] obj = (Object[])data;
+      String[] str = new String[obj.length];
+
+      for(int i = 0; i < str.length; i++) {
+        str[i] = stringify(obj[i]);
+        if(obj[i] instanceof Integer){
+          str[i] = str[i].replace("\"", "");
+        }
+      }
+      return Arrays.toString(str).replace(" ", "");
+    }
 
     //입력된 값이 HashMap일 경우
+    if(data instanceof HashMap) {
+      HashMap<Object, Object> hashMap = (HashMap<Object, Object>)data;
+      HashMap<Object, Object> result = new LinkedHashMap<>();
+        if(hashMap.isEmpty()) return "{}";
+
+        for(Object keys : hashMap.keySet()){
+          String key = stringify(keys);
+          String value = stringify(hashMap.get(keys));
+
+          result.put(key, value);
+        }
+        return result.toString().replace("=",":")
+                                .replace(" ", "");
+    }
 
     //지정되지 않은 타입의 경우에는 "null"을 리턴합니다.
-
+    return "null";
   }
 }
