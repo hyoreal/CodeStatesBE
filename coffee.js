@@ -2,7 +2,6 @@ $(document).ready(function(){
     getCoffeeList();
 
     $("#btnReg").click(function(){
-        $("#message").text('작업중입니다... 잠시 기다려주세요..')
         let korName = document.getElementById("korName").value;
         let engName = document.getElementById("engName").value;
         let price = document.getElementById("price").value;
@@ -27,6 +26,9 @@ $(document).ready(function(){
             alert("커피 코드를 입력해주세요.");
             return false;
         }
+
+        $("#message").text('작업중입니다... 잠시 기다려주세요..');
+
         $.ajax({
             type: "POST",
             url: "http://localhost:8080/v11/coffees",

@@ -1,61 +1,65 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>커피 등록</title>
-    <style>
-        #coffeeList {
-            border: 1px solid #8F8F8F;
-            width: 500px;
-            border-collapse: collapse;
-        }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<!--    <style>-->
+<!--        #coffeeList {-->
+<!--            border: 1px solid #8F8F8F;-->
+<!--            width: 500px;-->
+<!--            border-collapse: collapse;-->
+<!--        }-->
 
-        th, td {
-            padding: 5px;
-            border: 1px solid #8F8F8F;
-        }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script type="text/javascript" src="coffee.js"></script>
+<!--        th, td {-->
+<!--            padding: 5px;-->
+<!--            border: 1px solid #8F8F8F;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
+<div class="container-lg">
     <h3>커피 등록</h3>
+    <hr/>
     <div>
-        <form id="coffeeForm" method="POST" action="/coffee">
+        <form id="coffeeForm" method="POST" action="/coffee" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="korName" class="form-label">커피명(한글)</label>
+                <input type="text" name="korName" class="form-control" id="korName" placeholder="커피명(한글)을 입력해 주세요">
+            </div>
+            <div class="mb-3">
+                <label for="engName" class="form-label">커피명(영문)</label>
+                <input type="text" name="engName" class="form-control" id="engName" placeholder="커피명(영문)을 입력해 주세요">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">가격</label>
+                <input type="number" step="1000" name="price" id="price" class="form-control" placeholder="가격을 입력해 주세요">
+            </div>
+            <div class="mb-3">
+                <label for="coffeeCode" class="form-label">커피 코드</label>
+                <input type="text" name="coffeeCode" class="form-control" id="coffeeCode" placeholder="커피코드(영문 3자리)를 입력해 주세요">
+            </div>
+
             <div>
-                <label for="korName">커피명(한글):</label><br/>
-                <input type="text" name="korName" id="korName" value=""/>
+                <button type="button" class="btn btn-outline-primary" id="btnReg">등록</button>
+                <button type="button" class="btn btn-outline-secondary" id="btnOther" >다른 작업</button>
             </div>
             <br/>
-            <div>
-                <label for="korName">커피명(영문):</label><br/>
-                <input type="text" name="engName" id="engName" value=""/>
-            </div>
-            <br/>
-            <div>
-                <label for="korName">가격:</label><br/>
-                <input type="number" step="1000" name="price" id="price" value=""/>
-            </div>
-            <br/>
-            <div>
-                <label for="korName">커피 코드:</label><br/>
-                <input type="text" name="coffeeCode" id="coffeeCode" value=""/>
-            </div>
-            <br/>
-            <div>
-                <input type="button" id="btnReg" value="등록"/>&nbsp;<input type="button" id="btnOther" value="다른 작업"/>
-            </div>
             <div id="message">
 
             </div>
         </form>
     </div>
+    <p>&nbsp;</p>
+    <hr/>
+    <p>&nbsp;</p>
     <div>
-        <h4>커피 목록</h4>
-        <table id="coffeeList">
+        <h3>커피 목록</h3>
+        <hr/>
+        <table id="coffeeList" class="table table-light table-striped">
             <thead>
-                <tr>
+                <tr class="table table-dark">
                     <td align="center">커피 이름</td>
                     <td align="center">가격</td>
                     <td align="center">판매 상태</td>
@@ -66,5 +70,10 @@
             </tbody>
         </table>
     </div>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="coffee.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>
