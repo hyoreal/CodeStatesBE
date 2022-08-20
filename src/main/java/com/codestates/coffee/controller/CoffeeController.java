@@ -20,7 +20,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @Controller
-@RequestMapping("/coffee")
+@RequestMapping("/coffees")
 @Validated
 public class CoffeeController {
     private CoffeeService coffeeService;
@@ -33,7 +33,7 @@ public class CoffeeController {
 
     @GetMapping
     public String coffeeHome() {
-        return "/coffee";
+        return "coffee";
     }
 
     @PostMapping
@@ -42,6 +42,6 @@ public class CoffeeController {
         coffeeService.createCoffee(mapper.coffeePostDtoToCoffee(coffeePostDto));
         Page<Coffee> coffees = coffeeService.findCoffees(0, 100);
         model.addAttribute("coffees", mapper.coffeesToCoffeeResponseDtos(coffees.getContent()));
-        return "/coffee";
+        return "coffee";
     }
 }
