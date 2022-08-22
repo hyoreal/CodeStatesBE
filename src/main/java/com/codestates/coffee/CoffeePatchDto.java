@@ -11,7 +11,7 @@ public class CoffeePatchDto {
     private long coffeeId;
 
     @NotSpace(message = "공백만으로 구성되지 않아야 합니다.")
-    @Pattern(regexp = "^\\w+\\s?\\w*$", message = "워드 사이에 한칸의 공백만 허용될 수 있습니다.")
+    @Pattern(regexp = "^\\w+(\\s?\\w)*$", message = "워드 사이에 한칸의 공백만 허용될 수 있습니다.")
     private String engName;
 
     @NotSpace(message = "공백만으로 구성되지 않아야 합니다.")
