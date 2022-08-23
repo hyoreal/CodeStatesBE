@@ -9,6 +9,10 @@
 <body>
     <div layout:fragment="content">
         <form action="/process_login" method="post">
+            <div th:if="${param.error != null}">
+                <strong style="color: red">로그인 인증에 실패했습니다.</strong>
+            </div>
+
             <p><input type="email" name="username" placeholder="Email" /></p>
             <p><input type="password" name="password" placeholder="Password" /></p>
             <p><button>로그인</button></p>
