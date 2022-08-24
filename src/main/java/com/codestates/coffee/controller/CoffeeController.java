@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/coffees")
-@Validated
+//@Validated
 public class CoffeeController {
     private CoffeeService coffeeService;
     private CoffeeMapper mapper;
@@ -31,13 +34,27 @@ public class CoffeeController {
         this.mapper = coffeeMapper;
     }
 
-    @GetMapping
+    @GetMapping("/coffee-form")
     public String coffeeHome() {
         return "coffee";
     }
 
     @PostMapping
-    public String postCoffee(@Valid CoffeePostDto coffeePostDto, Model model) throws InterruptedException {
+    public String postCoffee(@Valid CoffeePostDto coffeePostDto,
+                             BindingResult bindingResult,
+                             Model model) throws InterruptedException {
+        // 애너테이션 Validation을 하지 않을 경우,
+        if (ObjectUtils.isEmpty(coffeePostDto.getEngName())) {
+            bindingResult.addError(new FieldError("coffee"
+                    , "engName"
+                    , "커피명(영문)을 입력해야 합니다."));
+        }
+        // 다른 검증 조건 추가..
+
+        if (bindingResult.hasErrors()) {
+            // TODO 에러 정보를 Model 객체에
+            return "coffee";
+        }
         Thread.sleep(5000L);
         coffeeService.createCoffee(mapper.coffeePostDtoToCoffee(coffeePostDto));
         Page<Coffee> coffees = coffeeService.findCoffees(0, 100);
