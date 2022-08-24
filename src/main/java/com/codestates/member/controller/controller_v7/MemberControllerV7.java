@@ -89,7 +89,8 @@ public class MemberControllerV7 {
 
     @ExceptionHandler
     public ResponseEntity handleException(MethodArgumentNotValidException e) {
-        final List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+
+        final List<FieldError> fieldErrors = e.getFieldErrors();
 
         List<ErrorResponse.FieldError> errors =
                 fieldErrors.stream()
