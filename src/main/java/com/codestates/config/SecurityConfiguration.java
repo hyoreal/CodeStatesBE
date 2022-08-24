@@ -19,6 +19,10 @@ public class SecurityConfiguration {
             .loginProcessingUrl("/process_login")
             .failureUrl("/auths/login-form?error")
             .and()
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/")
+            .and()
             .exceptionHandling().accessDeniedPage("/auths/access-denied")
             .and()
             .authorizeRequests(authorize -> authorize
@@ -37,6 +41,14 @@ public class SecurityConfiguration {
                         .password("1111")
                         .roles("USER")
                         .build();
-        return new InMemoryUserDetailsManager(user);
+
+        UserDetails admin =
+                User.withDefaultPasswordEncoder()
+                        .username("admin@gmail.com")
+                        .password("2222")
+                        .roles("ADMIN")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }
