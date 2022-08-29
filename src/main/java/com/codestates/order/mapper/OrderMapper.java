@@ -1,7 +1,7 @@
 package com.codestates.order.mapper;
 
 import com.codestates.coffee.entity.Coffee;
-import com.codestates.coffee.entity.CoffeeRef;
+import com.codestates.order.entity.CoffeeRef;
 import com.codestates.coffee.service.CoffeeService;
 import com.codestates.order.dto.OrderCoffeeResponseDto;
 import com.codestates.order.entity.Order;
@@ -12,12 +12,10 @@ import org.mapstruct.MappingConstants;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OrderMapper {
-    // TODO 수정되었음.
     default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
         Order order = new Order();
         order.setMemberId(new AggregateReference.IdOnlyAggregateReference(orderPostDto.getMemberId()));

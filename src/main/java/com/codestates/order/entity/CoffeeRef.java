@@ -1,4 +1,4 @@
-package com.codestates.coffee.entity;
+package com.codestates.order.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

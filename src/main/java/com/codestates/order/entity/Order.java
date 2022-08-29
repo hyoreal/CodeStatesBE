@@ -1,6 +1,5 @@
 package com.codestates.order.entity;
 
-import com.codestates.coffee.entity.CoffeeRef;
 import com.codestates.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +23,9 @@ public class Order {
 
     // 테이블 외래키처럼 memberId를 추가해서 참조하도록 한다..
     private AggregateReference<Member, Long> memberId;
+
+//    @MappedCollection(idColumn = "ORDER_ID")
+//    private Set<CoffeeRef> orderCoffees = new LinkedHashSet<>();
 
     @MappedCollection(idColumn = "ORDER_ID", keyColumn = "ORDER_COFFEE_ID")
     private List<CoffeeRef> orderCoffees = new ArrayList<>();
