@@ -1,6 +1,5 @@
 package com.codestates.order.entity;
 
-import com.codestates.coffee.entity.CoffeeRef;
 import com.codestates.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,9 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -25,6 +26,9 @@ public class Order {
 
     @MappedCollection(idColumn = "ORDER_ID")
     private Set<CoffeeRef> orderCoffees = new LinkedHashSet<>();
+
+//    @MappedCollection(idColumn = "ORDER_ID", keyColumn = "ORDER_COFFEE_ID")
+//    private List<CoffeeRef> orderCoffees = new ArrayList<>();
 
     private OrderStatus orderStatus = OrderStatus.ORDER_REQUEST;
     private LocalDateTime createdAt;
