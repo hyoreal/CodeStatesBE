@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Section3Week2JpaApplication {
 
 	public static void main(String[] args) {
-//		System.setProperty("spring.profiles.active", "basic");
+		System.setProperty("spring.profiles.active", "basic");
 //		System.setProperty("spring.profiles.active", "table");
 //		System.setProperty("spring.profiles.active", "column");
 //		System.setProperty("spring.profiles.active", "id-direct");

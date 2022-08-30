@@ -27,9 +27,9 @@ public class JpaColumnMappingConfig {
 //            testEmailNotNull();
 //            testEmailUpdatable();
 //            testEmailUnique();
-//            testRegisterMember();
-//            testRegisterCoffee();
-//            testRegisterOrder();
+//            testRegisterMember();     // 컨텐츠에는 없는 코드
+//            testRegisterCoffee();     // 컨텐츠에는 없는 코드
+//            testRegisterOrder();      // 컨텐츠에는 없는 코드
         };
     }
 

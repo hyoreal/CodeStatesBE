@@ -26,17 +26,19 @@ public class JpaBasicConfig {
 
         System.out.println("# Active Profile: basic");
         return args -> {
-//			persistGeneratedAUTO();
-//			persistGeneratedIdentity();
-//			persistAndCommitGeneratedIdentity();
-//			insertLazilyEagerly();
-//            updateEntity();
-//            deleteEntity();
-//            analyzePersistContextExpiration();
+//			example01();
+//			example02();
+//			example03();
+//          example04();
+//          example05();
+//          analyzePersistContextExpiration();  // 컨텐츠에 없는 참고 코드
+// 			persistGeneratedIdentity();         // 컨텐츠에 없는 참고 코드
+// 			persistAndCommitGeneratedIdentity(); // 컨텐츠에 없는 참고 코드
         };
     }
 
-    private void persistGeneratedAUTO() {
+    // 영속성 컨텍스트에 엔티티 저장
+    private void example01() {
         System.out.println("------------------------------");
         Member member = new Member("hgd@gmail.com");
 
@@ -57,6 +59,104 @@ public class JpaBasicConfig {
         System.out.println("completed: ------------------------------");
     }
 
+
+    // 영속성 컨텍스트와 테이블에 엔티티 저장
+    private void example02() {
+        System.out.println(" TX Begin: ------------------------------ ");
+        tx.begin();
+        Member member = new Member("hgd@gmail.com");
+
+        System.out.println("Persist: ------------------------------ ");
+        em.persist(member);
+
+        System.out.println("Commit: ------------------------------ ");
+        tx.commit();
+
+        /**
+         * - 식별자가 있다. memberId가 1차 캐시에 채워져있다.
+         * - 그래서 1차 캐시에서 조회한다.
+         * - 쿼리가 실행되지 않는다.
+         */
+        Member resultMember1 = em.find(Member.class, 1L);
+
+        System.out.println("Find from 1th Cache: ------------------------------ ");
+        System.out.println("Id: " + resultMember1.getMemberId() + ", email: " + resultMember1.getEmail());
+
+        System.out.println("Find from DB: ------------------------------ ");
+        Member resultMember2 = em.find(Member.class, 2L);
+        System.out.println(resultMember2 == null);
+
+    }
+
+    // 쓰기 지연을 통한 영속성 컨텍스트와 테이블에 엔티티 일괄 저장
+    private void example03() {
+        System.out.println("TX begin: ------------------------------");
+        //엔티티 매니저는 데이터 변경시 트랜잭션을 시작해야 한다.
+        tx.begin();
+        /**
+         * - Strategy AUTO일 경우 코드 작성 순서대로 동작한다.
+         * - 그런데 IDENTITY 일 경우는 persist()하면 식별자를 테이블에서 가져와야 하므로, 식별자 없이 1차 캐시에 저장
+         * 후, 테이블에 insert한다. (commit 안해도 됨)
+         * - insert 후, 식별자를 1차 캐시에 업데이트 한다.
+         * - 따라서 쓰기 지연 안됨.
+         */
+        Member member1 = new Member("hgd1@gmail.com");
+        Member member2 = new Member("hgd2@gmail.com");
+
+        System.out.println("persist: ------------------------------");
+        em.persist(member1);
+        em.persist(member2);
+
+        // GenerationType.AUTO 일 경우, 여기까지 INSERT SQL을 데이터베이스에 보내지 않는다. 쓰기 지연 SQL 저장소에 모아둔다.
+        System.out.println("TX commit: ------------------------------");
+        tx.commit();
+        System.out.println("TX committed: ------------------------------");
+    }
+
+    // 영속성 컨텍스트와 테이블에 엔티티 업데이트
+    private void example04() {
+        System.out.println("TX1 begin: ------------------------------");
+        tx.begin();
+
+        System.out.println("Persist: ------------------------------");
+        em.persist(new Member("hgd1@gmail.com"));
+
+        System.out.println("TX1 Commit: ------------------------------");
+        tx.commit();
+
+        System.out.println("TX2 begin: ------------------------------");
+        tx.begin();
+
+        Member member1 = em.find(Member.class, 1L);
+        member1.setEmail("hgd1@yahoo.co.kr");
+
+        System.out.println("TX2 commit: ------------------------------");
+        tx.commit();
+    }
+
+    // 영속성 컨텍스트와 테이블의 엔티티 삭제
+    private void example05() {
+        System.out.println("TX1 begin: ------------------------------");
+        tx.begin();
+
+        System.out.println("Persist: ------------------------------");
+        em.persist(new Member("hgd1@gmail.com"));
+
+        System.out.println("TX1 commit: ------------------------------");
+        tx.commit();
+
+        System.out.println("TX2 begin: ------------------------------");
+        tx.begin();
+
+        Member member = em.find(Member.class, 1L);
+        em.remove(member);
+
+        System.out.println("TX2 commit: ------------------------------");
+        tx.commit();
+
+    }
+
+    // 컨텐츠에 없는 참고 코드
     private void persistGeneratedIdentity() {
         System.out.println("No TX ---------------------------");
         Member member = new Member("hgd@gmail.com");
@@ -83,6 +183,7 @@ public class JpaBasicConfig {
                 resultMember.getEmail());
     }
 
+    // 컨텐츠에 없는 참고 코드
     private void persistAndCommitGeneratedIdentity() {
         System.out.println(" TX Begin: ------------------------------ ");
         tx.begin();
@@ -115,72 +216,7 @@ public class JpaBasicConfig {
 
     }
 
-    private void insertLazilyEagerly() {
-        System.out.println("TX begin: ------------------------------");
-        //엔티티 매니저는 데이터 변경시 트랜잭션을 시작해야 한다.
-        tx.begin();
-        /**
-         * - Strategy AUTO일 경우 코드 작성 순서대로 동작한다.
-         * - 그런데 IDENTITY 일 경우는 persist()하면 식별자를 테이블에서 가져와야 하므로, 식별자 없이 1차 캐시에 저장
-         * 후, 테이블에 insert한다. (commit 안해도 됨)
-         * - insert 후, 식별자를 1차 캐시에 업데이트 한다.
-         * - 따라서 쓰기 지연 안됨.
-         */
-        Member member1 = new Member("hgd1@gmail.com");
-        Member member2 = new Member("hgd2@gmail.com");
-
-        System.out.println("persist: ------------------------------");
-        em.persist(member1);
-        em.persist(member2);
-
-        // GenerationType.AUTO 일 경우, 여기까지 INSERT SQL을 데이터베이스에 보내지 않는다. 쓰기 지연 SQL 저장소에
-        // 모아둔다.
-        System.out.println("TX commit: ------------------------------");
-        tx.commit();
-        System.out.println("TX committed: ------------------------------");
-    }
-
-    private void updateEntity() {
-        System.out.println("TX1 begin: ------------------------------");
-        tx.begin();
-
-        System.out.println("Persist: ------------------------------");
-        em.persist(new Member("hgd1@gmail.com"));
-
-        System.out.println("TX1 Commit: ------------------------------");
-        tx.commit();
-
-        System.out.println("TX2 begin: ------------------------------");
-        tx.begin();
-
-        Member member1 = em.find(Member.class, 1L);
-        member1.setEmail("hgd1@yahoo.co.kr");
-
-        System.out.println("TX2 commit: ------------------------------");
-        tx.commit();
-    }
-
-    private void deleteEntity() {
-        System.out.println("TX1 begin: ------------------------------");
-        tx.begin();
-
-        System.out.println("Persist: ------------------------------");
-        em.persist(new Member("hgd1@gmail.com"));
-
-        System.out.println("TX1 commit: ------------------------------");
-        tx.commit();
-
-        System.out.println("TX2 begin: ------------------------------");
-        tx.begin();
-
-        Member member = em.find(Member.class, 1L);
-        em.remove(member);
-
-        System.out.println("TX2 commit: ------------------------------");
-        tx.commit();
-
-    }
-
+    // 컨텐츠에 없는 참고 코드
     // tx 범위와 영속성 컨텍스트(EntityManager) 생존 범위가 같다????
     private void analyzePersistContextExpiration() {
         Member member = new Member("hgd@gmail.com");
