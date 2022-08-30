@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -51,7 +50,7 @@ public class MemberService {
 
     public Page<Member> findMembers(int page, int size) {
         // TODO 페이지네이션을 적용하세요!
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "memberId");
+        Pageable pageable = PageRequest.of(page, size, Sort.by("memberId").descending());
         return memberRepository.findAll(pageable);
     }
 
