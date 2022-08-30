@@ -16,7 +16,7 @@ public class Section3Week2JpaApplication {
 //		System.setProperty("spring.profiles.active", "one-to-many-uni");
 //		System.setProperty("spring.profiles.active", "many-to-many-bi");
 //		System.setProperty("spring.profiles.active", "many-to-one-uni");
-		System.setProperty("spring.profiles.active", "many-to-one-bi");
+//		System.setProperty("spring.profiles.active", "many-to-one-bi");
 
 		SpringApplication.run(Section3Week2JpaApplication.class, args);
 	}

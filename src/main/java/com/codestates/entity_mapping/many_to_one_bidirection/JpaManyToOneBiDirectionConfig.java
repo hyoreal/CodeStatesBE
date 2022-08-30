@@ -26,7 +26,7 @@ public class JpaManyToOneBiDirectionConfig {
 
         return args -> {
 //            mappingManyToOneBiDirection();
-            fetchTest();
+//            fetchTest();
         };
     }
 
