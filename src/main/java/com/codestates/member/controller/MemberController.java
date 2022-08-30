@@ -1,18 +1,20 @@
 package com.codestates.member.controller;
 
+import com.codestates.member.dto.MemberPaginationResponseDto;
 import com.codestates.member.dto.MemberPatchDto;
 import com.codestates.member.dto.MemberPostDto;
-import com.codestates.member.dto.MemberResponseDto;
 import com.codestates.member.entity.Member;
 import com.codestates.member.mapper.MemberMapper;
 import com.codestates.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -67,12 +69,12 @@ public class MemberController {
     }
 
     @GetMapping
-    public ResponseEntity getMembers() {
+    public ResponseEntity getMembers(@RequestParam("page") @Min(1) int page,
+                                     @RequestParam("size") @Min(1) int size) {
         // TODO 페이지네이션을 적용하세요!
-        List<Member> members = memberService.findMembers();
-        List<MemberResponseDto> response = mapper.membersToMemberResponseDtos(members);
+        Page<Member> members = memberService.findMembers(page - 1, size);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.memberToMemberPaginationResponseDto(members), HttpStatus.OK);
     }
 
     @DeleteMapping("/{member-id}")

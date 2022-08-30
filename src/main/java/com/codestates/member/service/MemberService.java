@@ -4,6 +4,10 @@ import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.entity.Member;
 import com.codestates.member.repository.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,9 +38,9 @@ public class MemberService {
         Member findMember = findVerifiedMember(member.getMemberId());
 
         Optional.ofNullable(member.getName())
-                .ifPresent(name -> findMember.setName(name));
+                .ifPresent(findMember::setName);
         Optional.ofNullable(member.getPhone())
-                .ifPresent(phone -> findMember.setPhone(phone));
+                .ifPresent(findMember::setPhone);
 
         return memberRepository.save(findMember);
     }
@@ -45,9 +49,10 @@ public class MemberService {
         return findVerifiedMember(memberId);
     }
 
-    public List<Member> findMembers() {
+    public Page<Member> findMembers(int page, int size) {
         // TODO 페이지네이션을 적용하세요!
-        return (List<Member>) memberRepository.findAll();
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "memberId");
+        return memberRepository.findAll(pageable);
     }
 
     public void deleteMember(long memberId) {
