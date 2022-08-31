@@ -2,17 +2,26 @@ package com.codestates.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * 데이터베이스 연동을 통한 Spring Security 학습용
+ */
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfigurationV2 {
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChainV3(HttpSecurity http) throws Exception {
         http
+            .headers().frameOptions().sameOrigin() // 설정 추가된 부분
+            .and()
             .csrf().disable()
             .formLogin()
             .loginPage("/auths/login-form")
@@ -33,22 +42,10 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    // InMemory User와 관련된 설정이 제거 됨.
+
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("kevin@gmail.com")
-                        .password("1111")
-                        .roles("USER")
-                        .build();
-
-        UserDetails admin =
-                User.withDefaultPasswordEncoder()
-                        .username("admin@gmail.com")
-                        .password("2222")
-                        .roles("ADMIN")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
