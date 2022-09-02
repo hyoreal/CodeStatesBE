@@ -1,10 +1,14 @@
 package com.codestates.order.service;
 
+import com.codestates.coffee.service.CoffeeService;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
+import com.codestates.member.entity.Member;
 import com.codestates.member.service.MemberService;
 import com.codestates.order.entity.Order;
+import com.codestates.order.entity.OrderCoffee;
 import com.codestates.order.repository.OrderRepository;
+import com.codestates.stamp.entity.Stamp;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,11 +20,14 @@ import java.util.Optional;
 @Service
 public class OrderService {
     private final MemberService memberService;
+    private final CoffeeService coffeeService;
     private final OrderRepository orderRepository;
 
     public OrderService(MemberService memberService,
+                        CoffeeService coffeeService,
                         OrderRepository orderRepository) {
         this.memberService = memberService;
+        this.coffeeService = coffeeService;
         this.orderRepository = orderRepository;
     }
 
@@ -28,7 +35,31 @@ public class OrderService {
         // 회원이 존재하는지 확인
         memberService.findVerifiedMember(order.getMember().getMemberId());
 
-        // TODO 커피가 존재하는지 조회하는 로직이 포함되어야 합니다.
+        // TODO 주문한 커피가 존재하는지 조회하는 로직이 포함되어야 합니다.
+        order.getOrderCoffees().stream()
+                .forEach(findOrderCoffee ->
+                        coffeeService.findVerifiedCoffee(
+                                findOrderCoffee.getCoffee().getCoffeeId()));
+
+        // TODO 주문한 커피 수량만큼 스탬프 추가
+        Member member = memberService.findMember(order.getMember().getMemberId());
+
+        int count = order.getOrderCoffees().stream()
+                .map(OrderCoffee::getQuantity)
+                .mapToInt(quantity -> quantity)
+                .sum();
+
+        Stamp stamp = member.getStamp();
+        if(stamp.getStampCount() > 0) {
+            stamp.setStampCount(stamp.getStampCount() + count);
+        } else {
+            stamp.setStampCount(count);
+        }
+
+        stamp.setMember(member);
+        member.setStamp(stamp);
+
+        memberService.updateMember(member);
 
         return orderRepository.save(order);
     }

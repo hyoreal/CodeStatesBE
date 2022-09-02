@@ -31,4 +31,8 @@ public class OrderCoffee {
     public void addCoffee(Coffee coffee) {
         this.coffee = coffee;
     }
+
+    public void addOrder(Order order) {
+        this.order = order;
+    }
 }

@@ -1,6 +1,7 @@
 package com.codestates.order.dto;
 
 import com.codestates.member.entity.Member;
+import com.codestates.order.entity.OrderCoffee;
 import lombok.Getter;
 
 import javax.validation.Valid;

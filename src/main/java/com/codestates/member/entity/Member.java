@@ -43,22 +43,24 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "STAMP_ID")
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
     private Stamp stamp;
 
     public Member(String email) {
         this.email = email;
     }
 
-    public void addStamp(Stamp stamp) {
-        this.stamp = stamp;
-    }
-
     public Member(String email, String name, String phone) {
         this.email = email;
         this.name = name;
         this.phone = phone;
+    }
+
+    public void setStamp(Stamp stamp) {
+        this.stamp = stamp;
+        if (stamp.getMember() != this) {
+            stamp.setMember(this);
+        }
     }
 
     public void addOrder(Order order) {
