@@ -4,12 +4,12 @@ import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.entity.Member;
 import com.codestates.member.repository.MemberRepository;
+import com.codestates.utils.CustomBeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -20,9 +20,11 @@ import java.util.Optional;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final CustomBeanUtils<Member> beanUtils;
 
-    public MemberService(MemberRepository memberRepository) {
+    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils) {
         this.memberRepository = memberRepository;
+        this.beanUtils = beanUtils;
     }
 
     public Member createMember(Member member) {
@@ -32,7 +34,8 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public Member updateMember(Member member) {
+    // 리팩토링 전
+    public Member updateMemberOld(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
         Optional.ofNullable(member.getName())
@@ -43,6 +46,14 @@ public class MemberService {
         Optional.ofNullable(member.getMemberStatus())
                 .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
 //        findMember.setModifiedAt(LocalDateTime.now());
+
+        return memberRepository.save(findMember);
+    }
+
+    public Member updateMember(Member member) {
+        Member findMember = findVerifiedMember(member.getMemberId());
+
+        beanUtils.copyNonNullProperties(member, findMember);
 
         return memberRepository.save(findMember);
     }
