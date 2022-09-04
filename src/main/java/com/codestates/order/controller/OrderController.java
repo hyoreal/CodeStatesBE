@@ -28,14 +28,11 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
-    private final CoffeeService coffeeService;
 
     public OrderController(OrderService orderService,
-                           OrderMapper mapper,
-                           CoffeeService coffeeService) {
+                           OrderMapper mapper) {
         this.orderService = orderService;
         this.mapper = mapper;
-        this.coffeeService = coffeeService;
     }
 
     @PostMapping

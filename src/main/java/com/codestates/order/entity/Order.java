@@ -32,15 +32,14 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<OrderCoffee> orderCoffees = new ArrayList<>();
-
-    public void addMember(Member member) {
-        this.member = member;
-    }
 
     public void addOrderCoffees(OrderCoffee orderCoffee) {
         orderCoffees.add(orderCoffee);
+        if(orderCoffee.getOrder() != this) {
+            orderCoffee.setOrder(this);
+        }
     }
 
     public enum OrderStatus {

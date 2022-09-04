@@ -42,14 +42,14 @@ public class Coffee {
     @Column(nullable = false, name = "LAST_MODIFIED_AT")
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "coffee")
+    @OneToMany(mappedBy = "coffee", cascade = CascadeType.PERSIST)
     List<OrderCoffee> orderCoffees = new ArrayList<>();
 
     public void addOrderCoffee(OrderCoffee orderCoffee) {
         orderCoffees.add(orderCoffee);
-//        if(orderCoffee.getCoffee() != this) {
-//            orderCoffee.addCoffee(this);
-//        }
+        if(orderCoffee.getCoffee() != this) {
+            orderCoffee.addCoffee(this);
+        }
     }
 
     // 커피 상태 추가
