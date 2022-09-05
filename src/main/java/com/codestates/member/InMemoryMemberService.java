@@ -31,6 +31,11 @@ public class InMemoryMemberService implements MemberService {
         return member;
     }
 
+    @Override
+    public Member findMember(String email) {
+        return null;
+    }
+
     private List<GrantedAuthority> createAuthorities(String... roles) {
 
         return Arrays.stream(roles)

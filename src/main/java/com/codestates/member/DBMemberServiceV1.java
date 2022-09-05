@@ -29,6 +29,12 @@ public class DBMemberServiceV1 implements MemberService {
         return savedMember;
     }
 
+    @Override
+    public Member findMember(String email) {
+        // doesn't need to implement
+        return null;
+    }
+
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())

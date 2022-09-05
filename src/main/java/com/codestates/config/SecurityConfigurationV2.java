@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -16,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * 데이터베이스 연동을 통한 Spring Security 학습용
  */
 @Configuration
+//@EnableWebSecurity(debug = true)
 public class SecurityConfigurationV2 {
     @Bean
     public SecurityFilterChain filterChainV3(HttpSecurity http) throws Exception {

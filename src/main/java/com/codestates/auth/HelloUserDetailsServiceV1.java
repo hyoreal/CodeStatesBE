@@ -33,7 +33,7 @@ public class HelloUserDetailsServiceV1 implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> optionalMember = memberRepository.findByEmail(username);
         Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        Collection<? extends GrantedAuthority> authorities = authorityUtils.createAuthorities(findMember);
+        Collection<? extends GrantedAuthority> authorities = authorityUtils.createAuthorities(findMember.getEmail());
 
         return new User(findMember.getEmail(), findMember.getPassword(), authorities);
     }

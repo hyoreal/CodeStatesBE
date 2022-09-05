@@ -47,7 +47,7 @@ public class HelloUserDetailsServiceV2 implements UserDetailsService {
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            return authorityUtils.createAuthorities(this);
+            return authorityUtils.createAuthorities(this.getEmail());
         }
 
         @Override

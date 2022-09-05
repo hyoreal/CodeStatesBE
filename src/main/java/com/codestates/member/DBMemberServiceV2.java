@@ -4,7 +4,6 @@ import com.codestates.auth.utils.HelloAuthorityUtils;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -30,13 +29,26 @@ public class DBMemberServiceV2 implements MemberService {
         member.setPassword(encryptedPassword);
 
         // 추가: User Role DB에 저장
-        List<String> roles = authorityUtils.createAuthorities(member.getEmail());
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
         member.setRoles(roles);
 
         Member savedMember = memberRepository.save(member);
 
 
         return savedMember;
+    }
+
+    public Member findMember(String email) {
+        return findVerifiedMember(email);
+    }
+
+    private Member findVerifiedMember(String email) {
+        Optional<Member> optionalMember =
+                memberRepository.findByEmail(email);
+        Member findMember =
+                optionalMember.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return findMember;
     }
 
     private void verifyExistsEmail(String email) {

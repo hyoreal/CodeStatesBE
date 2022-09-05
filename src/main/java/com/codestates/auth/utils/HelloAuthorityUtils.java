@@ -1,6 +1,5 @@
 package com.codestates.auth.utils;
 
-import com.codestates.member.Member;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -20,24 +19,27 @@ public class HelloAuthorityUtils {
     private final List<String> ADMIN_ROLES_STRING = List.of("ADMIN", "USER");
     private final List<String> USER_ROLES_STRING = List.of("USER");
 
-    public List<GrantedAuthority> createAuthorities(Member member) {
-        if (member.getEmail().equals(adminMailAddress)) {
+    // 메모리 상의 Role을 기반으로 권한 정보 생성.
+    public List<GrantedAuthority> createAuthorities(String email) {
+        if (email.equals(adminMailAddress)) {
             return ADMIN_ROLES;
         }
         return USER_ROLES;
     }
 
-    public List<String> createAuthorities(String email) {
-        if (email.equals(adminMailAddress)) {
-            return ADMIN_ROLES_STRING;
-        }
-        return USER_ROLES_STRING;
-    }
-
+    // DB에 저장된 Role을 기반으로 권한 정보 생성
     public List<GrantedAuthority> createAuthorities(List<String> roles) {
        List<GrantedAuthority> authorities = roles.stream()
                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                .collect(Collectors.toList());
        return authorities;
+    }
+
+    // DB 저장 용
+    public List<String> createRoles(String email) {
+        if (email.equals(adminMailAddress)) {
+            return ADMIN_ROLES_STRING;
+        }
+        return USER_ROLES_STRING;
     }
 }
