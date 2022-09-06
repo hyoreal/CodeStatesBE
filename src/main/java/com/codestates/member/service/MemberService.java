@@ -2,10 +2,10 @@ package com.codestates.member.service;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
-import com.codestates.helper.email.EmailSender;
 import com.codestates.helper.event.MemberRegistrationApplicationEvent;
 import com.codestates.member.entity.Member;
 import com.codestates.member.repository.MemberRepository;
+import com.codestates.utils.CustomBeanUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,12 +28,15 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final ApplicationEventPublisher publisher;
+    private final CustomBeanUtils<Member> beanUtils;
 
     public MemberService(MemberRepository memberRepository,
-                         ApplicationEventPublisher publisher) {
+                         ApplicationEventPublisher publisher,
+                         CustomBeanUtils<Member> beanUtils) {
         this.memberRepository = memberRepository;
         this.publisher = publisher;
 
+        this.beanUtils = beanUtils;
     }
 
     public Member createMember(Member member) {
@@ -49,14 +52,17 @@ public class MemberService {
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
-        Optional.ofNullable(member.getName())
-                .ifPresent(name -> findMember.setName(name));
-        Optional.ofNullable(member.getPhone())
-                .ifPresent(phone -> findMember.setPhone(phone));
-        Optional.ofNullable(member.getMemberStatus())
-                .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
+        // 리팩토링 전 코드
+//        Optional.ofNullable(member.getName())
+//                .ifPresent(name -> findMember.setName(name));
+//        Optional.ofNullable(member.getPhone())
+//                .ifPresent(phone -> findMember.setPhone(phone));
+//        Optional.ofNullable(member.getMemberStatus())
+//                .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
 
-        return memberRepository.save(findMember);
+        // 리펙토링 후 코드
+        Member updatingMember = beanUtils.copyNonNullProperties(member, findMember);
+        return memberRepository.save(updatingMember);
     }
 
     @Transactional(readOnly = true)
