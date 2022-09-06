@@ -2,14 +2,15 @@ package com.codestates.member.service;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
-import com.codestates.helper.EmailSender;
+import com.codestates.helper.MemberEvent;
 import com.codestates.member.entity.Member;
 import com.codestates.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -25,18 +26,14 @@ import java.util.concurrent.Executors;
  *  - Spring Data JPA 적용
  *  - 트랜잭션 적용
  */
+
+@RequiredArgsConstructor
 @Slf4j
 @Transactional
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-    private final EmailSender emailSender;
-
-    public MemberService(MemberRepository memberRepository,
-                         EmailSender emailSender) {
-        this.memberRepository = memberRepository;
-        this.emailSender = emailSender;
-    }
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
@@ -56,15 +53,8 @@ public class MemberService {
          *      - 이벤트 리스너(Event Listener)가 이메일을 보내고 실패할 경우 이미 저장된 회원 정보를 삭제할 수 있습니다.
      *      - Spring에서는 @Async 애너테이션을 이용해서 비동기 작업을 손쉽게 처리할 수 있습니다.
          */
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(() -> {
-            try {
-                emailSender.sendEmail("any email message");
-            } catch (Exception e) {
-                log.error("MailSendException happened: ", e);
-                throw new RuntimeException(e);
-            }
-        });
+        applicationEventPublisher.publishEvent(new MemberEvent(savedMember));
+
         return savedMember;
     }
 
@@ -73,11 +63,11 @@ public class MemberService {
         Member findMember = findVerifiedMember(member.getMemberId());
 
         Optional.ofNullable(member.getName())
-                .ifPresent(name -> findMember.setName(name));
+                .ifPresent(findMember::setName);
         Optional.ofNullable(member.getPhone())
-                .ifPresent(phone -> findMember.setPhone(phone));
+                .ifPresent(findMember::setPhone);
         Optional.ofNullable(member.getMemberStatus())
-                .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
+                .ifPresent(findMember::setMemberStatus);
 
         return memberRepository.save(findMember);
     }
