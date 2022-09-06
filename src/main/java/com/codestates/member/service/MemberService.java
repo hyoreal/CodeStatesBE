@@ -2,7 +2,7 @@ package com.codestates.member.service;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
-import com.codestates.helper.event.MemberRegistrationApplicationEvent;
+import com.codestates.helper.event.MemberRegistrationEvent;
 import com.codestates.member.entity.Member;
 import com.codestates.member.repository.MemberRepository;
 import com.codestates.utils.CustomBeanUtils;
@@ -44,7 +44,7 @@ public class MemberService {
         Member savedMember = memberRepository.save(member);
 
         // 추가된 부분
-        publisher.publishEvent(new MemberRegistrationApplicationEvent(this, savedMember));
+        publisher.publishEvent(new MemberRegistrationEvent(savedMember));
         return savedMember;
     }
 

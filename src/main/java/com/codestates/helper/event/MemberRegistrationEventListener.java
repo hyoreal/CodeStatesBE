@@ -1,11 +1,9 @@
 package com.codestates.helper.event;
 
 import com.codestates.helper.email.EmailSender;
-import com.codestates.helper.event.MemberRegistrationApplicationEvent;
 import com.codestates.member.entity.Member;
 import com.codestates.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.mail.MailSendException;
 import org.springframework.scheduling.annotation.Async;
@@ -26,7 +24,7 @@ public class MemberRegistrationEventListener {
 
     @Async
     @EventListener
-    public void listen(MemberRegistrationApplicationEvent event) throws Exception {
+    public void listen(MemberRegistrationEvent event) throws Exception {
         try {
             // 전송할 메시지를 생성했다고 가정.
             String message = "any email message";
