@@ -36,7 +36,8 @@ public class OrderService {
         Order savedOrder = saveOrder(order);
         updateStamp(savedOrder);
 
-        return savedOrder;
+        throw new RuntimeException("rollback test");
+//        return savedOrder;
     }
 
     public Order updateOrder(Order order) {
