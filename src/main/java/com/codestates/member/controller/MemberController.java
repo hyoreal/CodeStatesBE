@@ -1,5 +1,6 @@
 package com.codestates.member.controller;
 
+import com.codestates.member.dto.MemberDto;
 import com.codestates.response.MultiResponseDto;
 import com.codestates.response.SingleResponseDto;
 import com.codestates.member.dto.MemberPatchDto;
@@ -39,8 +40,8 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberDto) {
-        Member member = mapper.memberPostDtoToMember(memberDto);
+    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
+        Member member = mapper.memberPostDtoToMember(requestBody);
         member.setStamp(new Stamp()); // homework solution 추가
 
         Member createdMember = memberService.createMember(member);
@@ -53,11 +54,11 @@ public class MemberController {
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(
             @PathVariable("member-id") @Positive long memberId,
-            @Valid @RequestBody MemberPatchDto memberPatchDto) {
-        memberPatchDto.setMemberId(memberId);
+            @Valid @RequestBody MemberDto.Patch requestBody) {
+        requestBody.setMemberId(memberId);
 
         Member member =
-                memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
+                memberService.updateMember(mapper.memberPatchDtoToMember(requestBody));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
