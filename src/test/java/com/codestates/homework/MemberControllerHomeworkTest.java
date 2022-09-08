@@ -38,7 +38,7 @@ public class MemberControllerHomeworkTest {
     private MemberRepository memberRepository;
 
     Member member1 = new Member("lmr@gmail.com", "이몽룡", "010-3054-7265");
-    Member member2 = new Member("lch@gmail.com", "이춘향", "010-2222-2222");
+    Member member2 = new Member("sch@gmail.com", "성춘향", "010-2222-2222");
     Member member3 = new Member("4tto@gmail.com", "사또", "010-3333-3333");
 
     @BeforeEach
@@ -123,8 +123,7 @@ public class MemberControllerHomeworkTest {
                         .contentType(MediaType.APPLICATION_JSON));
 
         // then
-        MvcResult result = actions.andExpect(status().isOk())
-                .andReturn();
+        MvcResult result = actions.andExpect(status().isOk()).andReturn();
 
         System.out.println(result.getResponse().getContentAsString());
     }
