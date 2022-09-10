@@ -40,7 +40,7 @@ public class HelloUserDetailsServiceV2 implements UserDetailsService {
     private final class HelloUserDetails extends Member implements UserDetails {
         HelloUserDetails(Member member) {
             setMemberId(member.getMemberId());
-            setName(member.getName());
+            setFullName(member.getFullName());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
         }
