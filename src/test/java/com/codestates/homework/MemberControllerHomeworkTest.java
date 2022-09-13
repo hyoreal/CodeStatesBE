@@ -1,11 +1,14 @@
 package com.codestates.homework;
 
+import com.codestates.helper.MemberControllerTestHelper;
+import com.codestates.helper.StubData;
 import com.codestates.member.dto.MemberDto;
 import com.codestates.member.entity.Member;
 import com.codestates.member.mapper.MemberMapper;
 import com.codestates.member.service.MemberService;
 import com.codestates.stamp.Stamp;
 import com.google.gson.Gson;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +16,25 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.*;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.http.HttpMethod;
+import org.springframework.test.web.servlet.*;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-import java.util.List;
+import java.net.URI;
+import java.util.*;
 
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MemberControllerHomeworkTest {
+public class MemberControllerHomeworkTest implements MemberControllerTestHelper {
     @Autowired
     private MockMvc mockMvc;
 
@@ -44,37 +49,31 @@ public class MemberControllerHomeworkTest {
 
     @Test
     void patchMemberTest() throws Exception {
-        // TODO MemberController의 patchMember() 핸들러 메서드를 테스트하는 테스트 케이스를 여기에 작성하세요.
-        // TODO Mockito를 사용해야 합니다. ^^
-        // given
-        MemberDto.Patch patch = new MemberDto.Patch();
-        patch.setName("백길동");
-        patch.setPhone("010-0100-0100");
-        patch.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
 
-        Member member = mapper.memberPatchToMember(patch);
-        member.setMemberId(1L);
-        member.setStamp(new Stamp());
+        // given
+        long memberId = 1L;
+
+        Map<String, String> updatedInfo = new HashMap<>();
+        updatedInfo.put("phone", "010-0100-0100");
+        updatedInfo.put("name", "백길동");
+
+        MemberDto.Patch patch = (MemberDto.Patch) StubData.MockMember.getRequestBody(HttpMethod.PATCH);
+        Member member = StubData.MockMember.getSingleResponseBody(memberId, updatedInfo);
 
         Mockito.when(memberService.updateMember(Mockito.any(Member.class))).thenReturn(member);
 
-        String content = gson.toJson(patch);
+        String content = toJsonContent(patch);
+        URI uri = getURI(memberId);
 
         // when
-        ResultActions actions =
-                mockMvc.perform(
-                        patch("/v11/members/" + member.getMemberId())
-                                .accept(MediaType.APPLICATION_JSON)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(content)
-                );
+        ResultActions actions = mockMvc.perform(patchRequestBuilder(uri, content));
 
         // then
-        MvcResult result = actions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.name").value(patch.getName()))
-                .andExpect(jsonPath("$.data.phone").value(patch.getPhone()))
+        MvcResult result = actions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.name").value(member.getName()))
+                .andExpect(jsonPath("$.data.phone").value(member.getPhone()))
                 .andReturn();
+
 
         System.out.println(result.getResponse().getContentAsString());
 
@@ -83,22 +82,16 @@ public class MemberControllerHomeworkTest {
 
     @Test
     void getMemberTest() throws Exception {
-        // TODO MemberController의 getMember() 핸들러 메서드를 테스트하는 테스트 케이스를 여기에 작성하세요.
-        // TODO Mockito를 사용해야 합니다. ^^
         // given
-        Member member = new Member("hgd@gmail.com", "홍길동", "010-1111-1111");
-        member.setMemberId(1L);
-        member.setStamp(new Stamp());
+        long memberId = 1L;
+        Member member = StubData.MockMember.getSingleResponseBody(memberId);
 
-        Mockito.when(memberService.findMember(member.getMemberId())).thenReturn(member);
+        Mockito.when(memberService.findMember(Mockito.anyLong())).thenReturn(member);
+
+        URI uri= getURI(memberId);
 
         // when
-        ResultActions actions =
-                mockMvc.perform(
-                        get("/v11/members/" + member.getMemberId())
-                                .accept(MediaType.APPLICATION_JSON)
-                                .contentType(MediaType.APPLICATION_JSON)
-                );
+        ResultActions actions = mockMvc.perform(getRequestBuilder(uri));
 
         // then
         MvcResult result = actions.andExpect(status().isOk())
@@ -113,53 +106,43 @@ public class MemberControllerHomeworkTest {
 
     @Test
     void getMembersTest() throws Exception {
-        // TODO MemberController의 getMembers() 핸들러 메서드를 테스트하는 테스트 케이스를 여기에 작성하세요.
-        // TODO Mockito를 사용해야 합니다. ^^
         // given
-        Member member1 = new Member("Imwakeup@gmail.com", "나기상", "010-8282-8282");
-        Member member2 = new Member("waiting@gmail.com", "대기중", "010-5353-5353");
-        member1.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
-        member2.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
-        member1.setStamp(new Stamp());
-        member2.setStamp(new Stamp());
-        member1.setMemberId(1L);
-        member2.setMemberId(2L);
+        Page<Member> members = StubData.MockMember.getSingleResponseBody();
 
-        Page<Member> memberPage = new PageImpl<>(List.of(member1, member2),
-                PageRequest.of(0, 10, Sort.by("memberId").descending()), 2);
+        Mockito.when(memberService.findMembers(Mockito.anyInt(), Mockito.anyInt())).thenReturn(members);
 
+        MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        queryParams.add("page", String.valueOf(1));
+        queryParams.add("size", String.valueOf(10));
 
-        given(memberService.findMembers(0, 10)).willReturn(memberPage);
+        URI uri = getURI();
 
         // when
-        ResultActions actions =
-                mockMvc.perform(
-                        get("/v11/members?page=1&size=10")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .contentType(MediaType.APPLICATION_JSON)
-                );
+        ResultActions actions = mockMvc.perform(getRequestBuilder(uri, queryParams));
 
         // then
-        MvcResult result = actions.andExpect(status().isOk()).andReturn();
+        MvcResult result = actions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").isArray())
+                .andReturn();
+
+        List list = JsonPath.parse(result.getResponse().getContentAsString()).read("$.data");
+
+        assertThat(list.size(), is(2));
 
         System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
     void deleteMemberTest() throws Exception {
-        // TODO MemberController의 deleteMember() 핸들러 메서드를 테스트하는 테스트 케이스를 여기에 작성하세요.
-        // TODO Mockito를 사용해야 합니다. ^^
         // given
         Member member = new Member("hgd@gmail.com", "홍길동", "010-1111-1111");
         member.setMemberId(1L);
         member.setStamp(new Stamp());
 
+        doNothing().when(memberService).deleteMember(member.getMemberId());
+
         // when
-        ResultActions actions =
-                mockMvc.perform(
-                        delete("/v11/members/1")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .contentType(MediaType.APPLICATION_JSON));
+        ResultActions actions = mockMvc.perform(deleteRequestBuilder(getURI(member.getMemberId())));
 
         // then
         MvcResult result = actions.andExpect(status().isNoContent()).andReturn();
