@@ -35,12 +35,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MemberControllerHomeworkTest_V1 implements MemberControllerTestHelper {
+public class MemberControllerHomeworkTest_V1 {
     @Autowired
     private MockMvc mockMvc;
 
@@ -118,7 +119,9 @@ public class MemberControllerHomeworkTest_V1 implements MemberControllerTestHelp
 
         given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(response);
 
-        String content = toJsonContent(patch);
+        Gson gson = new Gson();
+        String content = gson.toJson(patch);
+
         URI uri = UriComponentsBuilder.newInstance().path("/v11/members/{memberId}").buildAndExpand(memberId).toUri();
 
         // when
@@ -228,7 +231,7 @@ public class MemberControllerHomeworkTest_V1 implements MemberControllerTestHelp
         doNothing().when(memberService).deleteMember(memberId);
 
         // when
-        ResultActions actions = mockMvc.perform(deleteRequestBuilder(getURI(memberId)));
+        ResultActions actions = mockMvc.perform(delete("/v11/members/" + memberId));
 
         // then
         actions.andExpect(status().isNoContent());
