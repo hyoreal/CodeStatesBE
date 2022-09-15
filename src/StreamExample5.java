@@ -8,17 +8,17 @@ public class StreamExample5 {
         List<Student> totalList = Arrays.asList(
                 new Student("김코딩", 10, Student.Gender.Male),
                 new Student("김인기", 8, Student.Gender.Male),
-                new Student("이자바", 9, Student.Gender.Female),
-                new Student("최민선", 10, Student.Gender.Female)
+                new Student("이자바", 9, Student.Gender.Female)
         );
 
         List<Student> maleList = totalList.stream()
-                .filter(s -> s.getGender() == Student.Gender.Male)
-                .collect(Collectors.toList());
+                .filter(s -> s.getGender() == Student.Gender.Male) // 남자만 추리고
+                .collect(Collectors.toList()); // 리스트로 뽑아달라!
 
-        maleList.stream().forEach((n) -> System.out.println(n.getName()));
+        maleList.forEach((n) -> System.out.println(n.getName()));
     }
 }
+
 
 class Student {
     public enum Gender {Male, Female};
@@ -32,15 +32,16 @@ class Student {
         this.gender = gender;
     }
 
-    public Gender getGender(){
-        return gender;
-    }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public int getScore(){
+    public int getScore() {
         return score;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 }

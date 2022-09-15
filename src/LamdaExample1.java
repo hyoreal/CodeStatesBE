@@ -7,16 +7,12 @@ public class LamdaExample1 {
             }
         };
 
-
-        ExampleFunction ef = (num1, num2) -> num1 + num2; // 객체기 때문에 참조변수 필요. 하지만 문제발생!
-////
-        System.out.println( ef.sum(10, 15));
-
-
+        Controller controller = (num1, num2) -> num1 + num2;
+        System.out.println(controller.sum(1, 10));
 
     }
 }
 
-interface ExampleFunction {
+interface Controller {
     public abstract int sum(int num1, int num2);
 }
