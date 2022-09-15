@@ -47,6 +47,7 @@ public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelp
     @MockBean
     private MemberMapper mapper;
 
+
     @Test
     void postMemberTest() throws Exception {
         // given
@@ -132,7 +133,7 @@ public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelp
     @Test
     void getMembersTest() throws Exception {
         // given
-        Page<Member> pageMembers = StubData.MockMember.getSingleResultMember();
+        Page<Member> pageMembers = StubData.MockMember.getMultiResultMember();
 
         List<MemberDto.Response> responses = StubData.MockMember.getMultiResponseBody();
 
@@ -158,7 +159,7 @@ public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelp
                                 .andReturn();
 
         List list = JsonPath.parse(result.getResponse().getContentAsString()).read("$.data");
-
+        System.out.println(list);
         assertThat(list.size(), is(2));
     }
 

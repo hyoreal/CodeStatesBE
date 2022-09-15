@@ -54,9 +54,9 @@ public class MemberController {
             @PathVariable("member-id") @Positive long memberId,
             @Valid @RequestBody MemberDto.Patch requestBody) {
         requestBody.setMemberId(memberId);
-
-        Member member =
-                memberService.updateMember(mapper.memberPatchToMember(requestBody));
+        Member member0 = mapper.memberPatchToMember(requestBody);
+        Member  member=
+                memberService.updateMember(member0);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)),

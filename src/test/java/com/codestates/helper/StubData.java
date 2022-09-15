@@ -52,20 +52,6 @@ public class StubData {
                     new Stamp());
         }
 
-        public static Page<Member> getSingleResultMember() {
-            Member member1 = new Member("hgd1@gmail.com", "홍길동1", "010-1111-1111");
-            member1.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
-            member1.setStamp(new Stamp());
-
-            Member member2 = new Member("hgd2@gmail.com", "홍길동2", "010-2222-2222");
-            member2.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
-            member2.setStamp(new Stamp());
-
-            return new PageImpl<>(List.of(member1, member2),
-                    PageRequest.of(0, 10, Sort.by("memberId").descending()),
-                    2);
-        }
-
         public static Member getSingleResultMember(long memberId) {
             Member member = new Member("hgd@gmail.com", "홍길동", "010-1111-1111");
             member.setMemberId(memberId);
@@ -82,6 +68,22 @@ public class StubData {
             member.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
             member.setStamp(new Stamp());
             return member;
+        }
+
+        public static Page<Member> getMultiResultMember() {
+            Member member1 = new Member("hgd1@gmail.com", "홍길동1", "010-1111-1111");
+            member1.setMemberId(1L);  // 추가
+            member1.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
+            member1.setStamp(new Stamp());
+
+            Member member2 = new Member("hgd2@gmail.com", "홍길동2", "010-2222-2222");
+            member2.setMemberId(2L);  // 추가
+            member2.setMemberStatus(Member.MemberStatus.MEMBER_ACTIVE);
+            member2.setStamp(new Stamp());
+
+            return new PageImpl<>(List.of(member1, member2),
+                    PageRequest.of(0, 10, Sort.by("memberId").descending()), // 정렬 지원 안됨. DB에서 정렬하지 않으므로..
+                    2);
         }
 
         public static List<MemberDto.Response> getMultiResponseBody() {
