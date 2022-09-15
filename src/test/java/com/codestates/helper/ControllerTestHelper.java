@@ -2,8 +2,8 @@ package com.codestates.helper;
 
 import com.google.gson.Gson;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -12,7 +12,7 @@ import java.net.URI;
 public interface ControllerTestHelper<T> {
     default RequestBuilder postRequestBuilder(URI uri,
                                               String content) {
-        return MockMvcRequestBuilders
+        return RestDocumentationRequestBuilders
                 .post(uri)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -21,7 +21,7 @@ public interface ControllerTestHelper<T> {
 
     default RequestBuilder patchRequestBuilder(URI uri,
                                                String content) {
-        return MockMvcRequestBuilders
+        return RestDocumentationRequestBuilders
                 .patch(uri)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -30,13 +30,19 @@ public interface ControllerTestHelper<T> {
     }
 
     default RequestBuilder getRequestBuilder(URI uri) {
-        return MockMvcRequestBuilders
+        return RestDocumentationRequestBuilders
                 .get(uri)
                 .accept(MediaType.APPLICATION_JSON);
     }
 
+    default RequestBuilder getRequestBuilder(String uri, long memberId) {
+        return RestDocumentationRequestBuilders
+                .get(uri, memberId)
+                .accept(MediaType.APPLICATION_JSON);
+    }
+
     default RequestBuilder getRequestBuilder(URI uri, MultiValueMap<String, String> queryParams) {
-        return MockMvcRequestBuilders
+        return RestDocumentationRequestBuilders
                 .get(uri)
                 .params(
                         queryParams
@@ -44,8 +50,22 @@ public interface ControllerTestHelper<T> {
                 .accept(MediaType.APPLICATION_JSON);
     }
 
+    default RequestBuilder getRequestBuilder(String uri, MultiValueMap<String, String> queryParams) {
+        return RestDocumentationRequestBuilders
+                .get(uri)
+                .params(
+                        queryParams
+                )
+                .accept(MediaType.APPLICATION_JSON);
+    }
+
+
     default RequestBuilder deleteRequestBuilder(URI uri) {
-        return MockMvcRequestBuilders.delete(uri);
+        return RestDocumentationRequestBuilders.delete(uri);
+    }
+
+    default RequestBuilder deleteRequestBuilder(String uri, long memberId) {
+        return RestDocumentationRequestBuilders.delete(uri, memberId);
     }
 
     default URI createURI(String url) {

@@ -10,10 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpMethod;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class StubData {
     private static Map<HttpMethod, Object> stubRequestBody;
@@ -50,6 +47,26 @@ public class StubData {
             return new PageImpl<>(List.of(member1, member2),
                     PageRequest.of(0, 10, Sort.by("memberId").descending()),
                     2);
+        }
+
+        public static List<MemberDto.response> getMemberListMultiResponseBody() {
+            return List.of(
+                    new MemberDto.response(
+                            1L,
+                            "hgd1@gmail.com",
+                            "홍길동1",
+                            "010-1111-1111",
+                            Member.MemberStatus.MEMBER_ACTIVE,
+                            new Stamp()
+                    ),
+                    new MemberDto.response(
+                            2L,
+                            "hgd2@gmail.com",
+                            "홍길동2",
+                            "010-2222-2222",
+                            Member.MemberStatus.MEMBER_ACTIVE,
+                            new Stamp()
+                    ));
         }
 
         public static Member getSingleResponseBody(long memberId) {

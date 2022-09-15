@@ -9,6 +9,14 @@ public interface MemberControllerTestHelper extends ControllerTestHelper {
     }
 
     default URI getURI(long memberId) {
-        return createURI(MEMBER_URL + "/{memberId}", memberId);
+        return createURI(MEMBER_URL + "/{member-id}", memberId);
+    }
+
+    default String getUrl() {
+        return MEMBER_URL;
+    }
+
+    default String getUrl(long memberId) {
+        return MEMBER_URL + "/{member-id}";
     }
 }
