@@ -284,7 +284,10 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                             preprocessRequest(prettyPrint()),
                             preprocessResponse(prettyPrint()),
                             requestParameters(
-                                    getDefaultRequestParameterDescriptors()
+                                    List.of(
+                                            parameterWithName("page").description("Page 번호"),
+                                            parameterWithName("size").description("Page Size")
+                                    )
                             ),
                             responseFields(
                                 Arrays.asList(
@@ -297,16 +300,11 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                                         fieldWithPath("data[].memberStatus").type(JsonFieldType.STRING)
                                                 .description("회원 상태: MEMBER_ACTIVE(활동중) / MEMBER_SLEEP(휴면 계정) / MEMBER_QUIT(탈퇴)"),
                                         fieldWithPath("data[].stamp").type(JsonFieldType.NUMBER).description("스탬프 갯수"),
-                                        fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보")
-                                                                                                                .optional(),
-                                        fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("페이지 번호")
-                                                                                                                .optional(),
-                                        fieldWithPath("pageInfo.size").type(JsonFieldType.NUMBER).description("페이지 사이즈")
-                                                                                                                .optional(),
-                                        fieldWithPath("pageInfo.totalElements").type(JsonFieldType.NUMBER).description("전체 건 수")
-                                                                                                                .optional(),
+                                        fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보"),
+                                        fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("페이지 번호"),
+                                        fieldWithPath("pageInfo.size").type(JsonFieldType.NUMBER).description("페이지 사이즈"),
+                                        fieldWithPath("pageInfo.totalElements").type(JsonFieldType.NUMBER).description("전체 건 수"),
                                         fieldWithPath("pageInfo.totalPages").type(JsonFieldType.NUMBER).description("전체 페이지 수")
-                                                                                                                .optional()
                                 )
                             )
                         )
