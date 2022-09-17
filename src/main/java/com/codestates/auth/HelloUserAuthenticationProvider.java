@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
-@Component
+//@Component
 public class HelloUserAuthenticationProvider implements AuthenticationProvider {
     private final MemberService memberService;
     private final HelloAuthorityUtils authorityUtils;

@@ -28,7 +28,7 @@ public class SecurityConfigurationV1 {
             .loginProcessingUrl("/process_login")    // (4)
             .failureUrl("/auths/login-form?error")   // (5)
             .and()                                   // (6)
-            .authorizeRequests()                     // (7)
+            .authorizeHttpRequests()                     // (7)
             .anyRequest()                            // (8)
             .permitAll();                            // (9)
 
@@ -48,7 +48,7 @@ public class SecurityConfigurationV1 {
             .and()
             .exceptionHandling().accessDeniedPage("/auths/access-denied")   // (1)
             .and()
-            .authorizeRequests(authorize -> authorize                  // (2)
+            .authorizeHttpRequests(authorize -> authorize                  // (2)
                     .antMatchers("/orders/**").hasRole("ADMIN")        // (2-1)
                     .antMatchers("/members/my-page").hasRole("USER")   // (2-2)
                     .antMatchers("/**").permitAll()                    // (2-3)
@@ -73,7 +73,7 @@ public class SecurityConfigurationV1 {
             .and()
             .exceptionHandling().accessDeniedPage("/auths/access-denied")
             .and()
-            .authorizeRequests(authorize -> authorize
+            .authorizeHttpRequests(authorize -> authorize
                     .antMatchers("/orders/**").hasRole("ADMIN")
                     .antMatchers("/members/my-page").hasRole("USER")
                     .antMatchers("/**").permitAll()

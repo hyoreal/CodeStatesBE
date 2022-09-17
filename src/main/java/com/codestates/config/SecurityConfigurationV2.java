@@ -36,7 +36,7 @@ public class SecurityConfigurationV2 {
             .and()
             .exceptionHandling().accessDeniedPage("/auths/access-denied")
             .and()
-            .authorizeRequests(authorize -> authorize
+            .authorizeHttpRequests(authorize -> authorize
                     .antMatchers("/orders/**").hasRole("ADMIN")
                     .antMatchers("/members/my-page").hasRole("USER")
                     .antMatchers("/**").permitAll()
