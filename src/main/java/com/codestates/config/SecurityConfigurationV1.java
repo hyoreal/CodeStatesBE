@@ -60,7 +60,11 @@ public class SecurityConfigurationV1 {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-            builder.addFilter(new JwtAuthenticationFilter(authenticationManager));
+
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager);
+            jwtAuthenticationFilter.setFilterProcessesUrl("/api/auth/login");
+
+            builder.addFilter(jwtAuthenticationFilter);
         }
     }
 }
