@@ -11,10 +11,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
-@EnableAsync
-@Configuration
-@Component
 @Slf4j
+@EnableAsync
+@Component
 public class MemberRegistrationEventListener {
     private final EmailSender emailSender;
     private final MemberService memberService;

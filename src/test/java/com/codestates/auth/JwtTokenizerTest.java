@@ -1,5 +1,6 @@
 package com.codestates.auth;
 
+import com.codestates.auth.jwt.JwtTokenizer;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.io.Decoders;
 import org.junit.jupiter.api.BeforeAll;
