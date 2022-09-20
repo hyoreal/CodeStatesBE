@@ -2,7 +2,6 @@ package com.codestates.config;
 
 import com.codestates.auth.filter.JwtAuthenticationFilter;
 import com.codestates.auth.jwt.JwtTokenizer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,13 +19,15 @@ import java.util.Arrays;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-
+/**
+ * JwtAuthenticationFilter 추가
+ */
 //@Configuration
 //@EnableWebSecurity(debug = true)
-public class SecurityConfigurationV1 {
+public class SecurityConfigurationV2 {
     private final JwtTokenizer jwtTokenizer;
 
-    public SecurityConfigurationV1(JwtTokenizer jwtTokenizer) {
+    public SecurityConfigurationV2(JwtTokenizer jwtTokenizer) {
         this.jwtTokenizer = jwtTokenizer;
     }
 
@@ -39,6 +40,8 @@ public class SecurityConfigurationV1 {
             .cors(withDefaults())
             .formLogin().disable()
             .httpBasic().disable()
+            .apply(new CustomFilterConfigurer())  // 추가
+            .and()
             .authorizeHttpRequests(authorize -> authorize
                     .anyRequest().permitAll()
             );
@@ -58,5 +61,19 @@ public class SecurityConfigurationV1 {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+
+    // 추가
+    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
+        @Override
+        public void configure(HttpSecurity builder) throws Exception {
+            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
+
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
+            jwtAuthenticationFilter.setFilterProcessesUrl("/v11/auth/login");
+
+            builder.addFilter(jwtAuthenticationFilter);
+        }
     }
 }
