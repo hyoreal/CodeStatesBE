@@ -2,15 +2,16 @@ package com.codestates.config;
 
 import com.codestates.auth.filter.JwtAuthenticationFilter;
 import com.codestates.auth.filter.JwtVerificationFilter;
+import com.codestates.auth.handler.MemberAccessDeniedHandler;
+import com.codestates.auth.handler.MemberAuthenticationEntryPoint;
 import com.codestates.auth.handler.MemberAuthenticationFailureHandler;
 import com.codestates.auth.handler.MemberAuthenticationSuccessHandler;
 import com.codestates.auth.jwt.JwtTokenizer;
 import com.codestates.auth.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -25,15 +26,15 @@ import java.util.Arrays;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
- * SessionCreationPolicy 설정 추가
+ * Role 기반 리소스 접근 권한 부여(전체)
  */
 //@Configuration
 //@EnableWebSecurity(debug = true)
-public class SecurityConfigurationV4 {
+public class SecurityConfigurationV6 {
     private final JwtTokenizer jwtTokenizer;
-    private final CustomAuthorityUtils authorityUtils;
+    private final CustomAuthorityUtils authorityUtils; // 추가
 
-    public SecurityConfigurationV4(JwtTokenizer jwtTokenizer,
+    public SecurityConfigurationV6(JwtTokenizer jwtTokenizer,
                                    CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
@@ -46,13 +47,31 @@ public class SecurityConfigurationV4 {
             .and()
             .csrf().disable()
             .cors(withDefaults())
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 추가
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .formLogin().disable()
             .httpBasic().disable()
+            .exceptionHandling()
+            .authenticationEntryPoint(new MemberAuthenticationEntryPoint())
+            .accessDeniedHandler(new MemberAccessDeniedHandler())
+            .and()
             .apply(new CustomFilterConfigurer())
             .and()
             .authorizeHttpRequests(authorize -> authorize
+                    .antMatchers(HttpMethod.POST, "/*/members").permitAll()
+                    .antMatchers(HttpMethod.PATCH, "/*/members/**").hasRole("USER")
+                    .antMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
+                    .antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER")
+                    .antMatchers(HttpMethod.POST, "/*/coffees").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.PATCH, "/*/coffees/**").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.GET, "/*/coffees/**").hasAnyRole("USER", "ADMIN")
+                    .antMatchers(HttpMethod.GET, "/*/coffees").permitAll()
+                    .antMatchers(HttpMethod.DELETE, "/*/coffees").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.POST, "/*/orders").hasRole("USER")
+                    .antMatchers(HttpMethod.PATCH, "/*/orders").hasAnyRole("USER", "ADMIN")
+                    .antMatchers(HttpMethod.GET, "/*/orders/**").hasAnyRole("USER", "ADMIN")
+                    .antMatchers(HttpMethod.DELETE, "/*/orders").hasRole("USER")
                     .anyRequest().permitAll()
             );
         return http.build();
@@ -84,12 +103,12 @@ public class SecurityConfigurationV4 {
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
-            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);  // 추가
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
 
 
             builder
                 .addFilter(jwtAuthenticationFilter)
-                .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);   // 추가
+                .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }
     }
 }
