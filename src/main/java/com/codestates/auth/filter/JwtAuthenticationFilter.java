@@ -52,7 +52,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("Refresh", refreshToken);
-        AuthenticationSuccessHandler successHandler = this.getSuccessHandler();
+
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);  // 추가
     }
 

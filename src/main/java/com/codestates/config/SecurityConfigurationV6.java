@@ -9,9 +9,11 @@ import com.codestates.auth.handler.MemberAuthenticationSuccessHandler;
 import com.codestates.auth.jwt.JwtTokenizer;
 import com.codestates.auth.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -26,10 +28,10 @@ import java.util.Arrays;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
- * Role 기반 리소스 접근 권한 부여(전체)
+ * authenticationEntryPoint와 accessDeniedHandler 추가
  */
-//@Configuration
-//@EnableWebSecurity(debug = true)
+@Configuration
+@EnableWebSecurity(debug = true)
 public class SecurityConfigurationV6 {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils; // 추가
@@ -52,8 +54,8 @@ public class SecurityConfigurationV6 {
             .formLogin().disable()
             .httpBasic().disable()
             .exceptionHandling()
-            .authenticationEntryPoint(new MemberAuthenticationEntryPoint())
-            .accessDeniedHandler(new MemberAccessDeniedHandler())
+            .authenticationEntryPoint(new MemberAuthenticationEntryPoint())  // 추가
+            .accessDeniedHandler(new MemberAccessDeniedHandler())            // 추가
             .and()
             .apply(new CustomFilterConfigurer())
             .and()

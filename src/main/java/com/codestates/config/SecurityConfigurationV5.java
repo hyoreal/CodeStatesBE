@@ -32,8 +32,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 /**
  * Role 기반 리소스 접근 권한 부여(MemberController만)
  */
-@Configuration
-@EnableWebSecurity(debug = true)
+//@Configuration
+//@EnableWebSecurity(debug = true)
 public class SecurityConfigurationV5 {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils; // 추가

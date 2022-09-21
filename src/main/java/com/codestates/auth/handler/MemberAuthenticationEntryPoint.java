@@ -1,6 +1,8 @@
 package com.codestates.auth.handler;
 
+import com.codestates.auth.utils.ErrorResponder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -15,7 +17,8 @@ import java.io.IOException;
 public class MemberAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        log.warn("[AuthenticationEntryPointCustom] Unauthorized error : {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        Exception exception = (Exception) request.getAttribute("exception");
+        ErrorResponder.sendErrorResponse(response, HttpStatus.UNAUTHORIZED);
+        log.warn("Unauthorized error happened: {}", exception.getMessage());
     }
 }
