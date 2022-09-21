@@ -17,6 +17,8 @@
   * [Mockito 테스트](https://github.com/codestates-seb/be-live-session-resources/blob/52708dedb8d187ad3d90679c772bb14ad9bc885b/11_%EB%9D%BC%EC%9D%B4%EB%B8%8C_%EC%84%B8%EC%85%98-2022.09.13(%ED%99%94)-mockito_%EC%8B%A4%EC%8A%B5.pdf)
 * [API 문서화 강의 자료](https://github.com/codestates-seb/be-live-session-resources/blob/52708dedb8d187ad3d90679c772bb14ad9bc885b/12_%EB%9D%BC%EC%9D%B4%EB%B8%8C_%EC%84%B8%EC%85%98-2022.09.15(%EB%AA%A9)__api_%EB%AC%B8%EC%84%9C%ED%99%94.pdf)
 * [애플리케이션 빌드/실행/배포](https://github.com/codestates-seb/be-live-session-resources/blob/c0715e0bee46321a172822494c4d5a96033259c7/13_%EB%9D%BC%EC%9D%B4%EB%B8%8C_%EC%84%B8%EC%85%98-2022.09.16-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98_%EB%B9%8C%EB%93%9C_%EC%8B%A4%ED%96%89_%EB%B0%B0%ED%8F%AC.pdf)
+* Spring Security 강의 자료
+  * [Hello Spring Security 애플리케이션](https://github.com/codestates-seb/be-live-session-resources/blob/0d0bcce919d12b0e3bac4f38b3bae67cb7632086/14_%EB%9D%BC%EC%9D%B4%EB%B8%8C_%EC%84%B8%EC%85%98-Spring_Security_%EA%B8%B0%EB%B3%B8-2022.09.21(%EC%88%98).pdf)
 * Advanced
   * [람다와 스트림 API](https://github.com/codestates-seb/be-live-session-resources/blob/52708dedb8d187ad3d90679c772bb14ad9bc885b/0_%EB%9E%8C%EB%8B%A4%EC%99%80_Stream_API.pdf)
   * [구글 SMTP 서비스를 이용한 이메일 전송](https://github.com/codestates-seb/be-live-session-resources/blob/52708dedb8d187ad3d90679c772bb14ad9bc885b/0_%EA%B5%AC%EA%B8%80_SMTP_%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC_%EC%9D%B4%EC%9A%A9%ED%95%9C_%EC%9D%B4%EB%A9%94%EC%9D%BC_%EC%A0%84%EC%86%A1.pdf)
