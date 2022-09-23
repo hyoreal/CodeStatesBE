@@ -1,4 +1,4 @@
-package com.codestates.config;
+package com.codestates.hello_oauth2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +15,10 @@ public class SecurityConfigurationV1 {
             .csrf().disable()
             .formLogin().disable()
             .httpBasic().disable()
-            .oauth2Login()
-            .and()
-            .authorizeHttpRequests()
-            .anyRequest()
-            .authenticated();
+            .authorizeHttpRequests(authorize -> authorize
+                    .anyRequest().authenticated()
+            )
+            .oauth2Login();
 
         return http.build();
     }

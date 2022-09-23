@@ -1,4 +1,4 @@
-package com.codestates.config;
+package com.codestates.hello_oauth2.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -26,11 +28,10 @@ public class SecurityConfigurationV2 {
             .csrf().disable()
             .formLogin().disable()
             .httpBasic().disable()
-            .oauth2Login()
-            .and()
-            .authorizeHttpRequests()
-            .anyRequest()
-            .authenticated();
+            .authorizeHttpRequests(authorize -> authorize
+                    .anyRequest().authenticated()
+            )
+            .oauth2Login(withDefaults());
 
         return http.build();
     }
