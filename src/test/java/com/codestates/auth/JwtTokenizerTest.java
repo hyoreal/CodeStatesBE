@@ -22,6 +22,7 @@ public class JwtTokenizerTest {
     private static JwtTokenizer jwtTokenizer;
     private String secretKey;
     private String base64EncodedSecretKey;
+
     @BeforeAll
     public void init() {
         jwtTokenizer = new JwtTokenizer();
