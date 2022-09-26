@@ -5,8 +5,6 @@
     <title>OAuth2 + JWT My page</title>
 </head>
 <body>
-    <h2>My Page</h2>
-    <h3>아래의 토큰을 이용해서 Backend 애플리케이션의 리소스를 요청할 수 있습니다.</h3>
     <script type="text/javascript">
         let accessToken = (new URL(location.href)).searchParams.get('access_token');
         let refreshToken = (new URL(location.href)).searchParams.get('refresh_token');
