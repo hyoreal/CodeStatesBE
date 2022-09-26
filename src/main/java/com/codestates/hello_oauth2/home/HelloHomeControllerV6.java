@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Access Token 정보 조회 2
  */
 @Controller
-public class HomeControllerV6 {
-    @GetMapping("/")
+public class HelloHomeControllerV6 {
+    @GetMapping("/hello-oauth2")
     public String home(@RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient authorizedClient) {
 
         OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
@@ -21,6 +21,6 @@ public class HomeControllerV6 {
         System.out.println("Access Token Issued At: " + accessToken.getIssuedAt());
         System.out.println("Access Token Expires At: " + accessToken.getExpiresAt());
 
-        return "hello-oauth2-home";
+        return "hello-oauth2";
     }
 }
