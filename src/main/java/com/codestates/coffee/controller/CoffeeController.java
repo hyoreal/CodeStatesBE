@@ -1,5 +1,6 @@
 package com.codestates.coffee.controller;
 
+import com.codestates.coffee.dto.CoffeeDto;
 import com.codestates.coffee.dto.CoffeePatchDto;
 import com.codestates.coffee.dto.CoffeePostDto;
 import com.codestates.coffee.entity.Coffee;
@@ -30,8 +31,8 @@ public class CoffeeController {
     }
 
     @PostMapping
-    public ResponseEntity postCoffee(@Valid @RequestBody CoffeePostDto coffeePostDto) {
-        Coffee coffee = coffeeService.createCoffee(mapper.coffeePostDtoToCoffee(coffeePostDto));
+    public ResponseEntity postCoffee(@Valid @RequestBody CoffeeDto.Post requestBody) {
+        Coffee coffee = coffeeService.createCoffee(mapper.coffeePostDtoToCoffee(requestBody));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.coffeeToCoffeeResponseDto(coffee)),
@@ -40,9 +41,9 @@ public class CoffeeController {
 
     @PatchMapping("/{coffee-id}")
     public ResponseEntity patchCoffee(@PathVariable("coffee-id") @Positive long coffeeId,
-                                      @Valid @RequestBody CoffeePatchDto coffeePatchDto) {
-        coffeePatchDto.setCoffeeId(coffeeId);
-        Coffee coffee = coffeeService.updateCoffee(mapper.coffeePatchDtoToCoffee(coffeePatchDto));
+                                      @Valid @RequestBody CoffeeDto.Patch requestBody) {
+        requestBody.setCoffeeId(coffeeId);
+        Coffee coffee = coffeeService.updateCoffee(mapper.coffeePatchDtoToCoffee(requestBody));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.coffeeToCoffeeResponseDto(coffee)),
