@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/v5/coffees")
 @Validated
 public class CoffeeController {
-    private CoffeeService coffeeService;
-    private CoffeeMapper mapper;
+    private final CoffeeService coffeeService;
+    private final CoffeeMapper mapper;
 
     public CoffeeController(CoffeeService coffeeService, CoffeeMapper coffeeMapper) {
         this.coffeeService = coffeeService;
