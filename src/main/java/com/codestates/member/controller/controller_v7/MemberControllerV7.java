@@ -87,31 +87,5 @@ public class MemberControllerV7 {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @ExceptionHandler
-    public ResponseEntity handleException(MethodArgumentNotValidException e) {
-
-        final List<FieldError> fieldErrors = e.getFieldErrors();
-
-        List<ErrorResponse.FieldError> errors =
-                fieldErrors.stream()
-                            .map(error -> new ErrorResponse.FieldError(
-                                error.getField(),
-                                error.getRejectedValue(),
-                                error.getDefaultMessage()))
-                            .collect(Collectors.toList());
-
-        return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity handleException(ConstraintViolationException e) {
-        System.out.println(e.getConstraintViolations().stream().collect(Collectors.toList()));
-        /**
-         * - ConstraintViolationException 클래스는 getBindingResult().getFieldErrors()와
-         * 같이 에러 정보를 얻을 수 없다.
-         * - MethodArgumentNotValidException과 다르게 또 다른 방식으로 처리가 필요.
-         */
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+    
 }
