@@ -8,6 +8,6 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 public class MessageSpringJdbc {
     @Id
-    private long messageId;
+    private Long messageId;
     private String message;
 }

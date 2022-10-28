@@ -1,17 +1,21 @@
 package com.codestates.order.mapper;
 
 import com.codestates.coffee.entity.Coffee;
+import com.codestates.order.dto.ReadableOrderGroupDto;
 import com.codestates.order.entity.CoffeeRef;
 import com.codestates.coffee.service.CoffeeService;
 import com.codestates.order.dto.OrderCoffeeResponseDto;
 import com.codestates.order.entity.Order;
 import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.dto.OrderResponseDto;
+import com.codestates.order.entity.ReadableOrderCoffee;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -62,6 +66,51 @@ public interface OrderMapper {
                             coffee.getEngName(),
                             coffee.getPrice(),
                             coffeeRef.getQuantity());
+                }).collect(Collectors.toList());
+    }
+
+    default List<OrderResponseDto> readableOrderCoffeeToOrderResponseDto(List<ReadableOrderCoffee> orders) {
+        Map<ReadableOrderGroupDto, List<ReadableOrderCoffee>> grouped =
+                orders.stream().collect(
+                        Collectors.groupingBy(readableOrderCoffee -> new ReadableOrderGroupDto(readableOrderCoffee)));
+
+        List<OrderResponseDto> orderResponseDtos =
+                grouped.entrySet().stream()
+                        .map(e -> {
+                            ReadableOrderGroupDto groupDto = e.getKey();
+                            List<ReadableOrderCoffee> readableOrderCoffees = e.getValue();
+
+                            OrderResponseDto orderResponseDto = new OrderResponseDto();
+                            orderResponseDto.setOrderId(groupDto.getOrderId());
+                            orderResponseDto.setMemberId(groupDto.getMemberId());
+                            orderResponseDto.setOrderStatus(groupDto.getOrderStatus());
+                            orderResponseDto.setCreatedAt(groupDto.getCreatedAt());
+
+                            List<OrderCoffeeResponseDto> orderCoffeeResponseDtos =
+                                    readableOrderCoffeeToOrderCoffeeResponseDto(readableOrderCoffees);
+
+                            orderResponseDto.setOrderCoffees(orderCoffeeResponseDtos);
+
+                            return orderResponseDto;
+                        }).collect(Collectors.toList());
+
+        // 최근 주문 순으로 정렬
+        orderResponseDtos.sort(Comparator.comparing(OrderResponseDto::getOrderId).reversed());
+
+        return orderResponseDtos;
+    }
+
+    default List<OrderCoffeeResponseDto> readableOrderCoffeeToOrderCoffeeResponseDto(
+            List<ReadableOrderCoffee> readableOrderCoffees) {
+        return readableOrderCoffees.stream()
+                .map(readableOrderCoffee -> {
+                    OrderCoffeeResponseDto orderCoffeeResponseDto =
+                            new OrderCoffeeResponseDto(readableOrderCoffee.getCoffeeId(),
+                                    readableOrderCoffee.getKorName(),
+                                    readableOrderCoffee.getEngName(),
+                                    readableOrderCoffee.getPrice(),
+                                    readableOrderCoffee.getQuantity());
+                    return orderCoffeeResponseDto;
                 }).collect(Collectors.toList());
     }
 }

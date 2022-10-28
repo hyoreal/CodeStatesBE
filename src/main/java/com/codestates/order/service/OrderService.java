@@ -5,6 +5,7 @@ import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.service.MemberService;
 import com.codestates.order.entity.Order;
+import com.codestates.order.entity.ReadableOrderCoffee;
 import com.codestates.order.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,10 @@ public class OrderService {
 
     public List<Order> findOrders() {
         return (List<Order>) orderRepository.findAll();
+    }
+
+    public List<ReadableOrderCoffee> findOrders2() {
+        return orderRepository.findAllOrderCoffee();
     }
 
     public void cancelOrder(long orderId) {

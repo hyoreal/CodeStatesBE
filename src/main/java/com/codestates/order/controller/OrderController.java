@@ -1,7 +1,10 @@
 package com.codestates.order.controller;
 
 import com.codestates.coffee.service.CoffeeService;
+import com.codestates.order.dto.OrderCoffeeResponseDto;
+import com.codestates.order.dto.ReadableOrderGroupDto;
 import com.codestates.order.entity.Order;
+import com.codestates.order.entity.ReadableOrderCoffee;
 import com.codestates.order.service.OrderService;
 import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.dto.OrderResponseDto;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,16 +53,115 @@ public class OrderController {
                 HttpStatus.OK);
     }
 
+//    @GetMapping
+//    public ResponseEntity getOrders() {
+//        List<Order> orders = orderService.findOrders();
+//
+//        List<OrderResponseDto> response =
+//                orders.stream()
+//                        .map(order -> mapper.orderToOrderResponseDto(coffeeService, order))
+//                        .collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+//    @GetMapping
+//    public ResponseEntity getOrders2() {
+//        List<ReadableOrderCoffee> orders = orderService.findOrders2();
+//
+//        return new ResponseEntity<>(orders, HttpStatus.OK);
+//    }
+
+//    @GetMapping
+//    public ResponseEntity getOrders3() {
+//        List<ReadableOrderCoffee> orders = orderService.findOrders2();
+//
+//
+//        return new ResponseEntity<>(orders.stream()
+//                .collect(Collectors.groupingBy(ReadableOrderCoffee::getOrderId,
+//                        Collectors.groupingBy(ReadableOrderCoffee::getMemberId))), HttpStatus.OK);
+//    }
+
+//    @GetMapping
+//    public ResponseEntity getOrders4() {
+//        List<ReadableOrderCoffee> orders = orderService.findOrders2();
+//
+//        Map<ReadableOrderGroupDto, List<ReadableOrderCoffee>> grouped =
+//                orders.stream().collect(
+//                        Collectors.groupingBy(readableOrderCoffee -> new ReadableOrderGroupDto(readableOrderCoffee)));
+//
+//        List<OrderResponseDto> response = grouped.entrySet().stream()
+//                .map(e -> {
+//                    ReadableOrderGroupDto groupDto = e.getKey();
+//                    List<ReadableOrderCoffee> readableOrderCoffees = e.getValue();
+//                    OrderResponseDto orderResponseDto = new OrderResponseDto();
+//                    orderResponseDto.setOrderId(groupDto.getOrderId());
+//                    orderResponseDto.setMemberId(groupDto.getMemberId());
+//                    orderResponseDto.setOrderStatus(groupDto.getOrderStatus());
+//                    orderResponseDto.setCreatedAt(groupDto.getCreatedAt());
+//
+//                    List<OrderCoffeeResponseDto> orderCoffeeResponseDtos =
+//                            readableOrderCoffees.stream()
+//                                                .map(readableOrderCoffee -> {
+//                                                    OrderCoffeeResponseDto orderCoffeeResponseDto =
+//                                                            new OrderCoffeeResponseDto(readableOrderCoffee.getCoffeeId(),
+//                                                                    readableOrderCoffee.getKorName(),
+//                                                                    readableOrderCoffee.getEngName(),
+//                                                                    readableOrderCoffee.getPrice(),
+//                                                                    readableOrderCoffee.getQuantity());
+//                                                    return orderCoffeeResponseDto;
+//                            }).collect(Collectors.toList());
+//                    orderResponseDto.setOrderCoffees(orderCoffeeResponseDtos);
+//
+//                    return orderResponseDto;
+//                }).collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+//    @GetMapping
+//    public ResponseEntity getOrders5() {
+//        List<ReadableOrderCoffee> orders = orderService.findOrders2();
+//
+//        Map<ReadableOrderGroupDto, List<ReadableOrderCoffee>> grouped =
+//                orders.stream().collect(
+//                        Collectors.groupingBy(readableOrderCoffee -> new ReadableOrderGroupDto(readableOrderCoffee)));
+//
+//        List<OrderResponseDto> response = grouped.entrySet().stream()
+//                .map(e -> {
+//                    ReadableOrderGroupDto groupDto = e.getKey();
+//                    List<ReadableOrderCoffee> readableOrderCoffees = e.getValue();
+//                    OrderResponseDto orderResponseDto = new OrderResponseDto();
+//                    orderResponseDto.setOrderId(groupDto.getOrderId());
+//                    orderResponseDto.setMemberId(groupDto.getMemberId());
+//                    orderResponseDto.setOrderStatus(groupDto.getOrderStatus());
+//                    orderResponseDto.setCreatedAt(groupDto.getCreatedAt());
+//
+//                    List<OrderCoffeeResponseDto> orderCoffeeResponseDtos =
+//                            readableOrderCoffees.stream()
+//                                    .map(readableOrderCoffee -> {
+//                                        OrderCoffeeResponseDto orderCoffeeResponseDto =
+//                                                new OrderCoffeeResponseDto(readableOrderCoffee.getCoffeeId(),
+//                                                        readableOrderCoffee.getKorName(),
+//                                                        readableOrderCoffee.getEngName(),
+//                                                        readableOrderCoffee.getPrice(),
+//                                                        readableOrderCoffee.getQuantity());
+//                                        return orderCoffeeResponseDto;
+//                                    }).collect(Collectors.toList());
+//                    orderResponseDto.setOrderCoffees(orderCoffeeResponseDtos);
+//
+//                    return orderResponseDto;
+//                }).collect(Collectors.toList());
+//
+//        // 최근 주문 순으로 정렬
+//        response.sort(Comparator.comparing(OrderResponseDto::getOrderId).reversed());
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
     @GetMapping
-    public ResponseEntity getOrders() {
-        List<Order> orders = orderService.findOrders();
-
-        List<OrderResponseDto> response =
-                orders.stream()
-                        .map(order -> mapper.orderToOrderResponseDto(coffeeService, order))
-                        .collect(Collectors.toList());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity getOrders6() {
+        List<ReadableOrderCoffee> orders = orderService.findOrders2();
+        return new ResponseEntity<>(mapper.readableOrderCoffeeToOrderResponseDto(orders), HttpStatus.OK);
     }
 
     @DeleteMapping("/{order-id}")

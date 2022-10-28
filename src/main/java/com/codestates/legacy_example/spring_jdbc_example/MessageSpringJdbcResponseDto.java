@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MessageSpringJdbcResponseDto {
-    private long messageId;
+//    private long messageId;
     private String message;
 }

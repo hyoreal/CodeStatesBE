@@ -24,6 +24,6 @@ public class MessageSpringJdbcService {
        String sql = "INSERT INTO MESSAGE (message) VALUES (?)";
         int key = jdbcTemplate.update(sql, message.getMessage());
 
-       return new MessageSpringJdbc(key, message.getMessage());
+       return new MessageSpringJdbc(null, message.getMessage());
     }
 }

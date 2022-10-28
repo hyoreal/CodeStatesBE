@@ -26,7 +26,7 @@ public class MessageJdbcService {
             statement = connection.prepareStatement(sql);
             statement.setString(1, message.getMessage());
             int key = statement.executeUpdate();
-            return new MessageJdbc(key, message.getMessage());
+            return new MessageJdbc(null, message.getMessage());
         } catch (SQLException e) {
             log.error("SQLException happened: ", e);
         } catch (ClassNotFoundException e) {
