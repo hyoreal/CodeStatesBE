@@ -61,6 +61,10 @@ public class CoffeeService {
         return (List<Coffee>) coffeeRepository.findAll();
     }
 
+    public List<Coffee> findAllCoffeesByIds(List<Long> coffeeIds) {
+        return (List<Coffee>) coffeeRepository.findAllById(coffeeIds);
+    }
+
     public void deleteCoffee(long coffeeId) {
         Coffee coffee = findVerifiedCoffee(coffeeId);
         coffeeRepository.delete(coffee);
