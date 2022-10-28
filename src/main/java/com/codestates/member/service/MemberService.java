@@ -19,10 +19,9 @@ import java.util.Optional;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-    private final JdbcTemplate jdbcTemplate;
-    public MemberService(MemberRepository memberRepository, JdbcTemplate jdbcTemplate) {
+
+    public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
     public Member createMember(Member member) {
@@ -35,7 +34,8 @@ public class MemberService {
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
-        Optional.ofNullable(member.getName())
+        // TODO 리팩토링 포인트
+       Optional.ofNullable(member.getName())
                 .ifPresent(name -> findMember.setName(name));
         Optional.ofNullable(member.getPhone())
                 .ifPresent(phone -> findMember.setPhone(phone));

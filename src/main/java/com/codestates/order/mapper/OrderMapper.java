@@ -13,22 +13,22 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparing;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OrderMapper {
     default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
         Order order = new Order();
         order.setMemberId(new AggregateReference.IdOnlyAggregateReference(orderPostDto.getMemberId()));
-        List<CoffeeRef> orderCoffees =
+        Set<CoffeeRef> orderCoffees =
                 orderPostDto.getOrderCoffees()
                         .stream()
                         .map(orderCoffeeDto ->
                                 new CoffeeRef(orderCoffeeDto.getCoffeeId(), orderCoffeeDto.getQuantity()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         order.setOrderCoffees(orderCoffees);
 
         return order;
@@ -56,7 +56,7 @@ public interface OrderMapper {
 
     default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(
                                                         CoffeeService coffeeService,
-                                                        List<CoffeeRef> orderCoffees) {
+                                                        Set<CoffeeRef> orderCoffees) {
         return orderCoffees.stream()
                 .map(coffeeRef -> {
                     Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId());
@@ -95,8 +95,8 @@ public interface OrderMapper {
                         }).collect(Collectors.toList());
 
         // 최근 주문 순으로 정렬
-        orderResponseDtos.sort(Comparator.comparing(OrderResponseDto::getOrderId).reversed());
-
+        orderResponseDtos.sort(comparing(OrderResponseDto::getOrderId).reversed());
+//        Collections.sort(orderResponseDtos, Comparator.comparing(OrderResponseDto::getOrderId).reversed());
         return orderResponseDtos;
     }
 

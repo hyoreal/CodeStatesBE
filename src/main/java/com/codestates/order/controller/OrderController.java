@@ -53,18 +53,19 @@ public class OrderController {
                 HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity getOrders() {
-//        List<Order> orders = orderService.findOrders();
-//
-//        List<OrderResponseDto> response =
-//                orders.stream()
-//                        .map(order -> mapper.orderToOrderResponseDto(coffeeService, order))
-//                        .collect(Collectors.toList());
-//
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity getOrders() {
+        List<Order> orders = orderService.findOrders();
 
+        List<OrderResponseDto> response =
+                orders.stream()
+                        .map(order -> mapper.orderToOrderResponseDto(coffeeService, order))
+                        .collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+//    // 네이티브 쿼리로 Join된 주문한 커피 정보
 //    @GetMapping
 //    public ResponseEntity getOrders2() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
@@ -72,6 +73,7 @@ public class OrderController {
 //        return new ResponseEntity<>(orders, HttpStatus.OK);
 //    }
 
+//    // 주문한 커피별로 그룹핑하기
 //    @GetMapping
 //    public ResponseEntity getOrders3() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
@@ -82,6 +84,7 @@ public class OrderController {
 //                        Collectors.groupingBy(ReadableOrderCoffee::getMemberId))), HttpStatus.OK);
 //    }
 
+//    // 그룹핑된 주문한 커피 정보를 우리가 원하는 데이터 형식으로 변환하기
 //    @GetMapping
 //    public ResponseEntity getOrders4() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
@@ -119,6 +122,7 @@ public class OrderController {
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 
+//    // 최근 주문 순으로 정렬하기
 //    @GetMapping
 //    public ResponseEntity getOrders5() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
@@ -158,11 +162,12 @@ public class OrderController {
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 
-    @GetMapping
-    public ResponseEntity getOrders6() {
-        List<ReadableOrderCoffee> orders = orderService.findOrders2();
-        return new ResponseEntity<>(mapper.readableOrderCoffeeToOrderResponseDto(orders), HttpStatus.OK);
-    }
+//    // OrderMapper를 이용해 코드 리팩토링
+//    @GetMapping
+//    public ResponseEntity getOrders6() {
+//        List<ReadableOrderCoffee> orders = orderService.findOrders2();
+//        return new ResponseEntity<>(mapper.readableOrderCoffeeToOrderResponseDto(orders), HttpStatus.OK);
+//    }
 
     @DeleteMapping("/{order-id}")
     public ResponseEntity cancelOrder(@PathVariable("order-id") @Positive long orderId) {

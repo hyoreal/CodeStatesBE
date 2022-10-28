@@ -34,6 +34,7 @@ public class CoffeeService {
         // 조회하려는 커피가 검증된 커피인지 확인(존재하는 커피인지 확인 등)
         Coffee findCoffee = findVerifiedCoffee(coffee.getCoffeeId());
 
+        // TODO 리팩토링 포인트
         Optional.ofNullable(coffee.getKorName())
                 .ifPresent(korName -> findCoffee.setKorName(korName));
         Optional.ofNullable(coffee.getEngName())
