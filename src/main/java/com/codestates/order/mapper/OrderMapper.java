@@ -10,6 +10,7 @@ import com.codestates.order.dto.OrderCoffeeResponseDto;
 import com.codestates.order.entity.Order;
 import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.dto.OrderResponseDto;
+import com.codestates.order.entity.Order2;
 import com.codestates.order.entity.ReadableOrderCoffee;
 import com.google.common.collect.Streams;
 import org.mapstruct.Mapper;
@@ -23,6 +24,9 @@ import static java.util.Comparator.comparing;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OrderMapper {
+    // Entity에서 매핑을 처리하는 케이스. Order2와 예시로 사용될 수 있습니다.
+//    Order2 orderPostDtoToOrder(OrderPostDto orderPostDto);
+
     default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
         Order order = new Order();
         order.setMemberId(new AggregateReference.IdOnlyAggregateReference(orderPostDto.getMemberId()));
@@ -57,12 +61,12 @@ public interface OrderMapper {
         return orderResponseDto;
     }
 
-    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDtoV1(
+    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(
                                                         CoffeeService coffeeService,
                                                         Set<CoffeeRef> orderCoffees) {
         return orderCoffees.stream()
                 .map(coffeeRef -> {
-                    Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId());
+                    Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId()); // N + 1 이슈 발생
 
                     return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
                             coffee.getKorName(),
@@ -73,7 +77,7 @@ public interface OrderMapper {
     }
 
     // N + 1 이슈가 없는 개선된 orderToOrderCoffeeResponseDto 버전
-    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(CoffeeService coffeeService,
+    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDtoV2(CoffeeService coffeeService,
                                                                          Set<CoffeeRef> orderCoffees) {
         // 주문한 커피의 coffeeId만 수집
         List<Long> coffeeIds =
@@ -83,11 +87,6 @@ public interface OrderMapper {
 
         // 한번의 쿼리로 주문한 커피 정보 조회
         List<Coffee> coffees = coffeeService.findAllCoffeesByIds(coffeeIds);
-
-        // 조회 대상 커피가 모두 존재하는지 확인
-        if (coffeeIds.size() != coffees.size()) {
-            throw new BusinessLogicException(ExceptionCode.COFFEE_NOT_FOUND);
-        }
 
         // 조회된 커피(Coffee 엔티티)를 OrderCoffeeResponseDto로 변환
         // coffeeId를 기준으로 정렬 후, Guava Streams를 이용해 zipping 한다.
@@ -103,7 +102,9 @@ public interface OrderMapper {
                 .collect(Collectors.toList());
     }
 
+    // N + 1 이슈가 없는 네이티브 쿼리를 이용해 읽기 전용 엔티티 클래스에서 주문한 커피 정보를 매핑하는 버전
     default List<OrderResponseDto> readableOrderCoffeeToOrderResponseDto(List<ReadableOrderCoffee> orders) {
+        // ReadableOrderGroupDto의 필드 기준으로 그룹핑 한다.
         Map<ReadableOrderGroupDto, List<ReadableOrderCoffee>> grouped =
                 orders.stream().collect(
                         Collectors.groupingBy(readableOrderCoffee -> new ReadableOrderGroupDto(readableOrderCoffee)));
@@ -111,15 +112,17 @@ public interface OrderMapper {
         List<OrderResponseDto> orderResponseDtos =
                 grouped.entrySet().stream()
                         .map(e -> {
-                            ReadableOrderGroupDto groupDto = e.getKey();
-                            List<ReadableOrderCoffee> readableOrderCoffees = e.getValue();
+                            ReadableOrderGroupDto groupDto = e.getKey();  // 그룹핑한 필드 정보를 EntrySet key에서 얻는다.
+                            List<ReadableOrderCoffee> readableOrderCoffees = e.getValue();  // 그룹핑 된 주문한 커피 정보를 얻는다.
 
+                            // 주문 정보 매핑
                             OrderResponseDto orderResponseDto = new OrderResponseDto();
                             orderResponseDto.setOrderId(groupDto.getOrderId());
                             orderResponseDto.setMemberId(groupDto.getMemberId());
                             orderResponseDto.setOrderStatus(groupDto.getOrderStatus());
                             orderResponseDto.setCreatedAt(groupDto.getCreatedAt());
 
+                            // 주문한 커피 정보 매핑. ReadableOrderCoffee를 OrderCoffeeResponseDto로 변환한다.
                             List<OrderCoffeeResponseDto> orderCoffeeResponseDtos =
                                     readableOrderCoffeeToOrderCoffeeResponseDto(readableOrderCoffees);
 
