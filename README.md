@@ -3,7 +3,7 @@
 ### Description
 Spring Data JDBC 레퍼런스 코드는 학습 컨텐츠에서 사용되는 예제 코드 + 라이브 세션에서 사용되는 예제 코드로 구성이 되어 있습니다.
 * 학습 컨텐츠용 예제 코드
-  * [Hello World 예제 코드](#hello-world-예제코드)
+  * [Hello World 예제 코드](#hello-world-예제-코드)
   * Spring Data JDBC를 통한 데이터 액세스 계층 구현 예제 코드
 * 라이브 세션용 예제 코드
   * Hello World 예제 코드
