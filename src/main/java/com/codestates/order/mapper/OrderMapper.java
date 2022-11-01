@@ -1,15 +1,10 @@
 package com.codestates.order.mapper;
 
 import com.codestates.coffee.entity.Coffee;
-import com.codestates.exception.BusinessLogicException;
-import com.codestates.exception.ExceptionCode;
-import com.codestates.order.dto.ReadableOrderGroupDto;
+import com.codestates.order.dto.*;
 import com.codestates.order.entity.CoffeeRef;
 import com.codestates.coffee.service.CoffeeService;
-import com.codestates.order.dto.OrderCoffeeResponseDto;
 import com.codestates.order.entity.Order;
-import com.codestates.order.dto.OrderPostDto;
-import com.codestates.order.dto.OrderResponseDto;
 import com.codestates.order.entity.Order2;
 import com.codestates.order.entity.ReadableOrderCoffee;
 import com.google.common.collect.Streams;
@@ -40,6 +35,8 @@ public interface OrderMapper {
 
         return order;
     }
+
+//    default OrderResponseDto2 orderToOrderResponseDto(Order order);   // ResponseDto에서 더 많은 일을 하게 되는 케이스
 
     default OrderResponseDto orderToOrderResponseDto(CoffeeService coffeeService,
                                                      Order order) {

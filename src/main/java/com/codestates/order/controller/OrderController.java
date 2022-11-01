@@ -1,10 +1,7 @@
 package com.codestates.order.controller;
 
 import com.codestates.coffee.service.CoffeeService;
-import com.codestates.order.dto.OrderCoffeeResponseDto;
-import com.codestates.order.dto.ReadableOrderGroupDto;
 import com.codestates.order.entity.Order;
-import com.codestates.order.entity.ReadableOrderCoffee;
 import com.codestates.order.service.OrderService;
 import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.dto.OrderResponseDto;
@@ -16,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
@@ -74,7 +69,7 @@ public class OrderController {
      */
 //    // Step 1: 네이티브 쿼리로 Join된 주문한 커피 정보
 //    @GetMapping
-//    public ResponseEntity getOrders2() {
+//    public ResponseEntity getOrders1() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
 //
 //        return new ResponseEntity<>(orders, HttpStatus.OK);
@@ -82,7 +77,7 @@ public class OrderController {
 
 //    // Step 2: 주문한 커피별로 그룹핑하기
 //    @GetMapping
-//    public ResponseEntity getOrders3() {
+//    public ResponseEntity getOrders2() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
 //
 //
@@ -93,7 +88,7 @@ public class OrderController {
 
 //    // Step 3: 그룹핑된 주문한 커피 정보를 우리가 원하는 데이터 형식으로 변환하기
 //    @GetMapping
-//    public ResponseEntity getOrders4() {
+//    public ResponseEntity getOrders3() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
 //
 //        Map<ReadableOrderGroupDto, List<ReadableOrderCoffee>> grouped =
@@ -131,7 +126,7 @@ public class OrderController {
 
 //    // Step 4: 최근 주문 순으로 정렬하기
 //    @GetMapping
-//    public ResponseEntity getOrders5() {
+//    public ResponseEntity getOrders4() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
 //
 //        Map<ReadableOrderGroupDto, List<ReadableOrderCoffee>> grouped =
@@ -171,7 +166,7 @@ public class OrderController {
 
 //    // Step 5: OrderMapper를 이용해 코드 리팩토링
 //    @GetMapping
-//    public ResponseEntity getOrders6() {
+//    public ResponseEntity getOrders5() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
 //        return new ResponseEntity<>(mapper.readableOrderCoffeeToOrderResponseDto(orders), HttpStatus.OK);
 //    }

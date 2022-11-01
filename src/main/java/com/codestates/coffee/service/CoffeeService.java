@@ -61,6 +61,11 @@ public class CoffeeService {
         return (List<Coffee>) coffeeRepository.findAll();
     }
 
+    /**
+     * 주문한 커피 정보를 한 번에 조회한다.
+     * @param coffeeIds
+     * @return
+     */
     public List<Coffee> findAllCoffeesByIds(List<Long> coffeeIds) {
         return (List<Coffee>) coffeeRepository.findAllById(coffeeIds);
     }
