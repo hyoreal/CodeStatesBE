@@ -103,8 +103,3 @@ Mapper의 코드는 단순해지지만 DTO 클래스와 Entity 클래스의 복�
       * `AggregateReference<Member, Long> memberId` -> `long memberId`로 변환한다.
     * `public void setOrderCoffees(Set<CoffeeRef> coffeeRefs)`
       * `Set<CoffeeRef> coffeeRefs` -> `List<CoffeeRef> orderCoffees`로 변환한다.
-      
-### 참고 자료
-Spring Data JDBC 학습을 위해 참고할 수 있는 자료 링크입니다.
-
-
