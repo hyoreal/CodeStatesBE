@@ -98,11 +98,12 @@ Mapper의 코드는 단순해지지만 DTO 클래스와 Entity 클래스의 복�
     * `default OrderResponseDto2 orderToOrderResponseDto(Order order)`
       * 데이터 타입이 다른 필드에 대한 매핑 작업은 OrderResponseDto2 DTO 클래스에서 이루어진다.
   * DTO
-    * [src/main/java/com/codestates/order/dto/OrderResponseDto2]()
-    * `public void setMemberId(long memberId)`
-      * `long memberId` -> `AggregateReference<Long> memberId`로 변환한다.
-    * `public void setOrderCoffees(List<CoffeeRef> orderCoffees)`
-      * `List<CoffeeRef> orderCoffees` -> `Set<CoffeeRef> convertedOrderCoffees`로 변환한다.
+    * [src/main/java/com/codestates/order/dto/OrderResponseDto2](https://github.com/codestates-seb/be-reference-spring-data-jdbc/blob/8babfcc9e78a9c8594f88ab477988aa01f15fe5d/src/main/java/com/codestates/order/dto/OrderResponseDto2.java)
+    * `public void setMemberId(AggregateReference<Member, Long> memberId)`
+      * `AggregateReference<Member, Long> memberId` -> `long memberId`로 변환한다.
+    * `public void setOrderCoffees(Set<CoffeeRef> coffeeRefs)`
+      * `Set<CoffeeRef> coffeeRefs` -> `List<CoffeeRef> orderCoffees`로 변환한다.
+      
 ### 참고 자료
 Spring Data JDBC 학습을 위해 참고할 수 있는 자료 링크입니다.
 
