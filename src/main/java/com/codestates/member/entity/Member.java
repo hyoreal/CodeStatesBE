@@ -39,7 +39,7 @@ public class Member extends Auditable {
     private List<Order> orders = new ArrayList<>();
 
     // homework solution 추가
-    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private Stamp stamp;
 
     public Member(String email) {
