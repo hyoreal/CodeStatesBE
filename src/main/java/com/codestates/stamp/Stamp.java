@@ -22,6 +22,7 @@ public class Stamp extends Auditable {
     @Column(nullable = false)
     private int stampCount;
 
+//    @OneToOne( fetch = FetchType.EAGER)
     @OneToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
