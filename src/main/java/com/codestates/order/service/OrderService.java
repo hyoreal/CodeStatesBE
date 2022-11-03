@@ -89,6 +89,11 @@ public class OrderService {
 
     // homework solution 추가
     private void updateStamp(Order order) {
+        /**
+         * TODO 리팩토링 포인트일 수도 있고, 아닐 수도 있다.
+         * - 메서드 호출 관점에서는 중복 호출
+         * - 1차 캐시 사용 관점에서는 문제 없음
+         */
         Member member = memberService.findMember(order.getMember().getMemberId());
         int stampCount = calculateStampCount(order);
 
@@ -96,11 +101,7 @@ public class OrderService {
         stamp.setStampCount(stamp.getStampCount() + stampCount);
         member.setStamp(stamp);
 
-        /**
-         * TODO 리팩토링 포인트일 수도 있고, 아닐 수도 있다.
-         * - 메서드 호출 관점에서는 중복 호출
-         * - 1차 캐시 사용 관점에서는 문제 없음
-         */
+
 
         memberService.updateMember(member);
     }

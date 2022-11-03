@@ -2,12 +2,12 @@ package com.codestates.order.entity;
 
 import com.codestates.audit.Auditable;
 import com.codestates.member.entity.Member;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +23,7 @@ public class Order extends Auditable {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.ORDER_REQUEST;
 
+    @Setter(AccessLevel.NONE)
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -31,8 +32,11 @@ public class Order extends Auditable {
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<OrderCoffee> orderCoffees = new ArrayList<>();
 
-    public void setMember(Member member) {
+    public void addMember(Member member) {
         this.member = member;
+        if (!this.member.getOrders().contains(this)) {
+            this.member.getOrders().add(this);
+        }
     }
 
     // homework solution 추가

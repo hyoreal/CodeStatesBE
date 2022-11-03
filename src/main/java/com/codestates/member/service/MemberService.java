@@ -38,6 +38,7 @@ public class MemberService {
     public Member updateMemberOld(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
+        // 수정할 정보들이 늘어나면 반복되는 코드가 늘어나는 문제점이 있음
         Optional.ofNullable(member.getName())
                 .ifPresent(name -> findMember.setName(name));
         Optional.ofNullable(member.getPhone())
@@ -50,6 +51,7 @@ public class MemberService {
         return memberRepository.save(findMember);
     }
 
+    // 리팩토링 후
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 

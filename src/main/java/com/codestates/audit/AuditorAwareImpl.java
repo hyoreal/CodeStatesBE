@@ -1,6 +1,5 @@
 package com.codestates.audit;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 

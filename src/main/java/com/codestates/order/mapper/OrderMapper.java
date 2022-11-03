@@ -8,7 +8,6 @@ import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.dto.OrderResponseDto;
 import com.codestates.order.entity.Order;
 import com.codestates.order.entity.OrderCoffee;
-import org.aspectj.weaver.ast.Or;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -36,7 +35,7 @@ public interface OrderMapper {
                             orderCoffee.setQuantity(orderCoffeeDto.getQuantity());
                             return orderCoffee;
                         }).collect(Collectors.toList());
-        order.setMember(member);
+        order.addMember(member);
         order.setOrderCoffees(orderCoffees);
 
         return order;
@@ -44,16 +43,18 @@ public interface OrderMapper {
 
     // homework solution 추가
     default OrderResponseDto orderToOrderResponseDto(Order order){
+        // 객체 그래프 탐색을 통해 주문한 커피 정보를 가져온다.
+        // N + 1 문제가 발생할 수 있다.
         List<OrderCoffee> orderCoffees = order.getOrderCoffees();
 
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setOrderId(order.getOrderId());
-        orderResponseDto.setMember(order.getMember());
+        orderResponseDto.setMemberId(order.getMember().getMemberId());
         orderResponseDto.setOrderStatus(order.getOrderStatus());
         orderResponseDto.setCreatedAt(order.getCreatedAt());
-        orderResponseDto.setOrderCoffees(
-                orderCoffeesToOrderCoffeeResponseDtos(orderCoffees)
-        );
+
+        // 주문한 커피 정보를 List<OrderCoffeeResponseDto>로 변경한다.
+        orderResponseDto.setOrderCoffees(orderCoffeesToOrderCoffeeResponseDtos(orderCoffees));
 
         return orderResponseDto;
     }

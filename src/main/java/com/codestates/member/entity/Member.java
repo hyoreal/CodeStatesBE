@@ -3,6 +3,7 @@ package com.codestates.member.entity;
 import com.codestates.audit.Auditable;
 import com.codestates.order.entity.Order;
 import com.codestates.stamp.Stamp;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,7 @@ public class Member extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    @Column(nullable = false, updatable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(length = 100, nullable = false)
@@ -39,8 +40,7 @@ public class Member extends Auditable {
     private List<Order> orders = new ArrayList<>();
 
     // homework solution 추가
-//    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Stamp stamp;
 
     public Member(String email) {
@@ -57,7 +57,7 @@ public class Member extends Auditable {
     public void setOrder(Order order) {
         orders.add(order);
         if (order.getMember() != this) {
-            order.setMember(this);
+            order.addMember(this);
         }
     }
 
