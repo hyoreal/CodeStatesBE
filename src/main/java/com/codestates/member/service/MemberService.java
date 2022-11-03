@@ -42,6 +42,8 @@ public class MemberService {
         // 추가된 부분
         Optional.ofNullable(member.getMemberStatus())
                 .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
+
+        // 추가된 부분
         findMember.setModifiedAt(LocalDateTime.now());
 
         return memberRepository.save(findMember);
