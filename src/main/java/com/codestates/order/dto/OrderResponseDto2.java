@@ -45,7 +45,7 @@ public class OrderResponseDto2 {
                             return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
                                     coffee.getKorName(),
                                     coffee.getEngName(),
-                                    coffee.getPrice(),
+                                    coffee.getPrice().getValue(),
                                     coffeeRef.getQuantity());
                         }).collect(Collectors.toList());
 

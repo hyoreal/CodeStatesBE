@@ -68,7 +68,7 @@ public interface OrderMapper {
                     return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
                             coffee.getKorName(),
                             coffee.getEngName(),
-                            coffee.getPrice(),
+                            coffee.getPrice().getValue(),
                             coffeeRef.getQuantity());
                 }).collect(Collectors.toList());
     }
@@ -94,7 +94,7 @@ public interface OrderMapper {
                         (coffee, coffeeRef) -> new OrderCoffeeResponseDto(coffee.getCoffeeId(),
                                 coffee.getKorName(),
                                 coffee.getEngName(),
-                                coffee.getPrice(),
+                                coffee.getPrice().getValue(),
                                 coffeeRef.getQuantity()))
                 .collect(Collectors.toList());
     }

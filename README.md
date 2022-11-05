@@ -103,3 +103,11 @@ Mapper의 코드는 단순해지지만 DTO 클래스와 Entity 클래스의 복�
       * `AggregateReference<Member, Long> memberId` -> `long memberId`로 변환한다.
     * `public void setOrderCoffees(Set<CoffeeRef> coffeeRefs)`
       * `Set<CoffeeRef> coffeeRefs` -> `List<CoffeeRef> orderCoffees`로 변환한다.
+### Custom Value Object를 타입으로 사용하기 위한 Converter 사용 예제 코드
+Spring Data JDBC에서 Custom Value Object를 데이터 타입으로 사용하기 위해 Converter를 등록할 수 있습니다.
+* Money 타입 Value Object
+  * [src/main/java/com/codestates/values]()
+* JDBC Configuration
+  * [src/main/java/com/codestates/config]()
+* Converter
+  * [src/main/java/com/codestates/converter]()
