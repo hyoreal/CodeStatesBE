@@ -3,9 +3,9 @@
 ### Description
 예외 처리 레퍼런스 코드는 학습 컨텐츠에서 사용되는 예제 코드 + 라이브 세션에서 사용되는 예제 코드로 구성이 되어 있습니다.
 * 학습 컨텐츠용 예제 코드
-  * [@ExceptionHandler 예제 코드](#@ExceptionHandler-예제-코드)
-  * [@RestControllerAdvice 예제 코드](#@RestControllerAdvice-예제-코드)
-  * [비즈니스적인 예외 throw 예제 코드](비즈니스적인-예외-throw-예제-코드)
+  * [@ExceptionHandler 예제 코드](#exceptionHandler-예제-코드)
+  * [@RestControllerAdvice 예제 코드](#restControllerAdvice-예제-코드)
+  * [비즈니스적인 예외 throw 예제 코드](#비즈니스적인-예외-throw-예제-코드)
 * 라이브 세션용 예제 코드
   * [예외 처리 Worse case 예제 코드](#예외-처리-Worse-case-예제-코드)
     
