@@ -5,7 +5,7 @@
 * 학습 컨텐츠용 예제 코드
   * [@ExceptionHandler 예제 코드](#@ExceptionHandler-예제-코드)
   * [@RestControllerAdvice 예제 코드](#@RestControllerAdvice-예제-코드)
-  * [비즈니스적인 예외 throw 예제 코드](비즈니스적인-예외-throw-예제-코드)
+  * [비즈니스적인 예외 throw 예제 코드](#비즈니스적인-예외-throw-예제-코드)
 * 라이브 세션용 예제 코드
   * [예외 처리 Worse case 예제 코드](#예외-처리-Worse-case-예제-코드)
     
