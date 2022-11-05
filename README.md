@@ -27,8 +27,7 @@ Spring Data JDBC의 전체적인 동작 방식과 사용법을 이해하기 위�
 SQL 쿼리 중심 기술에 대한 예제 코드이며, JDBC API와 Spring JDBC로 구성되어 있습니다.
 * 소스 코드 경로
   * JDBC API 예제 코드
-    * [src/main/java/com/codestates/legacy_example/jdbc_example](https://github.
-      com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/legacy_example/jdbc_example)
+    * [src/main/java/com/codestates/legacy_example/jdbc_example](https://github.com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/legacy_example/jdbc_example)
   * Spring JDBC 예제 코드
     * [src/main/java/com/codestates/legacy_example/spring_jdbc_example](https://github.com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/legacy_example/spring_jdbc_example)
 
