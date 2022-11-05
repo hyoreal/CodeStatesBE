@@ -87,5 +87,18 @@ public class MemberControllerV7 {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    
+    @ExceptionHandler
+    public ResponseEntity handleException(MethodArgumentNotValidException e) {
+        final List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+
+        List<ErrorResponse.FieldError> errors =
+                fieldErrors.stream()
+                        .map(error -> new ErrorResponse.FieldError(
+                                error.getField(),
+                                error.getRejectedValue(),
+                                error.getDefaultMessage()))
+                        .collect(Collectors.toList());
+
+        return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
+    }
 }
