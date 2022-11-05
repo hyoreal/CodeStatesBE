@@ -13,6 +13,7 @@ public class MemberResponseDto {
     private String name;
     private String phone;
     private Member.MemberStatus memberStatus;   // TODO 추가된 부분
+//    private String memberStatus;   // Mapper에 매핑 시
 
     // TODO 수정된 부분
     public String getMemberStatus() {
