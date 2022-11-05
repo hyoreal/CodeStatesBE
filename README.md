@@ -87,7 +87,7 @@ Mapper의 코드는 단순해지지만 DTO 클래스와 Entity 클래스의 복�
     * `default Order2 orderPostDtoToOrder(OrderPostDto orderPostDto)`
       * 데이터 타입이 다른 필드에 대한 매핑 작업은 Order 엔티티 클래스에서 이루어진다.
   * Entity
-    * [src/main/java/com/codestates/order/entity/Order2](https://github.com/codestates-seb/be-reference-spring-data-jdbc/blob/fc692f0ca5c69a1c3c7a329d9036d353147afeb2/src/main/java/com/codestates/order/entity/Order2.java
+    * [src/main/java/com/codestates/order/entity/Order2](https://github.com/codestates-seb/be-reference-spring-data-jdbc/blob/fc692f0ca5c69a1c3c7a329d9036d353147afeb2/src/main/java/com/codestates/order/entity/Order2.java)
     * `public void setMemberId(long memberId)`
       * `long memberId` -> `AggregateReference<Long> memberId`로 변환한다.
     * `public void setOrderCoffees(List<CoffeeRef> orderCoffees)`
