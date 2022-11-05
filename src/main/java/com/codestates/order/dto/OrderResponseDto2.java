@@ -45,7 +45,8 @@ public class OrderResponseDto2 {
                             return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
                                     coffee.getKorName(),
                                     coffee.getEngName(),
-                                    coffee.getPrice().getValue(),
+                                    coffee.getPrice(),
+//                            coffee.getPrice().getValue(), // Money 타입을 사용할 경우
                                     coffeeRef.getQuantity());
                         }).collect(Collectors.toList());
 

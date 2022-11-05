@@ -12,14 +12,19 @@ import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CoffeeMapper {
-    @Mapping(source = "price", target = "price.value")
     Coffee coffeePostDtoToCoffee(CoffeePostDto coffeePostDto);
-
-    @Mapping(source = "price", target = "price.value")
     Coffee coffeePatchDtoToCoffee(CoffeePatchDto coffeePatchDto);
-
-    @Mapping(source = "price.value", target = "price")
     CoffeeResponseDto coffeeToCoffeeResponseDto(Coffee coffee);
+
+    // Money 타입을 사용할 경우
+//    @Mapping(source = "price", target = "price.value")
+//    Coffee coffeePostDtoToCoffee(CoffeePostDto coffeePostDto);
+//
+//    @Mapping(source = "price", target = "price.value")
+//    Coffee coffeePatchDtoToCoffee(CoffeePatchDto coffeePatchDto);
+//
+//    @Mapping(source = "price.value", target = "price")
+//    CoffeeResponseDto coffeeToCoffeeResponseDto(Coffee coffee);
 
     List<CoffeeResponseDto> coffeesToCoffeeResponseDtos(List<Coffee> coffees);
 }
