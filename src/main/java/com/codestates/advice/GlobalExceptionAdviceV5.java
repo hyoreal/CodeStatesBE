@@ -2,6 +2,7 @@ package com.codestates.advice;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.response.v2.ErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +14,7 @@ import javax.validation.ConstraintViolationException;
 
 // BusinessLogicException 정의. 상태 코드만 넘김 -> ControllerV10
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionAdviceV5 {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)

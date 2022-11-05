@@ -13,8 +13,8 @@ public class ErrorResponse {
     private List<FieldError> fieldErrors;
     private List<ConstraintViolationError> violationErrors;
 
-    private ErrorResponse(final List<FieldError> fieldErrors,
-                          final List<ConstraintViolationError> violationErrors) {
+    private ErrorResponse(List<FieldError> fieldErrors,
+                          List<ConstraintViolationError> violationErrors) {
         this.fieldErrors = fieldErrors;
         this.violationErrors = violationErrors;
     }
