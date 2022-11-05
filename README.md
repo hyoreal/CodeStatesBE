@@ -27,8 +27,7 @@ Spring Data JDBC의 전체적인 동작 방식과 사용법을 이해하기 위�
 SQL 쿼리 중심 기술에 대한 예제 코드이며, JDBC API와 Spring JDBC로 구성되어 있습니다.
 * 소스 코드 경로
   * JDBC API 예제 코드
-    * [src/main/java/com/codestates/legacy_example/jdbc_example](https://github.
-      com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/legacy_example/jdbc_example)
+    * [src/main/java/com/codestates/legacy_example/jdbc_example](https://github.com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/legacy_example/jdbc_example)
   * Spring JDBC 예제 코드
     * [src/main/java/com/codestates/legacy_example/spring_jdbc_example](https://github.com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/legacy_example/spring_jdbc_example)
 
@@ -88,7 +87,7 @@ Mapper의 코드는 단순해지지만 DTO 클래스와 Entity 클래스의 복�
     * `default Order2 orderPostDtoToOrder(OrderPostDto orderPostDto)`
       * 데이터 타입이 다른 필드에 대한 매핑 작업은 Order 엔티티 클래스에서 이루어진다.
   * Entity
-    * [src/main/java/com/codestates/order/entity/Order2](https://github.com/codestates-seb/be-reference-spring-data-jdbc/blob/fc692f0ca5c69a1c3c7a329d9036d353147afeb2/src/main/java/com/codestates/order/entity/Order2.java
+    * [src/main/java/com/codestates/order/entity/Order2](https://github.com/codestates-seb/be-reference-spring-data-jdbc/blob/fc692f0ca5c69a1c3c7a329d9036d353147afeb2/src/main/java/com/codestates/order/entity/Order2.java)
     * `public void setMemberId(long memberId)`
       * `long memberId` -> `AggregateReference<Long> memberId`로 변환한다.
     * `public void setOrderCoffees(List<CoffeeRef> orderCoffees)`
