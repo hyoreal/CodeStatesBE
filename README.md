@@ -114,3 +114,5 @@ Spring Data JDBC에서 Custom Value Object를 데이터 타입으로 사용하�
   * [src/main/java/com/codestates/config](https://github.com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/config)
 * Converter
   * [src/main/java/com/codestates/converter](https://github.com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/converter)
+* Mapper
+  * [src/main/java/com/codestates/coffee/mapper](https://github.com/codestates-seb/be-reference-spring-data-jdbc/tree/main/src/main/java/com/codestates/coffee/mapper)
