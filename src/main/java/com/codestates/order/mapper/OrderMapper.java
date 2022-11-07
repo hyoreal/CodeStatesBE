@@ -67,7 +67,8 @@ public interface OrderMapper {
                         .builder()
                         .coffeeId(orderCoffee.getCoffee().getCoffeeId())
                         .quantity(orderCoffee.getQuantity())
-                        .price(orderCoffee.getCoffee().getPrice())
+//                        .price(orderCoffee.getCoffee().getPrice())  // 레거시 코드
+                        .price(orderCoffee.getCoffee().getPrice().getValue())
                         .korName(orderCoffee.getCoffee().getKorName())
                         .engName(orderCoffee.getCoffee().getEngName())
                         .build())

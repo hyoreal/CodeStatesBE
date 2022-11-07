@@ -53,14 +53,21 @@ public class MemberDto {
         private String email;
         private String name;
         private String phone;
+        private String memberStatus;
+        private int stampCount;
+
+        // DTO 클래스에서 필드 매핑을 하는 경우. DTO의 역할이 늘어난다.
+        /*
         private Member.MemberStatus memberStatus;
         private Stamp stamp;
 
         public String getMemberStatus() {
             return memberStatus.getStatus();
         }
+
         public int getStamp() {
             return stamp.getStampCount();
         }
+        */
     }
 }

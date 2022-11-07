@@ -2,6 +2,7 @@ package com.codestates.coffee.entity;
 
 import com.codestates.audit.Auditable;
 import com.codestates.order.entity.OrderCoffee;
+import com.codestates.values.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,8 +27,16 @@ public class Coffee extends Auditable {
     @Column(length = 100, nullable = false)
     private String engName;
 
+    // 레거시 코드
+    /*
     @Column(length = 5, nullable = false)
     private Integer price;
+    */
+
+    // Value Object를 사용하는 예제
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "price", nullable = false, length = 5))
+    private Money price;
 
     @Column(length = 3, nullable = false, unique = true)
     private String coffeeCode;
