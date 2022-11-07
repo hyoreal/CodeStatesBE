@@ -28,3 +28,5 @@ Spring Data JPA에서 Value Object를 데이터 타입으로 사용하기 위해
   * [src/main/java/com/codestates/values](https://github.com/codestates-seb/be-reference-spring-data-jpa/tree/main/src/main/java/com/codestates/values)
 * Entity
   * [src/main/java/com/codestates/coffee/entity](https://github.com/codestates-seb/be-reference-spring-data-jpa/tree/main/src/main/java/com/codestates/coffee/entity)
+* Mapper
+  * [src/main/java/com/codestates/coffee/mapper](https://github.com/codestates-seb/be-reference-spring-data-jpa/tree/main/src/main/java/com/codestates/coffee/mapper)
