@@ -7,10 +7,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 @Slf4j
-public class MemberServiceInvocationHandler implements InvocationHandler {
+public class DynamicProxyInvocationHandler implements InvocationHandler {
     private final MemberService target;
 
-    public MemberServiceInvocationHandler(MemberService target) {
+    public DynamicProxyInvocationHandler(MemberService target) {
         this.target = target;
     }
 
