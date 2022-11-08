@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Transactional
+@Transactional    // 테스트 케이스 하나의 실행이 끝나면 매 번 rollback 처리를 해준다.
 @SpringBootTest
 @AutoConfigureMockMvc
 class MemberControllerTest2 {
@@ -44,6 +44,11 @@ class MemberControllerTest2 {
                                         .content(content)
                                 );
 
+        /**
+         * - andExpect()를 이용한 HTTP Status 검증
+         * - andExpect()를 이용한 response body 검증
+         * - MvcResult를 이용해 response body를 확인
+         */
         // then
         MvcResult result = actions
                                 .andExpect(status().isCreated())

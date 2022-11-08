@@ -43,6 +43,10 @@ class MemberControllerTest1 {
                                         .content(content)
                                 );
 
+        /**
+         * - andExpect()를 이용한 HTTP Status 검증
+         * - MvcResult를 이용해 response body 출력
+         */
         // then
         MvcResult result = actions
                                 .andExpect(status().isCreated())

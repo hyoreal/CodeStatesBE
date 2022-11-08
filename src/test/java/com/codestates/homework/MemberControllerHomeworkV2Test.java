@@ -27,10 +27,13 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Transactional
+/**
+ * Controller의 API만 이용하는 방법(리팩토링 후)
+ */
+@Transactional    // 테스트 케이스 하나의 실행이 끝나면 매 번 rollback 처리를 해준다.
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MemberControllerHomeworkTest implements MemberControllerTestHelper {
+public class MemberControllerHomeworkV2Test implements MemberControllerTestHelper {
     @Autowired
     private MockMvc mockMvc;
 
@@ -43,6 +46,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
 
     @BeforeEach
     public void init() throws Exception {
+        // given
         this.post = (MemberDto.Post) StubData.MockMember.get(HttpMethod.POST);
         String content = gson.toJson(post);
         URI uri = getURI();
@@ -73,8 +77,9 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
     void patchMemberTest() throws Exception {
         // given
         long memberId = getResponseMemberId();
+
         MemberDto.Patch patch =
-                (MemberDto.Patch) StubData.MockMember.get(HttpMethod.PATCH);
+                (MemberDto.Patch) StubData.MockMember.get(HttpMethod.PATCH); // 별도의 Stub Data를 만들어서 재사용
         String content = gson.toJson(patch);
         URI uri = getURI(memberId);
 
@@ -128,6 +133,7 @@ public class MemberControllerHomeworkTest implements MemberControllerTestHelper 
                                 .andExpect(status().isOk())
                                 .andExpect(jsonPath("$.data").isArray())
                                 .andReturn();
+
         List list = JsonPath.parse(result.getResponse().getContentAsString()).read("$.data");
 
         assertThat(list.size(), is(2));

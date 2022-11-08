@@ -12,7 +12,7 @@ public class StubData {
         stubMemberDto = new HashMap<>();
         stubMemberDto.put(HttpMethod.POST, new MemberDto.Post("hgd@gmail.com","홍길동",
                 "010-1111-1111"));
-        stubMemberDto.put(HttpMethod.PATCH, new MemberDto.Patch(0, null, "010-2222-2222", null));
+        stubMemberDto.put(HttpMethod.PATCH, new MemberDto.Patch(1, null, "010-2222-2222", null));
     }
 
     public static class MockMember {
