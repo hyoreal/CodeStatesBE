@@ -23,14 +23,11 @@ public class RandomPasswordGeneratorTest {
 
         // then
         assertEquals(length, randomPassword.length());
-        assertEquals(numberOfUpper,
-                randomPassword.chars().filter(Character::isUpperCase).count());
+        assertEquals(numberOfUpper, randomPassword.chars().filter(Character::isUpperCase).count());
 
-        assertEquals(numberOfLower,
-                randomPassword.chars().filter(Character::isLowerCase).count());
+        assertEquals(numberOfLower, randomPassword.chars().filter(Character::isLowerCase).count());
 
-        assertEquals(numberOfNum,
-                randomPassword.chars().filter(Character::isDigit).count());
+        assertEquals(numberOfNum, randomPassword.chars().filter(Character::isDigit).count());
 
         assertEquals(numberOfSpecial,
                 randomPassword

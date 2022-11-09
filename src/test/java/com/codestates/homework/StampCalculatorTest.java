@@ -21,7 +21,7 @@ public class StampCalculatorTest {
         // when
         int actual = StampCalculator.calculateStampCount(5, 3);
 
-        int expected = 8;
+        int expected = nowCount + earned;
 
         // then
         assertEquals(expected, actual);
@@ -30,6 +30,7 @@ public class StampCalculatorTest {
     @Test
     @DisplayName("실습1: 주문 후 누적 스탬프 카운트 계산 단위 테스트")
     public void calculateEarnedStampCountTest(){
+        // given
         Order order = new Order();
         OrderCoffee orderCoffee1 = new OrderCoffee();
         orderCoffee1.setQuantity(3);
