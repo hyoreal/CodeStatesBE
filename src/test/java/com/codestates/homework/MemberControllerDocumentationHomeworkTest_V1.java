@@ -23,6 +23,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -46,6 +47,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -67,7 +69,8 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
 
     @Autowired
     private Gson gson;
-    @Test
+
+//    @Test
     public void postMemberTest() throws Exception {
         // given
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com","홍길동",
@@ -97,6 +100,12 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                                 .content(content));
 
         // then
+        // 유효성 검증에 사용된 애너테이션에 대한 정보를 추가
+        ConstraintDescriptions postMemberConstraints = new ConstraintDescriptions(MemberDto.Post.class);
+        List<String> emailDescriptions = postMemberConstraints.descriptionsForProperty("email");
+        List<String> nameDescriptions = postMemberConstraints.descriptionsForProperty("name");
+        List<String> phoneDescriptions = postMemberConstraints.descriptionsForProperty("phone");
+
         actions
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.data.email").value(post.getEmail()))
@@ -107,9 +116,12 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 List.of(
-                                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
-                                        fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
+                                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일")
+                                                .attributes(key("constraints").value(emailDescriptions)),
+                                        fieldWithPath("name").type(JsonFieldType.STRING).description("이름")
+                                                .attributes(key("constraints").value(nameDescriptions)),
                                         fieldWithPath("phone").type(JsonFieldType.STRING).description("휴대폰 번호")
+                                                .attributes(key("constraints").value(phoneDescriptions))
                                 )
                         ),
                         responseFields(
@@ -127,7 +139,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                 ));
     }
 
-    @Test
+//    @Test
     public void patchMemberTest() throws Exception {
         // given
         long memberId = 1L;
@@ -160,6 +172,11 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                                                         .content(content));
 
         // then
+        // 유효성 검증에 사용된 애너테이션에 대한 정보를 추가
+        ConstraintDescriptions patchMemberConstraints = new ConstraintDescriptions(MemberDto.Patch.class);
+        List<String> nameDescriptions = patchMemberConstraints.descriptionsForProperty("name");
+        List<String> phoneDescriptions = patchMemberConstraints.descriptionsForProperty("phone");
+
         actions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.memberId").value(patch.getMemberId()))
@@ -175,8 +192,10 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                         requestFields(
                                 List.of(
                                     fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자").ignored(),
-                                    fieldWithPath("name").type(JsonFieldType.STRING).description("이름").optional(),
-                                    fieldWithPath("phone").type(JsonFieldType.STRING).description("휴대폰 번호").optional(),
+                                    fieldWithPath("name").type(JsonFieldType.STRING).description("이름")
+                                            .attributes(key("constraints").value(nameDescriptions)).optional(),
+                                    fieldWithPath("phone").type(JsonFieldType.STRING).description("휴대폰 번호")
+                                            .attributes(key("constraints").value(phoneDescriptions)).optional(),
                                     fieldWithPath("memberStatus").type(JsonFieldType.STRING)
                                             .description("회원 상태: MEMBER_ACTIVE(활동중) / MEMBER_SLEEP(휴면 계정) / MEMBER_QUIT(탈퇴)")
                                             .optional()
@@ -197,7 +216,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                 ));
     }
 
-    @Test
+//    @Test
     public void getMemberTest() throws Exception {
         // given
         long memberId = 1L;
@@ -242,7 +261,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                 ));
     }
 
-    @Test
+//    @Test
     public void getMembersTest() throws Exception {
         // given
         String page = "1";
@@ -315,7 +334,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
         assertThat(list.size(), is(2));
     }
 
-    @Test
+//    @Test
     public void deleteMemberTest() throws Exception {
         // given
         long memberId = 1L;
