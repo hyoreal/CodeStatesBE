@@ -10,6 +10,8 @@ import app.product.ProductRepository;
 
 public class AppConfigurer {
 
+    private Cart cart = new Cart(productRepository(), menu());
+
     public ProductRepository productRepository() {
         return new ProductRepository();
     }
@@ -19,7 +21,7 @@ public class AppConfigurer {
     }
 
     public Cart cart() {
-        return new Cart(productRepository(), menu());
+        return cart;
     }
 
     public Discount discount() {
