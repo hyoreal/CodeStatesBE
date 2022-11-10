@@ -32,6 +32,9 @@ import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * 중복을 제거한 리팩토링 된 Solution 코드
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelper {
@@ -51,6 +54,7 @@ public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelp
     @Test
     void postMemberTest() throws Exception {
         // given
+        // StubData 클래스를 이용해 테스트 데이터를 매 번 정의하는 중복을 제거한다.
         MemberDto.Post post = (MemberDto.Post) StubData.MockMember.getRequestBody(HttpMethod.POST);
         MemberDto.Response responseBody = StubData.MockMember.getSingleResponseBody();
 

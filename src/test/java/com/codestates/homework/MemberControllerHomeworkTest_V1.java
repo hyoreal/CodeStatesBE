@@ -39,6 +39,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * 중복을 제거하지 않은 리팩토링 전의 Solution 코드
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MemberControllerHomeworkTest_V1 {
@@ -66,10 +69,23 @@ public class MemberControllerHomeworkTest_V1 {
                                                                 new Stamp());
 
         // Stubbing by Mockito
+        /**
+         * mapper.memberPostToMember(Mockito.any(MemberDto.Post.class))에서 리턴하는 Member 객체는
+         * 다음 로직에서 사용되지 않으므로 단순히 new Member()를 통해 객체만 생성한다.
+         */
         given(mapper.memberPostToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
 
+        /**
+         * memberService.createMember(Mockito.any(Member.class))에서 리턴하는 Member 객체는
+         * 다음 로직에서 사용되지 않으므로 단순히 new Member()를 통해 객체만 생성한다.
+         */
         given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
 
+        /**
+         * mapper.memberToMemberResponse(Mockito.any(Member.class))에서 리턴하는 Member 객체는
+         * ResponseEntity에 포함되는 response body가 될 것이므로 구체적인 회원 정보가 포함된 responseBody를
+         * willReturn(responseBody)과 같이 전달달다.
+         */
         given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseBody);
 
         String content = gson.toJson(post);
@@ -191,6 +207,11 @@ public class MemberControllerHomeworkTest_V1 {
         List<MemberDto.Response> responses = StubData.MockMember.getMultiResponseBody();
 
         // Stubbing by Mockito
+        /**
+         * memberService.findMembers(Mockito.anyInt(), Mockito.anyInt())에서 리턴하는 리턴 값은 MemberController의
+         * getMembers() 핸들러 메서드의 로직 중에서 다음 라인의 로직(List<Member> members = pageMembers.getContent();)에서
+         * 사용되기 때문에 구체적인 값이 포함된 객체(pageMembers)를 지정해야 한다.
+         */
         given(memberService.findMembers(Mockito.anyInt(), Mockito.anyInt())).willReturn(pageMembers);
         given(mapper.membersToMemberResponses(Mockito.anyList())).willReturn(responses);
 
