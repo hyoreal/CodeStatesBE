@@ -1,10 +1,10 @@
-package com.codestates.proxy_example.proxy;
+package com.codestates.proxy_example.proxy_factory_bean;
 
 import com.codestates.proxy_example.Member;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Proxy가 부가 기능을 수행한 이 후, 핵심 기능을 처리하는 타겟 클래스
+ * ProxyFactoryBean을 이용한 예제 코드에서 사용되는 핵심 기능 클래스
  */
 @Slf4j
 public class MemberTargetService implements MemberService {
