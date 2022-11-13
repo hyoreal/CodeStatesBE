@@ -8,6 +8,7 @@ import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.dto.OrderResponseDto;
 import com.codestates.order.entity.Order;
 import com.codestates.order.entity.OrderCoffee;
+import com.codestates.values.Money;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -63,15 +64,21 @@ public interface OrderMapper {
                                                     List<OrderCoffee> orderCoffees) {
         return orderCoffees
                 .stream()
-                .map(orderCoffee -> OrderCoffeeResponseDto
-                        .builder()
-                        .coffeeId(orderCoffee.getCoffee().getCoffeeId())
-                        .quantity(orderCoffee.getQuantity())
+                .map(orderCoffee -> {
+                    // 주문 등록 시에는 price 값이 null이므로, null 여부를 체크해야 한다.
+                    Money coffeePrice = orderCoffee.getCoffee().getPrice();
+                    Integer price = coffeePrice != null ? coffeePrice.getValue() : null;
+
+                    return OrderCoffeeResponseDto
+                            .builder()
+                            .coffeeId(orderCoffee.getCoffee().getCoffeeId())
+                            .quantity(orderCoffee.getQuantity())
 //                        .price(orderCoffee.getCoffee().getPrice())  // 레거시 코드
-                        .price(orderCoffee.getCoffee().getPrice().getValue())
-                        .korName(orderCoffee.getCoffee().getKorName())
-                        .engName(orderCoffee.getCoffee().getEngName())
-                        .build())
+                            .price(price)
+                            .korName(orderCoffee.getCoffee().getKorName())
+                            .engName(orderCoffee.getCoffee().getEngName())
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 }
