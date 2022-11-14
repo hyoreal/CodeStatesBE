@@ -16,9 +16,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface OrderMapper {
-//    Order orderPostDtoToOrder(OrderPostDto orderPostDto);
     Order orderPatchDtoToOrder(OrderPatchDto orderPatchDto);
-//    OrderResponseDto orderToOrderResponseDto(Order order, List<OrderCoffee> orderCoffees);
     List<OrderResponseDto> ordersToOrderResponseDtos(List<Order> orders);
 
     default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
@@ -31,12 +29,12 @@ public interface OrderMapper {
                             OrderCoffee orderCoffee = new OrderCoffee();
                             Coffee coffee = new Coffee();
                             coffee.setCoffeeId(orderCoffeeDto.getCoffeeId());
-                            orderCoffee.addOrder(order);
-                            orderCoffee.addCoffee(coffee);
+                            orderCoffee.setOrder(order);
+                            orderCoffee.setCoffee(coffee);
                             orderCoffee.setQuantity(orderCoffeeDto.getQuantity());
                             return orderCoffee;
                         }).collect(Collectors.toList());
-        order.addMember(member);
+        order.setMember(member);
         order.setOrderCoffees(orderCoffees);
 
         return order;

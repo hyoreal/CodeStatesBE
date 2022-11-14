@@ -40,6 +40,16 @@ public class Member extends Auditable {
     private List<Order> orders = new ArrayList<>();
 
     // homework solution 추가
+    /**
+     * cascade 애트리뷰트
+     * - CascadeType.PERSIST
+     *      - member 객체만 영속성 컨텍스트에 영속화(persist)하면 member와 연관관계 매핑이 되어 있는 객체까지 영속화된다.
+     *      - JPA에서는 persist()를 호출하면 영속화 되지만, Spring Data JPA에서는 memberRepository.save(member)를 호출하면
+     *      member 뿐만 아니라 stamp까지 영속화 되고, 내부적으로 flush()가 호출 되므로 DB의 테이블(MEMBER, STAMP)에 모두 INSERT 된다.
+     * - CascadeType.REMOVE
+     *      - 만약 memberRepository.delete(member)를 호출하면 연관관계 매핑이 되어 있는 STAMP 테이블에서 stamp 정보가 먼저 삭제되고,
+     *      다음에 MEMBER 테이블에서 member 정보가 삭제된다.
+     */
     @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Stamp stamp;
 
@@ -54,14 +64,21 @@ public class Member extends Auditable {
     }
 
     // homework solution 추가
+    /**
+     * 클래스 레벨에 @Setter 애너테이션으로 setter를 추가했지만 양방향 연관 관계를 안전하게 매핑하기 위해 order 쪽에도 member를 추가한다.
+     */
     public void setOrder(Order order) {
         orders.add(order);
         if (order.getMember() != this) {
-            order.addMember(this);
+            order.setMember(this);
         }
     }
 
     // homework solution 추가
+
+    /**
+     * 클래스 레벨에 @Setter 애너테이션으로 setter를 추가했지만 양방향 연관 관계를 안전하게 매핑하기 위해 stamp 쪽에도 member를 추가한다.
+     */
     public void setStamp(Stamp stamp) {
         this.stamp = stamp;
         if (stamp.getMember() != this) {

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +49,13 @@ public class Coffee extends Auditable {
     @OneToMany(mappedBy = "coffee")
     private List<OrderCoffee> orderCoffees = new ArrayList<>();
 
-    public void addOrderCoffee(OrderCoffee orderCoffee) {
+    /**
+     * 클래스 레벨에 @Setter 애너테이션으로 setter를 추가했지만 양방향 연관 관계를 안전하게 매핑하기 위해 orderCoffee 쪽에도 coffee를 추가한다.
+     */
+    public void setOrderCoffee(OrderCoffee orderCoffee) {
         this.orderCoffees.add(orderCoffee);
         if (orderCoffee.getCoffee() != this) {
-            orderCoffee.addCoffee(this);
+            orderCoffee.setCoffee(this);
         }
     }
     // 커피 상태 추가

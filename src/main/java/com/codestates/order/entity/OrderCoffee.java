@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -29,17 +28,23 @@ public class OrderCoffee extends Auditable { // homework solution 추가
     @JoinColumn(name = "COFFEE_ID")
     private Coffee coffee;
 
-    public void addOrder(Order order) {
+    /**
+     * 클래스 레벨에 @Setter 애너테이션으로 setter를 추가했지만 양방향 연관 관계를 안전하게 매핑하기 위해 order 쪽에도 orderCoffee를 추가한다.
+     */
+    public void setOrder(Order order) {
         this.order = order;
         if (!this.order.getOrderCoffees().contains(this)) {
             this.order.getOrderCoffees().add(this);
         }
     }
 
-    public void addCoffee(Coffee coffee) {
+    /**
+     * 클래스 레벨에 @Setter 애너테이션으로 setter를 추가했지만 양방향 연관 관계를 안전하게 매핑하기 위해 order 쪽에도 orderCoffee를 추가한다.
+     */
+    public void setCoffee(Coffee coffee) {
         this.coffee = coffee;
         if (!this.coffee.getOrderCoffees().contains(this)) {
-            this.coffee.addOrderCoffee(this);
+            this.coffee.setOrderCoffee(this);
         }
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @Getter
-@Setter
+@Setter   // 기본적으로 클래스 레벨에 lombok의 @Setter, @Getter를 추가하면 클래스의 모든 필드에 setter/getter 메서드가 생긴다.
 @Entity(name = "ORDERS")
 public class Order extends Auditable {
     @Id
@@ -23,27 +23,27 @@ public class Order extends Auditable {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.ORDER_REQUEST;
 
-    @Setter(AccessLevel.NONE)
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     // homework solution 추가
+    /**
+     * cascade 애트리뷰트
+     * - order 객체만 영속성 컨텍스트에 영속화(persist)하면 order와 연관관계 매핑이 되어 있는 객체까지 영속화된다.
+     * - JPA에서는 persist()를 호출하면 영속화 되지만, Spring Data JPA에서는 orderRepository.save(order)를 호출하면
+     * order 뿐만 아니라 orderCoffee까지 영속화 되고, 내부적으로 flush()가 호출되므로 DB의 테이블(ORDER, ORDER_COFFEE)에 모두 INSERT 된다.
+     */
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<OrderCoffee> orderCoffees = new ArrayList<>();
 
-    public void addMember(Member member) {
+    /**
+     * 클래스 레벨에 @Setter 애너테이션으로 setter를 추가했지만 양방향 연관관계를 안전하게 매핑하기 위해 member 쪽에도 order를 추가한다.
+     */
+    public void setMember(Member member) {
         this.member = member;
         if (!this.member.getOrders().contains(this)) {
             this.member.getOrders().add(this);
-        }
-    }
-
-    // homework solution 추가
-    public void addOrderCoffee(OrderCoffee orderCoffee) {
-        this.orderCoffees.add(orderCoffee);
-        if (orderCoffee.getOrder() != this) {
-            orderCoffee.addOrder(this);
         }
     }
 
