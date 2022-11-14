@@ -55,4 +55,5 @@ Spring의 ProxyFactoryBean을 이용해 프록시를 생성하는 예제 코드�
           }`
     * IntelliJ 로그를 통해 MemberService > createMember() 호출 전 후로 아래 로그가 출력되는지 확인
       * `# Execute LogAdvice before proceeding target:...`
+      * `# Execute LogAdvice after proceeding target:...`
 ---
