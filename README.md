@@ -35,13 +35,13 @@ Java의 리플렉션(Reflection)을 사용하는 예제 코드입니다.
 Spring의 ProxyFactoryBean을 이용해 프록시를 생성하는 예제 코드입니다. Spring의 ProxyFactoryBean을 이용하면 프록시를 Spring Bean으로 등록할 수 있습니다.
 * 인터페이스 기반의 Proxy 생성(Dynamic Proxy 방식)
   * 소스 코드 경로
-    * [src/main/java/com/codestates/proxy_example/proxy_factory_bean]()
-    * [src/test/java/com/codestates/proxy_example/proxy_factory_bean]()
+    * [src/main/java/com/codestates/proxy_example/proxy_factory_bean](https://github.com/codestates-seb/be-reference-tx/tree/main/src/main/java/com/codestates/proxy_example/proxy_factory_bean)
+    * [src/test/java/com/codestates/proxy_example/proxy_factory_bean](https://github.com/codestates-seb/be-reference-tx/tree/main/src/test/java/com/codestates/proxy_example/proxy_factory_bean)
   * 실행 결과 확인
     * 테스트 케이스 실행으로 확인할 수 있습니다. 
 * 타겟 클래스 기반의 Proxy 생성(CGLIB 방식)
   * 소스코드 경로
-    * [src/main/java/com/codestates/proxy_example/proxy_factory_bean/cglib_based]()
+    * [src/main/java/com/codestates/proxy_example/proxy_factory_bean/cglib_based](https://github.com/codestates-seb/be-reference-tx/tree/main/src/main/java/com/codestates/proxy_example/proxy_factory_bean/cglib_based)
   * 실행 결과 확인
     * 애플리케이션 실행
     * 아래의 엔드포인트로 HTTP request 전송
@@ -56,4 +56,4 @@ Spring의 ProxyFactoryBean을 이용해 프록시를 생성하는 예제 코드�
     * IntelliJ 로그를 통해 MemberService > createMember() 호출 전 후로 아래 로그가 출력되는지 확인
       * `# Execute LogAdvice before proceeding target:...`
       * `# Execute LogAdvice after proceeding target:...`
----
+=======
