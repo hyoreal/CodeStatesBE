@@ -1,8 +1,9 @@
-package com.codestates.advice;
+package com.codestates.profile_examples;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -13,11 +14,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolationException;
 
 @Slf4j
+@Profile("local") // local 프로파일이 활성화 될 경우에만 실행된다.
 @RestControllerAdvice
 public class GlobalExceptionAdvice {
+    @PostConstruct
+    public void init() {
+        log.info("# Run GlobalExceptionAdvice by a profile!");
+    }
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMethodArgumentNotValidException(
