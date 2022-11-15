@@ -13,6 +13,7 @@ import static org.hamcrest.Matchers.is;
 public class MemberServiceProxyFactoryBeanTest {
     @Test
     public void createMemberTest() {
+        // given
         Member member = new Member("hgd@gmail.com", "Hong Gil Dong", "010-1111-1111");
 
 
@@ -23,9 +24,12 @@ public class MemberServiceProxyFactoryBeanTest {
         // MemberService 인터페이스에 대한 Proxy를 ProxyFactorBean에서 꺼낸다.
         MemberService memberServiceProxy = (MemberService) proxyFactoryBean.getObject();
 
+
+        // when
         // Proxy로 부가 기능 적용 대상 메서드 호출. 부가 기능을 처리하는 Advice가 먼저 실행된 뒤 타겟 클래스가 실행된다.
         Member resultMember = memberServiceProxy.createMember(member);
 
+        // then
         assertThat(resultMember.getEmail(), is(member.getEmail()));
         assertThat(resultMember.getName(), is(member.getName()));
         assertThat(resultMember.getPhone(), is(member.getPhone()));
