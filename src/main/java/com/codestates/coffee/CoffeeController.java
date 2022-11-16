@@ -8,41 +8,67 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * CoffeeController는 실습 과제에 대한 두 개의 Solution 메서드를 포함하고 있습니다.
+ * CoffeeController는 의존하는 서비스 계층의 클래스는 존재하지 않으며, 따라서 구체적인 비즈니스 로직을 포함하고 있지 않습니다.
+ * 클라이언트 측에서는 메모리(Map member)에 저장되어 있는 커피 정보를 수정 및 삭제할 수 있습니다.
+ *
+ * @author  황정식
+ * @version 1.0.0
+ */
 @RestController
 @RequestMapping("/v1/coffees")
 public class CoffeeController {
     private final Map<Long, Map<String, Object>> coffees = new HashMap<>();
 
+    /**
+     * CoffeeController가 의존 객체를 DI 받을 준비가 완료되면 호출됩니다.
+     * <p>
+     * DI 받을 객체가 없더라도 호출됩니다.
+     * <P>
+     * 여기서는 실습에 사용할 커피 정보를 Map에 추가하고 있습니다.
+     */
     @PostConstruct
     public void init() {
-        Map<String, Object> coffee1 = new HashMap<>();
+        Map<String, Object> coffee = new HashMap<>();
         long coffeeId = 1L;
-        coffee1.put("coffeeId", coffeeId);
-        coffee1.put("korName", "바닐라 라떼");
-        coffee1.put("engName", "Vanilla Latte");
-        coffee1.put("price", 4500);
+        coffee.put("coffeeId", coffeeId);
+        coffee.put("korName", "바닐라 라떼");
+        coffee.put("engName", "Vanilla Latte");
+        coffee.put("price", 4500);
 
-        coffees.put(coffeeId, coffee1);
+        coffees.put(coffeeId, coffee);
     }
 
-    //---------------- 여기서 부터 아래에 코드를 구현하세요! -------------------//
-    // 1. 커피 정보 수정을 위한 핸들러 메서드 구현
+    /**
+     * 커피 정보 수정을 위한 핸들러 메서드를 구현한 Solution 코드입니다.
+     * <ul>
+     *     <li>coffeeId에 해당하는 커피 정보가 Map coffee에 존재하지 않으면 404 Not Found HTTP Status를 전송합니다.</li>
+     *     <li>coffeeId에 해당하는 커피 정보가 Map coffee에 존재한다면 커피 정보를 수정합니다.</li>
+     * </ul>
+     * @param coffeeId  URL Path Variable에 매핑되는 커피 식별자
+     *                  <p>
+     *                  커피 정보 수정 대상이 된다.
+     * @param korName   수정하고자 하는 커피의 한글명
+     * @param price     수정하고자 하는 커피의 가격
+     * @return  수정된 커피 정보인 Map coffee를 포함한 ResponseEntity
+     */
     @PatchMapping("/{coffee-id}")
     public ResponseEntity patchCoffee(@PathVariable("coffee-id") long coffeeId,
                                       @RequestParam("korName") String korName,
                                       @RequestParam("price") int price) {
         // No need Business logic
 
-        Map<String, Object> coffee1 = coffees.get(coffeeId);
+        Map<String, Object> coffee = coffees.get(coffeeId);
 
-        if (coffee1 == null) {
+        if (coffee == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            coffee1.put("korName", korName);
-            coffee1.put("price", price);
+            coffee.put("korName", korName);
+            coffee.put("price", price);
         }
 
-        return new ResponseEntity<>(coffee1, HttpStatus.OK);
+        return new ResponseEntity<>(coffee, HttpStatus.OK);
     }
 
     // 2. 커피 정보 삭제를 위한 핸들러 서드 구현
