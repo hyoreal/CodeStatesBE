@@ -36,6 +36,14 @@ import java.util.Optional;
  *      Optional&lt;{@literal @}Range(min= 100, max= 50000) Integer&gt;: null 또는 100에서 50000까지의 숫자만 유효성 검증에 성공한다.
  *     </li>
  * </ul>
+ * <p>&nbsp;</p>
+ * <h4>getter가 필요한 이유</h4>
+ * 현재 버전은 CoffeeController에서 CoffeePostDto를 response body로 전달 하므로,
+ * MappingJackson2HttpMessageConverter가 CoffeePostDto를 JSON 문자열로 변환할 때 getter를 사용합니다.
+ *
+ * <p>&nbsp;</p>
+ * <h4>setCoffeeId()가 필요한 이유</h4>
+ * 핸들러 메서드에서 path variable로 전달 받은 coffeeId를 setCoffeeId()를 통해 필드를 채움으로써 response body에 포함시킬 수 있습니다.
  */
 public class CoffeePatchDto {
     private long coffeeId;

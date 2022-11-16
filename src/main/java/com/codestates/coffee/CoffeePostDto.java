@@ -35,7 +35,8 @@ import javax.validation.constraints.Pattern;
  * </ul>
  * <p>&nbsp;</p>
  * <h4>getter가 필요한 이유</h4>
- * 현재 버전은 CoffeeController에서 CoffeePostDto를 response body로 전달 하므로, JSON 문자열로 변환할 때 getter를 사용합니다.
+ * 현재 버전은 CoffeeController에서 CoffeePostDto를 response body로 전달 하므로,
+ * MappingJackson2HttpMessageConverter가 CoffeePostDto를 JSON 문자열로 변환할 때 getter를 사용합니다.
  */
 public class CoffeePostDto {
     @NotBlank
