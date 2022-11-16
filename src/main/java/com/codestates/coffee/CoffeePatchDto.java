@@ -9,6 +9,34 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
+/**
+ * <h3>DTO 실습 과제용 Solution 코드 포함</h3>
+ *
+ * CoffeePatchDto는 실습 과제의 요구 사항에 대한 Solution 코드(유효성 검증 애너테이션)들이 필드에 포함이 되어 있습니다.
+ *
+ * <ul>
+ *     <li>
+ *      {@literal @}NotSpace: null 또는 공백이 아닐 경우에만 유효성 검증에 성공합니다.
+ *     </li>
+ *     <li>
+ *      {@literal @}Pattern(regexp = "^([A-Za-z])(\\s?[A-Za-z])*$"):
+ *          <ul>
+ *              <li>
+ *                  한 단어이거나 단어와 단어 사이에 공백이 하나만 존재하는 경우에만 유효성 검증에 성공한다.
+ *              </li>
+ *              <li>
+ *                  유효성 검증 성공 예) “Cafe Latte” (ㅇ), “Ca fe Latte” (ㅇ)
+ *              </li>
+ *              <li>
+ *                  유효성 검증 실패 예) “Cafe       Latte” (X), “         Cafe Latte” (X), “ Cafe Latte       ” (X), “ Cafe Latte ” (X)
+ *              </li>
+ *          </ul>
+ *     </li>
+ *     <li>
+ *      Optional&lt;{@literal @}Range(min= 100, max= 50000) Integer&gt;: null 또는 100에서 50000까지의 숫자만 유효성 검증에 성공한다.
+ *     </li>
+ * </ul>
+ */
 public class CoffeePatchDto {
     private long coffeeId;
 
