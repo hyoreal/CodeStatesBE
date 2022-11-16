@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <h3>Controller 실습 과제용 Solution 코드 포함</h3>
+ *
  * CoffeeController는 실습 과제에 대한 두 개의 Solution 메서드를 포함하고 있습니다.
  * CoffeeController는 의존하는 서비스 계층의 클래스는 존재하지 않으며, 따라서 구체적인 비즈니스 로직을 포함하고 있지 않습니다.
  * 클라이언트 측에서는 메모리(Map member)에 저장되어 있는 커피 정보를 수정 및 삭제할 수 있습니다.
@@ -71,7 +73,16 @@ public class CoffeeController {
         return new ResponseEntity<>(coffee, HttpStatus.OK);
     }
 
-    // 2. 커피 정보 삭제를 위한 핸들러 서드 구현
+    /**
+     * 커피 정보 삭제를 위한 핸들러 메서드를 구현한 Solution 코드입니다.
+     *
+     * @param coffeeId  URL Path Variable에 매핑되는 커피 식별자.
+     *                  <p>
+     *                  삭제할 대상이 된다.
+     * @return  response body를 포함하지 않는 ResponseEntity.
+     *          <p>
+     *          커피 정보를 삭제할 경우, 삭제되어 존재하지 않으므로 204 No Content를 지정한다.
+     */
     @DeleteMapping("/{coffee-id}")
     public ResponseEntity deleteCoffee(@PathVariable("coffee-id") long coffeeId) {
         if(coffees.containsKey(coffeeId))

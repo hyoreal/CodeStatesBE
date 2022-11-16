@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <h3>Controller 실습 과제용 Solution 코드 포함</h3>
+ *
  * MemberController는 실습 과제에 대한 두 개의 Solution 메서드를 포함하고 있습니다.<p>
  * MemberController는 의존하는 서비스 계층의 클래스는 존재하지 않으며, 따라서 구체적인 비즈니스 로직을 포함하고 있지 않습니다.<p>
  * 클라이언트 측에서는 메모리(Map member)에 저장되어 있는 회원 정보를 수정 및 삭제할 수 있습니다.
@@ -75,7 +77,7 @@ public class MemberController {
      *                  삭제할 대상이 된다.
      * @return  response body를 포함하지 않는 ResponseEntity.
      *          <p>
-     *          회원 정보가 삭제되어 존재하지 않으므로 204 No Content를 지정한다.
+     *          회원 정보를 삭제할 경우, 삭제되어 존재하지 않으므로 204 No Content를 지정한다.
      */
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(@PathVariable("member-id") long memberId) {
