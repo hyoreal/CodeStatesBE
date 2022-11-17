@@ -10,7 +10,7 @@
   * [Money](https://github.com/codestates-seb/be-solution-mapper/blob/a60e492de8a6afaa8826cd13ae232ab184663716/src/main/java/com/codestates/values/Money.java)
   
 > 실습 Solution과 관련이 있는 클래스에 대한 설명은 Solution 코드에 포함된 코멘트 또는 javadoc(index.html) 문서를 참고하세요.
-> javadoc 문서를 확인하는 방법은 아래의 [Solution 코드 설명을 위한 javadoc(index.html) 문서 확인 방법]()을 참고하세요.
+> javadoc 문서를 확인하는 방법은 아래의 [Solution 코드 설명을 위한 javadoc(index.html) 문서 확인 방법](#solution-코드-설명을-위한-javadocindexhtml-문서-확인-방법)을 참고하세요.
 
 ---
 
