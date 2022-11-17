@@ -14,6 +14,8 @@ import lombok.Getter;
  *     <li>커피 가격을 의미하는 price 필드는 경우, int 형으로 표현하는 것 보다 Money로 표현할 경우 필드의 의도가 명확해집니다.</li>
  *     <li>이 처럼 필드의 의도에 맞게 지정하는 객체를 값 <b>객체(Value Object)</b>라고 합니다.</li>
  * </ul>
+ * @author  황정식
+ * @version 1.0.0
  */
 @Getter
 @AllArgsConstructor

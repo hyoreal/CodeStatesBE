@@ -48,6 +48,8 @@ import java.util.List;
  * </ul>
  * @see <a href="https://mapstruct.org/documentation/stable/api/org/mapstruct/Mapper.html" target="_blank">@Mapper</a>
  * @see <a href="https://mapstruct.org/documentation/stable/api/org/mapstruct/Mapping.html" target="_blank">@Mapping</a>
+ * @author  황정식
+ * @version 1.0.0
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CoffeeMapper {

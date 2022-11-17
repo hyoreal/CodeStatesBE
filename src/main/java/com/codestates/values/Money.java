@@ -8,6 +8,8 @@ import lombok.Getter;
  *
  * Money는 Entity 클래스에서 사용되는 값 객체(Value Object)이며, 의미 그대로 돈을 표현합니다.
  *
+ * @author  황정식
+ * @version 1.0.0
  */
 @Getter
 @AllArgsConstructor
