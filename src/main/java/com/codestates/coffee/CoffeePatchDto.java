@@ -3,9 +3,6 @@ package com.codestates.coffee;
 import com.codestates.validator.NotSpace;
 import org.hibernate.validator.constraints.Range;
 
-import javax.swing.text.html.Option;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
@@ -44,6 +41,9 @@ import java.util.Optional;
  * <p>&nbsp;</p>
  * <h4>setCoffeeId()가 필요한 이유</h4>
  * 핸들러 메서드에서 path variable로 전달 받은 coffeeId를 setCoffeeId()를 통해 필드를 채움으로써 response body에 포함시킬 수 있습니다.
+ *
+ * @author 황정식
+ * @version 1.0.0
  */
 public class CoffeePatchDto {
     private long coffeeId;
