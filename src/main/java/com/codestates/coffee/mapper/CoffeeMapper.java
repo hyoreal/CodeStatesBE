@@ -46,6 +46,8 @@ import java.util.List;
  *     <li>커피 가격인 price의 경우, int 형으로 표현하는 것 보다 Money로 표현할 경우 필드의 의도가 명확해집니다.</li>
  *     <li>이 처럼 필드의 의도에 맞게 지정하는 객체를 값 <b>객체(Value Object)</b>라고 합니다.</li>
  * </ul>
+ * @see <a href="https://mapstruct.org/documentation/stable/api/org/mapstruct/Mapper.html" target="_blank">@Mapper</a>
+ * @see <a href="https://mapstruct.org/documentation/stable/api/org/mapstruct/Mapping.html" target="_blank">@Mapping</a>
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CoffeeMapper {
