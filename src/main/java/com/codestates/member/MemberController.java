@@ -15,6 +15,13 @@ import java.util.Map;
  * MemberController는 의존하는 서비스 계층의 클래스는 존재하지 않으며, 따라서 구체적인 비즈니스 로직을 포함하고 있지 않습니다.<p>
  * 클라이언트 측에서는 메모리(Map member)에 저장되어 있는 회원 정보를 수정 및 삭제할 수 있습니다.
  *
+ * @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html" target="_blank">@RestController</a>* @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">@RequestMapping</a>
+ * @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/validation/annotation/Validated.html" target="_blank">@Validated</a>
+ * @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html" target="_blank">@PostMapping</a>
+ * @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PatchMapping.html" target="_blank">@PatchMapping</a>
+ * @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html" target="_blank">@GetMapping</a>
+ * @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/DeleteMapping.html" target="_blank">@DeleteMapping</a>
+ * @see <a href="https://docs.oracle.com/javaee/7/api/javax/annotation/PostConstruct.html" target="_blank">@PostConstruct</a>
  * @author  황정식
  * @version 1.0.0
  */
