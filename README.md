@@ -3,9 +3,9 @@
 ### Description
 DTO 적용 실습 Solution 코드는 유어클래스의 실습 과제에 사용된 코드로 구성되어 있습니다.
 * DTO 적용 실습 Solution과 관련이 있는 클래스
-  * [CoffeeController]()
-  * [CoffeePostDto]()
-  * [CoffeePatchDto]()
+  * [CoffeeController](https://github.com/codestates-seb/be-solution-dto/blob/0b64f27d66772083991d81a3064288e19b07ec25/src/main/java/com/codestates/coffee/CoffeeController.java)
+  * [CoffeePostDto](https://github.com/codestates-seb/be-solution-dto/blob/0b64f27d66772083991d81a3064288e19b07ec25/src/main/java/com/codestates/coffee/CoffeePatchDto.java)
+  * [CoffeePatchDto](https://github.com/codestates-seb/be-solution-dto/blob/0b64f27d66772083991d81a3064288e19b07ec25/src/main/java/com/codestates/coffee/CoffeePostDto.java)
   
 > 실습 Solution과 관련이 있는 클래스에 대한 설명은 Solution 코드에 포함된 코멘트 또는 javadoc(index.html) 문서를 참고하세요.
 > javadoc 문서를 확인하는 방법은 아래의 [Solution 코드 설명을 위한 javadoc(index.html) 문서 확인 방법](#solution-코드-설명을-위한-javadocindexhtml-문서-확인-방법)을 참고하세요.
