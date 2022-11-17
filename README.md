@@ -3,11 +3,11 @@
 ### Description
 서비스 계층과 API 계층의 연동 실습 Solution 코드는 유어클래스의 실습 과제에 사용된 코드로 구성되어 있습니다.
 * 서비스 계층과 API 계층의 연동 실습 Solution과 관련이 있는 클래스
-  * [CoffeeController]()
-  * [CoffeeService]()
-  * [CoffeeMapper]()
-  * [Coffee]()
-  * [Money]()
+  * [CoffeeController](https://github.com/codestates-seb/be-solution-mapper/blob/a60e492de8a6afaa8826cd13ae232ab184663716/src/main/java/com/codestates/coffee/controller/CoffeeController.java)
+  * [CoffeeService](https://github.com/codestates-seb/be-solution-mapper/blob/a60e492de8a6afaa8826cd13ae232ab184663716/src/main/java/com/codestates/coffee/service/CoffeeService.java)
+  * [CoffeeMapper](https://github.com/codestates-seb/be-solution-mapper/blob/a60e492de8a6afaa8826cd13ae232ab184663716/src/main/java/com/codestates/coffee/mapper/CoffeeMapper.java)
+  * [Coffee](https://github.com/codestates-seb/be-solution-mapper/blob/a60e492de8a6afaa8826cd13ae232ab184663716/src/main/java/com/codestates/coffee/entity/Coffee.java)
+  * [Money](https://github.com/codestates-seb/be-solution-mapper/blob/a60e492de8a6afaa8826cd13ae232ab184663716/src/main/java/com/codestates/values/Money.java)
   
 > 실습 Solution과 관련이 있는 클래스에 대한 설명은 Solution 코드에 포함된 코멘트 또는 javadoc(index.html) 문서를 참고하세요.
 > javadoc 문서를 확인하는 방법은 아래의 [Solution 코드 설명을 위한 javadoc(index.html) 문서 확인 방법]()을 참고하세요.
