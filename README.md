@@ -14,7 +14,7 @@
 
 ---
 
-* Solution 코드 설명을 위한 javadoc(index.html) 문서 확인 방법
+### Solution 코드 설명을 위한 javadoc(index.html) 문서 확인 방법
   * IntelliJ 화면 오른쪽 상단의 `[Gradle]` 탭에서 `Tasks > documentation > javadoc` task를 더블 클릭해서 실행하세요.
   * 아래 경로의 index.html을 더블 클릭하세요.
     * `build/docs/index.html`
