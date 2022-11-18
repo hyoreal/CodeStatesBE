@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * 데이터베이스 연동을 통한 Spring Security 학습용
  */
 @Configuration
-//@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = true)
 public class SecurityConfigurationV2 {
     @Bean
     public SecurityFilterChain filterChainV3(HttpSecurity http) throws Exception {

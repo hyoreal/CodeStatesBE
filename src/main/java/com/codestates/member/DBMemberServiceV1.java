@@ -25,6 +25,7 @@ public class DBMemberServiceV1 implements MemberService {
 
         Member savedMember = memberRepository.save(member);
 
+        // 권한 정보를 DB에 저장하지 않음.
         System.out.println("# Create Member in DB");
         return savedMember;
     }

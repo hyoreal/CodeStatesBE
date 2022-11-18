@@ -48,7 +48,7 @@ public class HelloUserDetailsServiceV3 implements UserDetailsService {
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             System.out.println("USER Role 정보는 DB에 있는걸로 제공");
-            return authorityUtils.createAuthorities(this.getRoles());
+            return authorityUtils.createAuthorities(getRoles());
         }
 
         @Override
