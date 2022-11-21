@@ -36,8 +36,9 @@ public class PasswordEncoderTest {
         String pbkdf2Password = passwordEncoder.encode(message);
         System.out.println("pbkdf2 encoded: " + pbkdf2Password);
 
+        // scrypt의 경우, bouncycastle 라이브러리가 필요합니다. build.gradle 참고
         passwordEncoder = new DelegatingPasswordEncoder("scrypt", encoders);
-        String scryptPassword = passwordEncoder.encode(message); // NoClassesDefFoundError 발생!
+        String scryptPassword = passwordEncoder.encode(message);
         System.out.println("scrypt encoded: " + scryptPassword);
 
         passwordEncoder = new DelegatingPasswordEncoder("sha256", encoders);
