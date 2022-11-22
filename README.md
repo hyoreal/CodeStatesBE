@@ -3,9 +3,9 @@
 ### Description
 Spring Data JDBC를 이용한 데이터 액세스 실습 Solution 코드는 유어클래스의 실습 과제에 사용된 코드로 구성되어 있습니다.
 * Spring Data JDBC를 이용한 데이터 액세스 실습 Solution과 관련이 있는 클래스
-  * [MemberController]()
-  * [MemberService]()
-  * [MemberRepository]()
+  * [MemberController](https://github.com/codestates-seb/be-solution-jdbc/blob/7d87ccd23915e38ad16d249d9e88f1aad8ecd759/src/main/java/com/codestates/member/controller/MemberController.java)
+  * [MemberService](https://github.com/codestates-seb/be-solution-jdbc/blob/7d87ccd23915e38ad16d249d9e88f1aad8ecd759/src/main/java/com/codestates/member/service/MemberService.java)
+  * [MemberRepository](https://github.com/codestates-seb/be-solution-jdbc/blob/7d87ccd23915e38ad16d249d9e88f1aad8ecd759/src/main/java/com/codestates/member/repository/MemberRepository.java)
   
 > 실습 Solution과 관련이 있는 클래스에 대한 설명은 Solution 코드에 포함된 코멘트 또는 javadoc(index.html) 문서를 참고하세요.
 > javadoc 문서를 확인하는 방법은 아래의 [Solution 코드 설명을 위한 javadoc(index.html) 문서 확인 방법](#solution-코드-설명을-위한-javadocindexhtml-문서-확인-방법)을 참고하세요.
