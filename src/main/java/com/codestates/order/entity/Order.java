@@ -1,6 +1,7 @@
 package com.codestates.order.entity;
 
 import com.codestates.member.entity.Member;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Table("ORDERS")
 public class Order {
     @Id
+    @Setter(AccessLevel.NONE)
     private long orderId;
 
     // 테이블 외래키처럼 memberId를 추가해서 참조하도록 한다..
