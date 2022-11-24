@@ -8,8 +8,10 @@ import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Calendar;
@@ -19,7 +21,7 @@ import java.util.Map;
 @Component
 public class JwtTokenizer {
     @Getter
-    @Value("${jwt.secret-key}")
+    @Value("${jwt.key}")
     private String secretKey;
 
     @Getter
