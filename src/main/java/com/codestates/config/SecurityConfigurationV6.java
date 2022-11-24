@@ -63,6 +63,7 @@ public class SecurityConfigurationV6 {
                     .antMatchers(HttpMethod.POST, "/*/members").permitAll()
                     .antMatchers(HttpMethod.PATCH, "/*/members/**").hasRole("USER")
                     .antMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN")
+//                    .mvcMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN")
                     .antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
                     .antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER")
                     .antMatchers(HttpMethod.POST, "/*/coffees").hasRole("ADMIN")
