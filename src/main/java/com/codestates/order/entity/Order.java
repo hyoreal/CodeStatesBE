@@ -93,7 +93,7 @@ public class Order extends Auditable {
     private Member member;
 
     /**
-     * Order와 OrderCoffee 간의 연관관계를 매핑하기 위한 Solution 코드입니다.
+     * Order와 OrderCoffee 간의 1대N 연관관계를 매핑하기 위한 Solution 코드입니다.
      * <p>
      *     <b>Solution 키 포인트</b>
      * </p>
@@ -102,12 +102,17 @@ public class Order extends Auditable {
      *         <a href="https://www.baeldung.com/jpa-cascade-types" target="_blank">cascade</a> 애트리뷰트
      *         <ul>
      *             <li>
-     *                 order 객체만 영속성 컨텍스트에 영속화(persist)하면 order와 연관관계 매핑이 되어 있는 객체까지 영속화됩니다.
-     *             </li>
-     *             <li>
-     *                 JPA에서는 persist()를 호출하면 영속화 되지만, Spring Data JPA에서는 orderRepository.save(order)를 호출하면
-     *                 order 뿐만 아니라 orderCoffee까지 영속화 되고,
-     *                 내부적으로 flush()가 호출되므로 DB의 테이블(ORDER, ORDER_COFFEE)에 모두 INSERT 됩니다.
+     *                 CascadeType.PERSIST
+     *                 <ul>
+     *                     <li>
+     *                         order 객체만 영속성 컨텍스트에 영속화(persist)하면 order와 연관관계 매핑이 되어 있는 객체까지 영속화됩니다.
+     *                     </li>
+     *                     <li>
+     *                         JPA에서는 persist()를 호출하면 영속화 되지만, Spring Data JPA에서는 orderRepository.save(order)를 호출하면
+     *                         order 뿐만 아니라 orderCoffee까지 영속화 되고,
+     *                         내부적으로 flush()가 호출되므로 DB의 테이블(ORDER, ORDER_COFFEE)에 모두 INSERT 됩니다.
+     *                     </li>
+     *                 </ul>
      *             </li>
      *         </ul>
      *     </li>

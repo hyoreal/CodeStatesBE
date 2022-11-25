@@ -180,7 +180,7 @@ public class Coffee extends Auditable {
     private CoffeeStatus coffeeStatus = CoffeeStatus.COFFEE_FOR_SALE;
 
     /**
-     * Coffee와 OrderCoffee 간의 연관관계를 매핑하기 위한 Solution 코드입니다.
+     * Coffee와 OrderCoffee 간의 1대N 연관관계를 매핑하기 위한 Solution 코드입니다.
      * <p>
      *     <b>Solution 키 포인트</b>
      * </p>

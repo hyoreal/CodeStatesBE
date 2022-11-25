@@ -85,7 +85,7 @@ public class OrderCoffee extends Auditable {
     private int quantity;
 
     /**
-     * OrderCoffee와 Order 간에 양방향 연관 관계를 매핑하기 위한 Solution 코드입니다.
+     * OrderCoffee와 Order 간에 N대1 연관 관계를 매핑하기 위한 Solution 코드입니다.
      * <p>
      *     <b>Solution 키 포인트</b>
      * </p>
@@ -93,12 +93,12 @@ public class OrderCoffee extends Auditable {
      *     <li>
      *         <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/ManyToOne.html" target="_blank">
      *             {@literal @}ManyToOne
-     *         </a>을 이용해 다대1의 연관관계를 매핑합니다.
+     *         </a>을 이용해 N대1의 연관관계를 매핑합니다.
      *     </li>
      *     <li>
      *         <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/JoinColumn.html" target="_blank">
      *             {@literal @}JoinColumn
-     *         </a>을 이용해 ORDER_COFFEE 테이블에서 ORDER 테이블에 대한 외래키가 추가되는 컬럼을 지정합니다.
+     *         </a>을 이용해 ORDER_COFFEE 테이블에서 ORDER 테이블의 참조를 위한 외래키가 추가되는 컬럼을 지정합니다.
      *     </li>
      * </ul>
      */
@@ -107,7 +107,7 @@ public class OrderCoffee extends Auditable {
     private Order order;
 
     /**
-     * OrderCoffee와 Coffee 간에 양방향 연관 관계를 매핑하기 위한 Solution 코드입니다.
+     * OrderCoffee와 Coffee 간에 N대1 연관 관계를 매핑하기 위한 Solution 코드입니다.
      * <p>
      *     <b>Solution 키 포인트</b>
      * </p>
@@ -115,12 +115,12 @@ public class OrderCoffee extends Auditable {
      *     <li>
      *         <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/ManyToOne.html" target="_blank">
      *             {@literal @}ManyToOne
-     *         </a>을 이용해 다대1의 연관관계를 매핑합니다.
+     *         </a>을 이용해 N대1의 연관관계를 매핑합니다.
      *     </li>
      *     <li>
      *         <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/JoinColumn.html" target="_blank">
      *             {@literal @}JoinColumn
-     *         </a>을 이용해 ORDER_COFFEE 테이블에서 COFFEE 테이블에 대한 외래키가 추가되는 컬럼을 지정합니다.
+     *         </a>을 이용해 ORDER_COFFEE 테이블에서 COFFEE 테이블의 참조를 위한 외래키가 추가되는 컬럼을 지정합니다.
      *     </li>
      * </ul>
      */
