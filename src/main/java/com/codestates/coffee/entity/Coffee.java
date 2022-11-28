@@ -138,7 +138,7 @@ public class Coffee extends Auditable {
      * </ul>
      */
     @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "price", nullable = false, length = 5))
+    @AttributeOverride(name = "value", column = @Column(name = "price", nullable = false))
     private Money price;
 
     @Column(length = 3, nullable = false, unique = true)
