@@ -45,7 +45,7 @@ public class XaCoffeeOrderConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean coffeeOrderEntityManager() {
         LocalContainerEntityManagerFactoryBean emFactoryBean =
-                new LocalContainerEntityManagerFactoryBean();
+                                                new LocalContainerEntityManagerFactoryBean();
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.MYSQL);
         Map<String, Object> properties = new HashMap<>();
