@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class EmailConfiguration {
-    @Primary
     @Bean
     public EmailSendable mockExceptionEmailSendable() {
         return new MockExceptionEmailSendable();
     }
 
+    @Primary
     @Bean
     public EmailSendable simpleEmailSendable() {
         return new SimpleEmailSendable();
