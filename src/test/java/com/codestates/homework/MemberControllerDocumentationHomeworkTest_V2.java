@@ -37,9 +37,9 @@ import static org.springframework.restdocs.request.RequestDocumentation.requestP
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MemberController.class)
-@MockBean(JpaMetamodelMappingContext.class)
-@AutoConfigureRestDocs
+//@WebMvcTest(MemberController.class)
+//@MockBean(JpaMetamodelMappingContext.class)
+//@AutoConfigureRestDocs
 public class MemberControllerDocumentationHomeworkTest_V2 implements MemberControllerTestHelper {
     @Autowired
     private MockMvc mockMvc;
@@ -50,7 +50,7 @@ public class MemberControllerDocumentationHomeworkTest_V2 implements MemberContr
     @MockBean
     private MemberMapper mapper;
 
-    @Test
+//    @Test
     public void postMemberTest() throws Exception {
         // given
         MemberDto.Post post = (MemberDto.Post) StubData.MockMember.getRequestBody(HttpMethod.POST);
@@ -88,7 +88,7 @@ public class MemberControllerDocumentationHomeworkTest_V2 implements MemberContr
                 ));
     }
 
-    @Test
+//    @Test
     public void patchMemberTest() throws Exception {
         // given
         long memberId = 1L;
@@ -130,7 +130,7 @@ public class MemberControllerDocumentationHomeworkTest_V2 implements MemberContr
                 ));
     }
 
-    @Test
+//    @Test
     public void getMemberTest() throws Exception {
         // given
         long memberId = 1L;
@@ -161,7 +161,7 @@ public class MemberControllerDocumentationHomeworkTest_V2 implements MemberContr
                 ));
     }
 
-    @Test
+//    @Test
     public void getMembersTest() throws Exception {
         // given
         String page = "1";
@@ -206,7 +206,7 @@ public class MemberControllerDocumentationHomeworkTest_V2 implements MemberContr
         assertThat(list.size(), is(2));
     }
 
-    @Test
+//    @Test
     public void deleteMemberTest() throws Exception {
         // given
         long memberId = 1L;

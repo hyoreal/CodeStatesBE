@@ -57,7 +57,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MemberController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
-public class MemberControllerDocumentationHomeworkTest_V1 implements MemberControllerTestHelper {
+public class MemberControllerDocumentationHomeworkTest_V1 {
     @Autowired
     private MockMvc mockMvc;
 
@@ -70,7 +70,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
     @Autowired
     private Gson gson;
 
-//    @Test
+    @Test
     public void postMemberTest() throws Exception {
         // given
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com","홍길동",
@@ -139,7 +139,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                 ));
     }
 
-//    @Test
+    @Test
     public void patchMemberTest() throws Exception {
         // given
         long memberId = 1L;
@@ -216,7 +216,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                 ));
     }
 
-//    @Test
+    @Test
     public void getMemberTest() throws Exception {
         // given
         long memberId = 1L;
@@ -261,7 +261,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
                 ));
     }
 
-//    @Test
+    @Test
     public void getMembersTest() throws Exception {
         // given
         String page = "1";
@@ -334,7 +334,7 @@ public class MemberControllerDocumentationHomeworkTest_V1 implements MemberContr
         assertThat(list.size(), is(2));
     }
 
-//    @Test
+    @Test
     public void deleteMemberTest() throws Exception {
         // given
         long memberId = 1L;
