@@ -47,5 +47,6 @@ public class StampCalculatorTest {
 
 
         // then
-        assertEquals(expected, actual);    }
+        assertEquals(expected, actual);
+    }
 }
