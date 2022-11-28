@@ -26,7 +26,7 @@ public class ProxyConfig {
         ProxyFactoryBean proxyFactoryBean = new ProxyFactoryBean();   // ProxyFactorBean 객체 생성
         proxyFactoryBean.setProxyTargetClass(true);                   // CGLIB 방식을 타겟 클래스를 직접 Proxy 하도록 설정
         proxyFactoryBean.setTarget(new MemberService(memberRepository));  // 타겟 클래스를 설정한다.
-        proxyFactoryBean.addAdvice(new LogAdvice());                     // 부가 기능을 할 Advice를 추가한다.
+        proxyFactoryBean.addAdvice(new LogAdvice());                   // 부가 기능을 할 Advice를 추가한다.
 
         return proxyFactoryBean;
     }
