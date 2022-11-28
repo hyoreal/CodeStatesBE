@@ -59,7 +59,7 @@ public class MemberControllerHomeworkV1Test {
         // then
         MvcResult result = actions
                                 .andExpect(status().isCreated())
-                                .andExpect(jsonPath("$.data.email").value(post.getEmail()))
+                                .andExpect(jsonPath("$.data.email").value(post.getEmail()))  // xpath
                                 .andExpect(jsonPath("$.data.name").value(post.getName()))
                                 .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
                                 .andReturn();
