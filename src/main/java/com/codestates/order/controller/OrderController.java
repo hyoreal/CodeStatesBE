@@ -38,11 +38,8 @@ public class OrderController {
     @PostMapping
     public ResponseEntity postOrder(@Valid @RequestBody OrderPostDto orderPostDto) {
         Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderPostDto));
-
-        // TODO JPA 기능에 맞춰서 회원이 주문한 커피 정보를 ResponseEntity에 포함 필요
-        // List<Coffee> coffees = coffeeService.findOrderedCoffees(order);
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order, null)),
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
                 HttpStatus.CREATED);
     }
 
@@ -53,32 +50,28 @@ public class OrderController {
         Order order =
                 orderService.updateOrder(mapper.orderPatchDtoToOrder(orderPatchDto));
 
-        // TODO JPA 기능에 맞춰서 주문 상태 정보 업데이트 후, 주문한 커피 정보 포함 필요
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order, null))
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order))
                 , HttpStatus.OK);
     }
     @GetMapping("/{order-id}")
     public ResponseEntity getOrder(@PathVariable("order-id") @Positive long orderId) {
         Order order = orderService.findOrder(orderId);
 
-        // TODO JPA 기능에 맞춰서 회원이 주문한 커피 정보를 ResponseEntity에 포함 필요
-        // List<Coffee> coffees = coffeeService.findOrderedCoffees(order);
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order, null)),
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
                 HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity getOrders(@Positive @RequestParam int page,
                                     @Positive @RequestParam int size) {
-        Page<Order> pageOrders = orderService.findOrders(page - 1, size);
-        List<Order> orders = pageOrders.getContent();
+       Page<Order> pageOrders = orderService.findOrders(page - 1, size);
+       List<Order> orders = pageOrders.getContent();
 
-        // TODO JPA 기능에 맞춰서 주문 목록에 회원이 주문한 커피 정보를 ResponseEntity에 포함 필요
        return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageOrders),
-                HttpStatus.OK);
+               new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageOrders),
+               HttpStatus.OK);
     }
 
     @DeleteMapping("/{order-id}")
