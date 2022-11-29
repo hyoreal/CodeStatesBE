@@ -19,17 +19,12 @@ import java.time.LocalDateTime;
  * <h4>Auditable 클래스에 대한 추가 설명</h4>
  * <ul>
  *     <li>
- *         {@link com.codestates.audit.Auditable}
- *         <ul>
- *             <li>
- *                 {@link com.codestates.audit.Auditable} 클래스는 엔티티 클래스마다 공통으로 존재하는 엔티티 생성일, 수정일, 작성자 등의
- *                 필드를 공통화 한 뒤, 엔티티에 대한 이벤트 발생 시 해당 필드의 값을 자동으로 채워주는 기능을 합니다.
- *             </li>
- *             <li>
- *                 그리고 특정 Entity 클래스에서 Auditable 클래스를 상속(extends)하면
- *                 Auditable 클래스에 정의된 필드를 Entity 클래스의 컬럼 매핑 대상으로 포함시킵니다.
- *             </li>
- *         </ul>
+ *         {@link com.codestates.audit.Auditable} 클래스는 엔티티 클래스마다 공통으로 존재하는 엔티티 생성일, 수정일, 작성자 등의
+ *         필드를 공통화 한 뒤, 엔티티에 대한 이벤트 발생 시 해당 필드의 값을 자동으로 채워주는 기능을 합니다.
+ *     </li>
+ *     <li>
+ *         그리고 특정 Entity 클래스에서 Auditable 클래스를 상속(extends)하면
+ *         Auditable 클래스에 정의된 필드를 Entity 클래스의 컬럼 매핑 대상으로 포함시킵니다.
  *     </li>
  *     <li>
  *         <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html" target="_blank">@MappedSuperclass</a>
@@ -144,6 +139,7 @@ public abstract class Auditable {
      *
      * @see <a href="https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/annotation/CreatedBy.html" target="_blank">@CreatedBy</a>
      * @see <a href="https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/AuditorAware.html" target="_blank">AuditorAware</a>
+     * @see com.codestates.audit.AuditorAwareImpl
      */
     @CreatedBy
     @Column(updatable = false)
