@@ -4,18 +4,18 @@
 Spring Data JPA 실습 과제 Solution 코드는 유어클래스의 실습 과제에 사용된 코드로 구성되어 있습니다.
 
 * Spring Data JPA 실습 과제 Solution과 관련이 있는 클래스
-  * [Order](완료)
-  * [OrderCoffee](완료)
-  * [Coffee](완료)
-  * [Money](완료)
-  * [Member](완료)
-  * [Stamp](완료)
-  * [Auditable](완료)
-  * [AuditorAwareImpl](완료)
-  * [OrderService](완료)
-  * [OrderController](완료)
-  * [OrderMapper](완료)
-  * [OrderResponseDto](완료)
+  * [Order](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/order/entity/Order.java)
+  * [OrderCoffee](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/order/entity/OrderCoffee.java)
+  * [Coffee](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/coffee/entity/Coffee.java)
+  * [Money](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/values/Money.java)
+  * [Member](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/member/entity/Member.java)
+  * [Stamp](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/stamp/Stamp.java)
+  * [Auditable](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/audit/Auditable.java)
+  * [AuditorAwareImpl](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/audit/AuditorAwareImpl.java)
+  * [OrderService](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/order/service/OrderService.java)
+  * [OrderController](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/order/controller/OrderController.java)
+  * [OrderMapper](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/order/mapper/OrderMapper.java)
+  * [OrderResponseDto](https://github.com/codestates-seb/be-solution-jpa/blob/5703b335b8a38da3ebefe689cc32f9c6471b67dd/src/main/java/com/codestates/order/dto/OrderResponseDto.java)
   
 * Advanced 예제
   * [static 멤버 클래스를 이용한 DTO 클래스 리팩토링](#static-멤버-클래스를-이용한-dto-클래스-리팩토링)
