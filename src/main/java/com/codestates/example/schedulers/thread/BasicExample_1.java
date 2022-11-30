@@ -3,7 +3,7 @@ package com.codestates.example.schedulers.thread;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class BasicExample {
+public class BasicExample_1 {
     public static void main(String[] args) {
         log.info("# start!");
         Thread thread = new Thread(){

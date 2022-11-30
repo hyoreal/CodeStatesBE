@@ -13,9 +13,9 @@ public class FlatMapExample01 {
         Flux
             .range(2, 6)
             .flatMap(dan -> Flux
-                    .range(1, 9)
-                    .publishOn(Schedulers.parallel())
-                    .map(num -> dan + " x " + num + " = " + dan * num))
+                                .range(1, 9)
+                                .publishOn(Schedulers.parallel())
+                                .map(num -> dan + " x " + num + " = " + dan * num))
             .subscribe(log::info);
 
         Thread.sleep(100L);

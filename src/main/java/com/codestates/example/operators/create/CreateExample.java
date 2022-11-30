@@ -17,6 +17,7 @@ public class CreateExample {
     public static void main(String[] args) {
         Flux.create((FluxSink<Integer> sink) -> {
             sink.onRequest(n -> {
+                System.out.println("# request N: " + n);
                 for (int i = 0; i < source.size(); i++) {
                     sink.next(source.get(i));
 
