@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
-//@Component
+@Component
 public class HelloUserAuthenticationProvider implements AuthenticationProvider {
     private final MemberService memberService;
     private final HelloAuthorityUtils authorityUtils;
@@ -30,40 +30,40 @@ public class HelloUserAuthenticationProvider implements AuthenticationProvider {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
-
-        String username = authToken.getName();
-        Optional.ofNullable(username).orElseThrow(() -> new UsernameNotFoundException("Invalid User name or User Password"));
-        Member member = memberService.findMember(username);
-
-        String password = member.getPassword();
-        verifyCredentials(authToken.getCredentials(), password);
-
-        Collection<? extends GrantedAuthority> authorities = authorityUtils.createAuthorities(member.getRoles());
-
-        return new UsernamePasswordAuthenticationToken(username, password, authorities);
-    }
-
-    // V2: AuthenticationException을 rethrow 하는 개선 코드
 //    @Override
 //    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 //        UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
 //
 //        String username = authToken.getName();
 //        Optional.ofNullable(username).orElseThrow(() -> new UsernameNotFoundException("Invalid User name or User Password"));
-//        try {
-//            Member member = memberService.findMember(username);
-//            String password = member.getPassword();
-//            verifyCredentials(authToken.getCredentials(), password);
+//        Member member = memberService.findMember(username);
 //
-//            Collection<? extends GrantedAuthority> authorities = authorityUtils.createAuthorities(member.getRoles());
-//            return new UsernamePasswordAuthenticationToken(username, password, authorities);
-//        } catch (Exception ex) {
-//            throw new UsernameNotFoundException(ex.getMessage());
-//        }
+//        String password = member.getPassword();
+//        verifyCredentials(authToken.getCredentials(), password);
+//
+//        Collection<? extends GrantedAuthority> authorities = authorityUtils.createAuthorities(member.getRoles());
+//
+//        return new UsernamePasswordAuthenticationToken(username, password, authorities);
 //    }
+
+    // V2: AuthenticationException을 rethrow 하는 개선 코드
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
+
+        String username = authToken.getName();
+        Optional.ofNullable(username).orElseThrow(() -> new UsernameNotFoundException("Invalid User name or User Password"));
+        try {
+            Member member = memberService.findMember(username);
+            String password = member.getPassword();
+            verifyCredentials(authToken.getCredentials(), password);
+
+            Collection<? extends GrantedAuthority> authorities = authorityUtils.createAuthorities(member.getRoles());
+            return new UsernamePasswordAuthenticationToken(username, password, authorities);
+        } catch (Exception ex) {
+            throw new UsernameNotFoundException(ex.getMessage());
+        }
+    }
 
     // HelloUserAuthenticationProvider가 Username/Password 방식의 인증을 지원한다는 것을 Spring Security에게 알려준다.
     @Override
