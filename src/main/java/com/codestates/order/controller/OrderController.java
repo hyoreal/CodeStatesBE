@@ -10,6 +10,7 @@ import com.codestates.order.entity.Order;
 import com.codestates.order.mapper.OrderMapper;
 import com.codestates.order.service.OrderService;
 import com.codestates.stamp.Stamp;
+import com.codestates.utils.UriCreator;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -44,6 +46,7 @@ import java.util.List;
 @RequestMapping("/v11/orders")
 @Validated
 public class OrderController {
+    private final static String ORDER_DEFAULT_URL = "/v11/orders";
     private final OrderService orderService;
     private final OrderMapper mapper;
     private final MemberService memberService;
@@ -55,41 +58,22 @@ public class OrderController {
         this.memberService = memberService;
     }
 
-    /**
-     * 주문 등록 시, 주문한 주문 정보를 response body에 포함시키기 위한 Solution 코드입니다.
-     * <p>
-     *     <b>Solution 키 포인트</b>
-     * </p>
-     * <ul>
-     *     <li>
-     *         OrderService 클래스를 통해 등록한 주문 정보를 리턴 받아 response body에 추가할 수 있습니다.
-     *     </li>
-     * </ul>
-     * @param orderPostDto 등록할 주문 정보에 해당하는 OrderPostDto 객체
-     * @return 등록한 주문 정보(
-     * <a href="https://github.com/codestates-seb/be-solution-jpa/blob/7e6e098edc80f5bbfef43db2ab3edd01afa27ed8/src/main/java/com/codestates/order/dto/OrderResponseDto.java" target="_blank">
-     *      OrderResponseDto
-     * </a>)를 포함하는 ResponseEntity 객체
-     */
     @PostMapping
     public ResponseEntity postOrder(@Valid @RequestBody OrderPostDto orderPostDto) {
         Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderPostDto));
+        URI location = UriCreator.createUri(ORDER_DEFAULT_URL, order.getOrderId());
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
-                HttpStatus.CREATED);
+        return ResponseEntity.created(location).build();
     }
 
     @PatchMapping("/{order-id}")
     public ResponseEntity patchOrder(@PathVariable("order-id") @Positive long orderId,
                                      @Valid @RequestBody OrderPatchDto orderPatchDto) {
         orderPatchDto.setOrderId(orderId);
-        Order order =
-                orderService.updateOrder(mapper.orderPatchDtoToOrder(orderPatchDto));
+        Order order = orderService.updateOrder(mapper.orderPatchDtoToOrder(orderPatchDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order))
-                , HttpStatus.OK);
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)), HttpStatus.OK);
     }
 
     /**
@@ -113,8 +97,7 @@ public class OrderController {
         Order order = orderService.findOrder(orderId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
-                HttpStatus.OK);
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)), HttpStatus.OK);
     }
 
     /**
@@ -141,8 +124,7 @@ public class OrderController {
         List<Order> orders = pageOrders.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageOrders),
-                HttpStatus.OK);
+                new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageOrders), HttpStatus.OK);
     }
 
     @DeleteMapping("/{order-id}")
