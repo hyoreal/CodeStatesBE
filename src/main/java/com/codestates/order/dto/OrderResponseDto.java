@@ -25,7 +25,6 @@ public class OrderResponseDto {
     private LocalDateTime createdAt;
 
     /** 제거됨
-     * @deprecated
         public void setMember(Member member) {
             this.memberId = member.getMemberId();
         }
