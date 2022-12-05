@@ -50,20 +50,15 @@ public class OrderController {
     public ResponseEntity patchOrder(@PathVariable("order-id") @Positive long orderId,
                                      @Valid @RequestBody OrderPatchDto orderPatchDto) {
         orderPatchDto.setOrderId(orderId);
-        Order order =
-                orderService.updateOrder(mapper.orderPatchDtoToOrder(orderPatchDto));
+        Order order = orderService.updateOrder(mapper.orderPatchDtoToOrder(orderPatchDto));
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order))
-                , HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)), HttpStatus.OK);
     }
     @GetMapping("/{order-id}")
     public ResponseEntity getOrder(@PathVariable("order-id") @Positive long orderId) {
         Order order = orderService.findOrder(orderId);
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
-                HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)), HttpStatus.OK);
     }
 
     @GetMapping
@@ -73,8 +68,7 @@ public class OrderController {
        List<Order> orders = pageOrders.getContent();
 
        return new ResponseEntity<>(
-               new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageOrders),
-               HttpStatus.OK);
+               new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageOrders), HttpStatus.OK);
     }
 
     @DeleteMapping("/{order-id}")
