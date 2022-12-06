@@ -1,3 +1,0 @@
-{"id":"192.168.0.11.tm167029817186000001","wasCommitted":false,"participants":[{"uri":"192.168.0.11.tm1","state":"TERMINATED","expires":1670298181997,"resourceName":"xaCoffeeOrder"},{"uri":"192.168.0.11.tm2","state":"TERMINATED","expires":1670298181997,"resourceName":"xaMySQLBackupMember"}]}
-{"id":"192.168.0.11.tm167029818479100002","wasCommitted":true,"participants":[{"uri":"192.168.0.11.tm3","state":"COMMITTING","expires":1670298194729,"resourceName":"xaCoffeeOrder"}]}
-{"id":"192.168.0.11.tm167029818479100002","wasCommitted":true,"participants":[{"uri":"192.168.0.11.tm3","state":"TERMINATED","expires":1670298194744,"resourceName":"xaCoffeeOrder"}]}
