@@ -24,8 +24,8 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.startsWith;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Controller의 API만 이용하는 방법(리팩토링 후)
@@ -62,15 +62,9 @@ public class MemberControllerHomeworkV2Test implements MemberControllerTestHelpe
         // init() 에서..
 
         // then
-        MvcResult result =
-                this.postResultActions
-                                    .andExpect(status().isCreated())
-                                    .andExpect(jsonPath("$.data.email").value(this.post.getEmail()))
-                                    .andExpect(jsonPath("$.data.name").value(this.post.getName()))
-                                    .andExpect(jsonPath("$.data.phone").value(this.post.getPhone()))
-                                    .andReturn();
-
-//        System.out.println(result.getResponse().getContentAsString());
+        this.postResultActions
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", is(startsWith("/v11/members/"))));
     }
 
     @Test
@@ -155,15 +149,8 @@ public class MemberControllerHomeworkV2Test implements MemberControllerTestHelpe
 
     private long getResponseMemberId() {
         long memberId;
-        try {
-            String responseMember = this.postResultActions
-                    .andReturn()
-                    .getResponse()
-                    .getContentAsString();
-            memberId = JsonPath.parse(responseMember).read("$.data.memberId", Long.class);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        String location = this.postResultActions.andReturn().getResponse().getHeader("Location"); // "/v11/members/1"
+        memberId = Long.parseLong(location.substring(location.lastIndexOf("/") + 1));
 
         return memberId;
     }

@@ -25,12 +25,12 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * MemberRepository를 이용해 테스트 케이스 실행 전에
+ * MemberRepository를 이용해 테스트 케이스 실행 전에 테스트 데이터를 미리 저장한다.
  */
 @Transactional   // 테스트 케이스 하나의 실행이 끝나면 매 번 rollback 처리를 해준다.
 @SpringBootTest
@@ -64,14 +64,9 @@ public class MemberControllerHomeworkV3Test implements MemberControllerTestHelpe
         /** 중복 코드 끝 */
 
         // then
-        MvcResult result = actions
-                                .andExpect(status().isCreated())
-                                .andExpect(jsonPath("$.data.email").value(post.getEmail()))
-                                .andExpect(jsonPath("$.data.name").value(post.getName()))
-                                .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
-                                .andReturn();
-
-//        System.out.println(result.getResponse().getContentAsString());
+        actions
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", is(startsWith("/v11/members/"))));
     }
 
     @Test

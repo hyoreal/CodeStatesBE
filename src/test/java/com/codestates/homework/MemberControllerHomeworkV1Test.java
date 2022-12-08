@@ -21,9 +21,9 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Controller의 API만 이용하는 방법(리팩토링 전)
@@ -42,7 +42,9 @@ public class MemberControllerHomeworkV1Test {
     public void postMemberTest() throws Exception {
         /** 중복 코드 시작 */
         // given: MemberController의 postMember()를 테스트 하기 위한 테스트 데이터를 미리 생성
-        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com","홍길동","010-1111-1111");
+        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com",
+                "홍길동",
+                "010-1234-5678");
         String content = gson.toJson(post);
         URI uri = UriComponentsBuilder.newInstance().path("/v11/members").build().toUri();
 
@@ -57,14 +59,9 @@ public class MemberControllerHomeworkV1Test {
         /** 중복 코드 끝 */
 
         // then
-        MvcResult result = actions
-                                .andExpect(status().isCreated())
-                                .andExpect(jsonPath("$.data.email").value(post.getEmail()))  // xpath
-                                .andExpect(jsonPath("$.data.name").value(post.getName()))
-                                .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
-                                .andReturn();
-
-//        System.out.println(result.getResponse().getContentAsString());
+        actions
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", is(startsWith("/v11/members/"))));
     }
 
     @Test
@@ -84,11 +81,8 @@ public class MemberControllerHomeworkV1Test {
                                 .content(postContent)
                 );
         long memberId;
-        String responseMember = postActions
-                                        .andReturn()
-                                        .getResponse()
-                                        .getContentAsString();
-        memberId = JsonPath.parse(responseMember).read("$.data.memberId", Long.class);
+        String location = postActions.andReturn().getResponse().getHeader("Location"); // "/v11/members/1"
+        memberId = Long.parseLong(location.substring(location.lastIndexOf("/") + 1));
         /** 중복 코드 끝 */
 
         // MemberController의 patchMember()를 테스트하기 위한 테스트 데이터를 생성 후, DB에 업데이트
@@ -129,11 +123,8 @@ public class MemberControllerHomeworkV1Test {
                                 .content(postContent)     /** 중복 */
                 );
         long memberId;
-        String responseMember = postActions
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
-        memberId = JsonPath.parse(responseMember).read("$.data.memberId", Long.class);
+        String location = postActions.andReturn().getResponse().getHeader("Location"); // "/v11/members/1"
+        memberId = Long.parseLong(location.substring(location.lastIndexOf("/") + 1));
         /** 중복 코드 끝 */
 
         /** 중복 */
@@ -202,6 +193,8 @@ public class MemberControllerHomeworkV1Test {
         List list = JsonPath.parse(result.getResponse().getContentAsString()).read("$.data");
 
         assertThat(list.size(), is(2));
+
+//        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
@@ -220,11 +213,8 @@ public class MemberControllerHomeworkV1Test {
                                 .content(postContent)
                 );
         long memberId;
-        String responseMember = postActions
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
-        memberId = JsonPath.parse(responseMember).read("$.data.memberId", Long.class);
+        String location = postActions.andReturn().getResponse().getHeader("Location"); // "/v11/members/1"
+        memberId = Long.parseLong(location.substring(location.lastIndexOf("/") + 1));
         /** 중복 코드 끝 */
 
         /** 중복 */
