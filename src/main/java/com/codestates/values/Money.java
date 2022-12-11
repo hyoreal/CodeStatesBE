@@ -103,5 +103,5 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Money {
-    int value;
+    Integer value;
 }

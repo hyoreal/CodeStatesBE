@@ -4,6 +4,7 @@ import com.codestates.coffee.entity.Coffee;
 import com.codestates.coffee.repository.CoffeeRepository;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
+import com.codestates.values.Money;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -38,8 +39,8 @@ public class CoffeeService {
                 .ifPresent(korName -> findCoffee.setKorName(korName));
         Optional.ofNullable(coffee.getEngName())
                 .ifPresent(engName -> findCoffee.setEngName(engName));
-        Optional.ofNullable(coffee.getPrice())
-                .ifPresent(price -> findCoffee.setPrice(price));
+        Optional.ofNullable(coffee.getPrice().getValue())
+                .ifPresent(price -> findCoffee.setPrice(new Money(price)));
 
         // 추가된 부분
         Optional.ofNullable(coffee.getCoffeeStatus())
