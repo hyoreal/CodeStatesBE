@@ -27,10 +27,10 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * 중복을 제거한 리팩토링 된 Solution 코드
@@ -61,7 +61,9 @@ public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelp
         // Stubbing by Mockito
         given(mapper.memberPostToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
 
-        given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
+        Member mockResultMember = new Member();
+        mockResultMember.setMemberId(1L);
+        given(memberService.createMember(Mockito.any(Member.class))).willReturn(mockResultMember);
 
         given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseBody);
 
@@ -72,14 +74,9 @@ public class MemberControllerHomeworkTest_V2 implements MemberControllerTestHelp
         ResultActions actions = mockMvc.perform(postRequestBuilder(uri, content));
 
         // then
-        MvcResult result = actions
+        actions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.data.email").value(post.getEmail()))
-                .andExpect(jsonPath("$.data.name").value(post.getName()))
-                .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
-                .andReturn();
-
-//        System.out.println(result.getResponse().getContentAsString());
+                .andExpect(header().string("Location", is(startsWith("/v11/members/"))));
     }
 
     @Test

@@ -33,11 +33,11 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * 중복을 제거하지 않은 리팩토링 전의 Solution 코드
@@ -79,7 +79,9 @@ public class MemberControllerHomeworkTest_V1 {
          * memberService.createMember(Mockito.any(Member.class))에서 리턴하는 Member 객체는
          * 다음 로직에서 사용되지 않으므로 단순히 new Member()를 통해 객체만 생성한다.
          */
-        given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
+        Member mockResultMember = new Member();
+        mockResultMember.setMemberId(1L);
+        given(memberService.createMember(Mockito.any(Member.class))).willReturn(mockResultMember);
 
         /**
          * mapper.memberToMemberResponse(Mockito.any(Member.class))에서 리턴하는 Member 객체는
@@ -101,14 +103,9 @@ public class MemberControllerHomeworkTest_V1 {
                                 .content(content));
 
         // then
-        MvcResult result = actions
+        actions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.data.email").value(post.getEmail()))
-                .andExpect(jsonPath("$.data.name").value(post.getName()))
-                .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
-                .andReturn();
-
-//        System.out.println(result.getResponse().getContentAsString());
+                .andExpect(header().string("Location", is(startsWith("/v11/members/"))));
     }
 
     @Test
