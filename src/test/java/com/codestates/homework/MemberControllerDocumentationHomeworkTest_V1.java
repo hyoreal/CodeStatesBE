@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
@@ -39,8 +40,11 @@ import static com.codestates.util.ApiDocumentUtils.getRequestPreProcessor;
 import static com.codestates.util.ApiDocumentUtils.getResponsePreProcessor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -48,8 +52,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.restdocs.snippet.Attributes.key;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * 리팩토링 수행 전 버젼
@@ -73,68 +76,51 @@ public class MemberControllerDocumentationHomeworkTest_V1 {
     @Test
     public void postMemberTest() throws Exception {
         // given
-        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com","홍길동",
-                                                                "010-1111-1111");
+        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com", "홍길동", "010-1234-5678");
         String content = gson.toJson(post);
 
-        MemberDto.Response responseBody = new MemberDto.Response(1L,
-                                                            "hgd@gmail.com",
-                                                            "홍길동",
-                                                            "010-1111-1111",
-                                                            Member.MemberStatus.MEMBER_ACTIVE,
-                                                            new Stamp());
+        MemberDto.Response responseDto =
+                new MemberDto.Response(1L,
+                        "hgd@gmail.com",
+                        "홍길동",
+                        "010-1234-5678",
+                        Member.MemberStatus.MEMBER_ACTIVE,
+                        new Stamp());
 
         // willReturn()이 최소한 null은 아니어야 한다.
         given(mapper.memberPostToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
 
-        given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
+        Member mockResultMember = new Member();
+        mockResultMember.setMemberId(1L);
+        given(memberService.createMember(Mockito.any(Member.class))).willReturn(mockResultMember);
 
-        given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseBody);
+        given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseDto);
 
         // when
         ResultActions actions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v11/members")
+                        post("/v11/members")
                                 .accept(MediaType.APPLICATION_JSON)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(content));
+                                .content(content)
+                );
 
         // then
-        // 유효성 검증에 사용된 애너테이션에 대한 정보를 추가
-        ConstraintDescriptions postMemberConstraints = new ConstraintDescriptions(MemberDto.Post.class);
-        List<String> emailDescriptions = postMemberConstraints.descriptionsForProperty("email");
-        List<String> nameDescriptions = postMemberConstraints.descriptionsForProperty("name");
-        List<String> phoneDescriptions = postMemberConstraints.descriptionsForProperty("phone");
-
         actions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.data.email").value(post.getEmail()))
-                .andExpect(jsonPath("$.data.name").value(post.getName()))
-                .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
+                .andExpect(header().string("Location", is(startsWith("/v11/members/"))))
                 .andDo(document("post-member",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
+                        getRequestPreProcessor(),
+                        getResponsePreProcessor(),
                         requestFields(
                                 List.of(
-                                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일")
-                                                .attributes(key("constraints").value(emailDescriptions)),
-                                        fieldWithPath("name").type(JsonFieldType.STRING).description("이름")
-                                                .attributes(key("constraints").value(nameDescriptions)),
+                                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                        fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
                                         fieldWithPath("phone").type(JsonFieldType.STRING).description("휴대폰 번호")
-                                                .attributes(key("constraints").value(phoneDescriptions))
                                 )
                         ),
-                        responseFields(
-                                Arrays.asList(
-                                        fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터").optional(),
-                                        fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
-                                        fieldWithPath("data.email").type(JsonFieldType.STRING).description("이메일"),
-                                        fieldWithPath("data.name").type(JsonFieldType.STRING).description("이름"),
-                                        fieldWithPath("data.phone").type(JsonFieldType.STRING).description("휴대폰 번호"),
-                                        fieldWithPath("data.memberStatus").type(JsonFieldType.STRING)
-                                                .description("회원 상태: MEMBER_ACTIVE(활동중) / MEMBER_SLEEP(휴면 계정) / MEMBER_QUIT(탈퇴)"),
-                                        fieldWithPath("data.stamp").type(JsonFieldType.NUMBER).description("스탬프 갯수")
-                                )
+                        responseHeaders(
+                                headerWithName(HttpHeaders.LOCATION).description("Location header. 등록된 리소스의 URI")
                         )
                 ));
     }

@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -28,14 +29,16 @@ import static com.codestates.util.ApiDocumentUtils.getRequestPreProcessor;
 import static com.codestates.util.ApiDocumentUtils.getResponsePreProcessor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //@WebMvcTest(MemberController.class)
 //@MockBean(JpaMetamodelMappingContext.class)
@@ -61,7 +64,9 @@ public class MemberControllerDocumentationHomeworkTest_V2 implements MemberContr
         // willReturn()이 최소한 null은 아니어야 한다.
         given(mapper.memberPostToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
 
-        given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
+        Member mockResultMember = new Member();
+        mockResultMember.setMemberId(1L);
+        given(memberService.createMember(Mockito.any(Member.class))).willReturn(mockResultMember);
 
         given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseBody);
 
@@ -72,18 +77,15 @@ public class MemberControllerDocumentationHomeworkTest_V2 implements MemberContr
         // then
         actions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.data.email").value(post.getEmail()))
-                .andExpect(jsonPath("$.data.name").value(post.getName()))
-                .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
+                .andExpect(header().string("Location", is(startsWith("/v11/members/"))))
                 .andDo(document("post-member",
                         getRequestPreProcessor(),
                         getResponsePreProcessor(),
                         requestFields(
                                 getDefaultMemberPostRequestDescriptors()
                         ),
-                        responseFields(
-                                getFullResponseDescriptors(
-                                        getDefaultMemberResponseDescriptors(DataResponseType.SINGLE))
+                        responseHeaders(
+                                headerWithName(HttpHeaders.LOCATION).description("Location header. 등록된 리소스의 URI")
                         )
                 ));
     }

@@ -29,8 +29,8 @@ include::{snippets}/post-member/request-fields.adoc[]
 .http-response
 include::{snippets}/post-member/http-response.adoc[]
 
-.response-fields
-include::{snippets}/post-member/response-fields.adoc[]
+.response-headers
+include::{snippets}/post-member/response-headers.adoc[]
 
 
 === 회원 정보 수정
