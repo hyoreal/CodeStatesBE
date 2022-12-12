@@ -1,6 +1,7 @@
 package com.codestates.coffee;
 
 import com.codestates.member.dto.MemberDto;
+import com.codestates.utils.UriCreator;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -11,12 +12,14 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.net.URI;
 import java.util.List;
 
 @Validated
 @RestController
 @RequestMapping("/v12/coffees")
 public class CoffeeController {
+    private final static String COFFEE_DEFAULT_URL = "/v11/coffees";
     private final CoffeeService coffeeService;
     private final CoffeeMapper mapper;
 
@@ -26,13 +29,13 @@ public class CoffeeController {
     }
 
     @PostMapping
-    public ResponseEntity postCoffee(@Valid @RequestBody Mono<CoffeeDto.Post> requestBody) {
-        Mono<CoffeeDto.Response> response =
-                requestBody
-                        .flatMap(post -> coffeeService.createCoffee(mapper.coffeePostDtoToCoffee(post)))
-                        .map(coffee -> mapper.coffeeToCoffeeResponseDto(coffee));
-
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public Mono<ResponseEntity> postCoffee(@Valid @RequestBody Mono<CoffeeDto.Post> requestBody) {
+        return requestBody
+                .flatMap(post -> coffeeService.createCoffee(mapper.coffeePostDtoToCoffee(post)))
+                .map(createdCoffee -> {
+                    URI location = UriCreator.createUri(COFFEE_DEFAULT_URL, createdCoffee.getCoffeeId());
+                    return ResponseEntity.created(location).build();
+                });
     }
 
     @PatchMapping("/{coffee-id}")
