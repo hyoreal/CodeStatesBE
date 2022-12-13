@@ -104,8 +104,23 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 public class Money {
     /**
-     * mapstruct에서 매핑 시, 값이 없을 경우에는 매핑을 하지 않도록 int가 아닌 Integer를 사용합니다.
-     * 만약 int일 경우, 0이 매핑되어 의도치 않게 값이 변경되므로 주의합니다.
+     * 수정될 수도 있고 수정되지 않을 수도 있는 값으로 사용될 수 있기 때문에 null을 통해 판단할 수 있어야 합니다.
+     * 따라서 int가 아닌 Integer 타입이어야 합니다.
+     * <ul>
+     *     <li>
+     *         ex) <a href="https://github.com/codestates-seb/be-solution-jpa/blob/main/src/main/java/com/codestates/values/Money.java" target="_blank">
+     *                  CoffeeService
+     *             </a>의 updateCoffee()의 Optional 부분
+     *         <ul>
+     *              <li>
+     *                    <code>
+     *                           Optional.ofNullable(coffee.getPrice().getValue())
+     *                               .ifPresent(price -&gt; findCoffee.setPrice(new Money(price)));
+     *                    </code>
+     *              </li>
+     *        </ul>
+     *     </li>
+     * </ul>
      */
     private Integer value;
 }
