@@ -10,5 +10,5 @@ public class OrderCoffeeResponseDto {
     private int quantity;
     private String korName;
     private String engName;
-    private Integer price;
+    private int price;
 }

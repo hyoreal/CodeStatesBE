@@ -103,5 +103,9 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Money {
-    Integer value;
+    /**
+     * mapstruct에서 매핑 시, 값이 없을 경우에는 매핑을 하지 않도록 int가 아닌 Integer를 사용합니다.
+     * 만약 int일 경우, 0이 매핑되어 의도치 않게 값이 변경되므로 주의합니다.
+     */
+    private Integer value;
 }
