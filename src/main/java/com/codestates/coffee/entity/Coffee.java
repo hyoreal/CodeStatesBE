@@ -13,7 +13,7 @@ public class Coffee {
 
     private String korName;
     private String engName;
-    private int price;
+    private Integer price;
 //    private Money price;
     private String coffeeCode;
 }
