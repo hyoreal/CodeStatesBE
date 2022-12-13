@@ -108,7 +108,7 @@ public class Money {
      * 따라서 int가 아닌 Integer 타입이어야 합니다.
      * <ul>
      *     <li>
-     *         ex) <a href="https://github.com/codestates-seb/be-solution-jpa/blob/main/src/main/java/com/codestates/values/Money.java" target="_blank">
+     *         ex) <a href="https://github.com/codestates-seb/be-solution-jpa/blob/main/src/main/java/com/codestates/coffee/service/CoffeeService.java" target="_blank">
      *                  CoffeeService
      *             </a>의 updateCoffee()의 Optional 부분
      *         <ul>
