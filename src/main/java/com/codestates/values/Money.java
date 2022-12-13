@@ -13,5 +13,5 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor  // Mapstruct는 @NoArgsConstructor와 함께 사용하면 @AllArgsConstructor가 정상 동작하지 않는다.
 @NoArgsConstructor   // Spring Data는 디폴트 생성자가 필요하다.
 public class Money {
-    int value;
+    Integer value;
 }

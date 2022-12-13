@@ -24,7 +24,7 @@ public class Coffee {
     private String engName;
 
     @Column(nullable = false)
-    private int price;
+    private Integer price;
 
     // Value Object를 사용하는 예제
 //    @Embedded
