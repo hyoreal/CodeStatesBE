@@ -8,6 +8,18 @@ group = 'com.codestates'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+javadoc.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -27,4 +39,10 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.named('javadoc') {
+	source = sourceSets.main.allJava
+	options.memberLevel = JavadocMemberLevel.PRIVATE
+	destinationDir = file("build/docs/javadoc")
 }
