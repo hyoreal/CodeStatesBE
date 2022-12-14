@@ -4,9 +4,9 @@
 트랜잭션(Transaction) 실습 과제 Solution 코드는 유어클래스의 실습 과제에 사용된 코드로 구성되어 있습니다.
 
 * Spring Data JPA 실습 과제 Solution과 관련이 있는 클래스
-  * [MemberService](ㅇ)
-  * [MemberRegistrationEvent](ㅇ)
-  * [MemberRegistrationEventListener](ㅇ)
+  * [MemberService](https://github.com/codestates-seb/be-solution-tx/blob/16e6c0bd56477de7cbc33b72bf32c38336c404a4/src/main/java/com/codestates/member/service/MemberService.java)
+  * [MemberRegistrationEvent](https://github.com/codestates-seb/be-solution-tx/blob/16e6c0bd56477de7cbc33b72bf32c38336c404a4/src/main/java/com/codestates/helper/event/MemberRegistrationEvent.java)
+  * [MemberRegistrationEventListener](https://github.com/codestates-seb/be-solution-tx/blob/16e6c0bd56477de7cbc33b72bf32c38336c404a4/src/main/java/com/codestates/helper/event/MemberRegistrationEventListener.java)
 
 > 예제 코드에 대한 더 구체적인 정보는 아래에서 확인하세요.
 
