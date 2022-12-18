@@ -22,6 +22,10 @@ public class CoffeePatchDto {
         return coffeeId;
     }
 
+    public void setCoffeeId(long coffeeId) {
+        this.coffeeId = coffeeId;
+    }
+
     public String getKorName() {
         return korName;
     }
