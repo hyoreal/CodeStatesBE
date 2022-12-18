@@ -14,5 +14,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Money {
-    int value;
+    Integer value;
 }
