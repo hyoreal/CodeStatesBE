@@ -55,9 +55,9 @@ public class MemberService {
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
-        beanUtils.copyNonNullProperties(member, findMember);
+        Member updatedMember = beanUtils.copyNonNullProperties(member, findMember);
 
-        return memberRepository.save(findMember);
+        return memberRepository.save(updatedMember);
     }
 
     public Member findMember(long memberId) {
