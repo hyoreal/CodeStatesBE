@@ -53,6 +53,11 @@ import java.util.List;
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CoffeeMapper {
+    // Money 사용 전
+//    Coffee coffeePostDtoToCoffee(CoffeePostDto coffeePostDto);
+//    Coffee coffeePatchDtoToCoffee(CoffeePatchDto coffeePatchDto);
+//    CoffeeResponseDto coffeeToCoffeeResponseDto(Coffee coffee);
+
     /**
      * CoffeePostDto를 Coffee로 변환합니다.
      *
