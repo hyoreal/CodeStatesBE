@@ -49,11 +49,9 @@ public class MemberControllerV5 {
             @Valid @RequestBody MemberPatchDto memberPatchDto) {
         memberPatchDto.setMemberId(memberId);
 
-        Member response =
-                memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
+        Member response = memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
 
-        return new ResponseEntity<>(mapper.memberToMemberResponseDto(response),
-                HttpStatus.OK);
+        return new ResponseEntity<>(mapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
 
     @GetMapping("/{member-id}")
