@@ -1,18 +1,22 @@
 package com.codestates.order.mapper;
 
 import com.codestates.coffee.entity.Coffee;
-import com.codestates.order.dto.*;
-import com.codestates.order.entity.CoffeeRef;
 import com.codestates.coffee.service.CoffeeService;
+import com.codestates.order.dto.OrderCoffeeResponseDto;
+import com.codestates.order.dto.OrderPostDto;
+import com.codestates.order.dto.OrderResponseDto;
+import com.codestates.order.dto.ReadableOrderGroupDto;
+import com.codestates.order.entity.CoffeeRef;
 import com.codestates.order.entity.Order;
-import com.codestates.order.entity.Order2;
 import com.codestates.order.entity.ReadableOrderCoffee;
 import com.google.common.collect.Streams;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
@@ -29,8 +33,11 @@ public interface OrderMapper {
                 orderPostDto.getOrderCoffees()
                         .stream()
                         .map(orderCoffeeDto ->
-                                new CoffeeRef(orderCoffeeDto.getCoffeeId(), orderCoffeeDto.getQuantity()))
-                .collect(Collectors.toSet());
+                                CoffeeRef.builder()
+                                        .coffeeId(orderCoffeeDto.getCoffeeId())
+                                        .quantity(orderCoffeeDto.getQuantity())
+                                        .build())
+                        .collect(Collectors.toSet());
         order.setOrderCoffees(orderCoffees);
 
         return order;

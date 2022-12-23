@@ -45,7 +45,10 @@ public class Order2 {
                 orderCoffees
                         .stream()
                         .map(orderCoffeeDto ->
-                                new CoffeeRef(orderCoffeeDto.getCoffeeId(), orderCoffeeDto.getQuantity()))
+                                CoffeeRef.builder()
+                                        .coffeeId(orderCoffeeDto.getCoffeeId())
+                                        .quantity(orderCoffeeDto.getQuantity())
+                                        .build())
                         .collect(Collectors.toSet());
 
         this.orderCoffees = convertedOrderCoffees;
