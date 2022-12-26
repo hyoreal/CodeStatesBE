@@ -1,9 +1,12 @@
 package com.codestates.order.controller;
 
 import com.codestates.coffee.service.CoffeeService;
+import com.codestates.order.dto.OrderCoffeeResponseDto;
 import com.codestates.order.dto.OrderPostDto;
 import com.codestates.order.dto.OrderResponseDto;
+import com.codestates.order.dto.ReadableOrderGroupDto;
 import com.codestates.order.entity.Order;
+import com.codestates.order.entity.ReadableOrderCoffee;
 import com.codestates.order.mapper.OrderMapper;
 import com.codestates.order.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -15,7 +18,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import static java.util.Comparator.comparing;
 
@@ -74,7 +79,7 @@ public class OrderController {
      * N + 1 이슈가 없는 개선된 버전의 주문 목록 조회
      *
      */
-//    // Step 1: 네이티브 쿼리로 Join된 주문한 커피 정보
+    // Step 1: 네이티브 쿼리로 Join된 주문한 커피 정보
 //    @GetMapping
 //    public ResponseEntity getOrders1() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
@@ -82,7 +87,7 @@ public class OrderController {
 //        return new ResponseEntity<>(orders, HttpStatus.OK);
 //    }
 
-//    // Step 2: 주문한 커피별로 그룹핑하기
+    // Step 2: 주문한 커피별로 그룹핑하기
 //    @GetMapping
 //    public ResponseEntity getOrders2() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
@@ -93,7 +98,7 @@ public class OrderController {
 //                        Collectors.groupingBy(ReadableOrderCoffee::getMemberId))), HttpStatus.OK);
 //    }
 
-//    // Step 3: 그룹핑된 주문한 커피 정보를 우리가 원하는 데이터 형식으로 변환하기
+    // Step 3: 그룹핑된 주문한 커피 정보를 우리가 원하는 데이터 형식으로 변환하기
 //    @GetMapping
 //    public ResponseEntity getOrders3() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();
@@ -131,7 +136,7 @@ public class OrderController {
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 
-//    // Step 4: 최근 주문 순으로 정렬하기
+    // Step 4: 최근 주문 순으로 정렬하기
 //    @GetMapping
 //    public ResponseEntity getOrders4() {
 //        List<ReadableOrderCoffee> orders = orderService.findOrders2();

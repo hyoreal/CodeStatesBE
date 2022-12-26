@@ -43,7 +43,7 @@ public interface OrderMapper {
         return order;
     }
 
-//    default OrderResponseDto2 orderToOrderResponseDto(Order order);   // ResponseDto에서 더 많은 일을 하게 되는 케이스
+//    OrderResponseDto2 orderToOrderResponseDto(Order order);   // ResponseDto에서 더 많은 일을 하게 되는 케이스
 
     default OrderResponseDto orderToOrderResponseDto(CoffeeService coffeeService,
                                                      Order order) {
@@ -65,24 +65,24 @@ public interface OrderMapper {
         return orderResponseDto;
     }
 
-    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(
-                                                        CoffeeService coffeeService,
-                                                        Set<CoffeeRef> orderCoffees) {
-        return orderCoffees.stream()
-                .map(coffeeRef -> {
-                    Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId()); // N + 1 이슈 발생
+//    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(
+//                                                        CoffeeService coffeeService,
+//                                                        Set<CoffeeRef> orderCoffees) {
+//        return orderCoffees.stream()
+//                .map(coffeeRef -> {
+//                    Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId()); // N + 1 이슈 발생
+//
+//                    return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
+//                            coffee.getKorName(),
+//                            coffee.getEngName(),
+//                            coffee.getPrice(),
+////                            coffee.getPrice().getValue(), // Money 타입을 사용할 경우
+//                            coffeeRef.getQuantity());
+//                }).collect(Collectors.toList());
+//    }
 
-                    return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
-                            coffee.getKorName(),
-                            coffee.getEngName(),
-                            coffee.getPrice(),
-//                            coffee.getPrice().getValue(), // Money 타입을 사용할 경우
-                            coffeeRef.getQuantity());
-                }).collect(Collectors.toList());
-    }
-
-    // N + 1 이슈가 없는 개선된 orderToOrderCoffeeResponseDto 버전
-    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDtoV2(CoffeeService coffeeService,
+    // N + 1 이슈가 어느 정도는 개선된 orderToOrderCoffeeResponseDtoV2 버전
+    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(CoffeeService coffeeService,
                                                                          Set<CoffeeRef> orderCoffees) {
         // 주문한 커피의 coffeeId만 수집
         List<Long> coffeeIds =
@@ -98,7 +98,7 @@ public interface OrderMapper {
         return Streams
                 .zip(
                         coffees.stream().sorted(comparing(Coffee::getCoffeeId)),
-                        orderCoffees.stream().sorted(comparing(CoffeeRef::getCoffeeId)),
+                        orderCoffees.stream().sorted(comparing(CoffeeRef::getCoffeeId)),  // Quantity 정보를 얻기 위한 Set<CoffeeRef>
                         (coffee, coffeeRef) -> new OrderCoffeeResponseDto(coffee.getCoffeeId(),
                                 coffee.getKorName(),
                                 coffee.getEngName(),
