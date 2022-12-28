@@ -32,29 +32,30 @@ import java.util.stream.Collectors;
  */
 @Mapper(componentModel = "spring")
 public interface OrderMapper {
-    Order orderPatchDtoToOrder(OrderPatchDto orderPatchDto);
-    List<OrderResponseDto> ordersToOrderResponseDtos(List<Order> orders);
-
+    // 자동 매핑을 할 경우, Order가 OrderCoffee와 연관 관계 매핑을 할 방법이 없으므로 수동 매핑으로 해줘야 됨
     default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
         Order order = new Order();
         Member member = new Member();
         member.setMemberId(orderPostDto.getMemberId());
 
         List<OrderCoffee> orderCoffees = orderPostDto.getOrderCoffees().stream()
-                        .map(orderCoffeeDto -> {
-                            OrderCoffee orderCoffee = new OrderCoffee();
-                            Coffee coffee = new Coffee();
-                            coffee.setCoffeeId(orderCoffeeDto.getCoffeeId());
-                            orderCoffee.setOrder(order);
-                            orderCoffee.setCoffee(coffee);
-                            orderCoffee.setQuantity(orderCoffeeDto.getQuantity());
-                            return orderCoffee;
-                        }).collect(Collectors.toList());
+                .map(orderCoffeeDto -> {
+                    OrderCoffee orderCoffee = new OrderCoffee();
+                    Coffee coffee = new Coffee();
+                    coffee.setCoffeeId(orderCoffeeDto.getCoffeeId());
+                    orderCoffee.setOrder(order);
+                    orderCoffee.setCoffee(coffee);
+                    orderCoffee.setQuantity(orderCoffeeDto.getQuantity());
+                    return orderCoffee;
+                }).collect(Collectors.toList());
         order.setMember(member);
         order.setOrderCoffees(orderCoffees);
 
         return order;
     }
+
+    Order orderPatchDtoToOrder(OrderPatchDto orderPatchDto);
+    List<OrderResponseDto> ordersToOrderResponseDtos(List<Order> orders);
 
     /**
      * Order 엔티티 객체를 response body로 전달하기 위해 OrderResponseDto로 변환하는 Solution 코드입니다.
