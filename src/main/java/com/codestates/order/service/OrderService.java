@@ -169,7 +169,7 @@ public class OrderService {
 
         Stamp stamp = member.getStamp();
         stamp.setStampCount(stamp.getStampCount() + stampCount);
-        member.setStamp(stamp);
+//        member.setStamp(stamp);    // TODO 불필요한 코드라 제거
 
 
 
