@@ -36,7 +36,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+    @Transactional(propagation = Propagation.REQUIRED)
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
