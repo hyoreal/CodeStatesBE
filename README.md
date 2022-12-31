@@ -6,6 +6,8 @@
 
 ### Java
 
+#### Java Basic Homework
+
 - (Optional) 심화 실습 - 방문자 수 예측 프로그램(연산자 & 배열)
   - Ai_V1 Repo
   - Ai_V2 Repo
@@ -25,6 +27,8 @@
 
 
 - (Optional) 심화 실습 - 유튜브 자막 순화 프로그램(문자열 & 배열)
+
+
 
 
 ### Java OOP
