@@ -4,12 +4,12 @@
 
 ### 1. Api 계층
 
-#### homework
-- Controller homework Repo
-- Dto homework Repo
-#### homework solution
-- Controller homework solution Repo
-- Dto homework solution Repo
+#### Homework
+- Controller Homework Repo
+- Dto Homework Repo
+#### Homework Solution
+- Controller Homework Solution Repo
+- Dto Homework Solution Repo
 
 -------------------------
 
@@ -17,10 +17,10 @@
 
 #### Service Layer Reference Repo
 #### Service Layer Template Repo
-#### homework
-- Mapper homework Repo
-#### homework solution
-- Mapper homework solution Repo
+#### Homework
+- Mapper Homework Repo
+#### Homework Solution
+- Mapper Homework Solution Repo
 
 --------------------------
 
@@ -28,10 +28,10 @@
 
 #### Exception Reference Repo
 #### Exception Template Repo
-#### homework
-- Exception Handler homework Repo
-#### homework solution
-- Exception Handler homework solution Repo
+#### Homework
+- Exception Handler Homework Repo
+#### Homework Solution
+- Exception Handler Homework Solution Repo
 
 ---------------------------
 
@@ -41,22 +41,22 @@
 
 #### JDBC Reference Repo
 #### JDBC Template Repo
-#### homework
-- jdbc homework Repo
-#### homework solution
-- jdbc homework solution Repo
+#### Homework
+- JDBC Homework Repo
+#### Homework Solution
+- JDBC Homework Solution Repo
 
 ### JPA
 
 #### JPA Reference Repo
 #### JPA Template Repo
 #### Spring Data JPA
-- spring data jpa Reference Repo
-- spring data jpa Template Repo
--  homework
-   - spring data jpa homework Repo
-- homework solution
-   - spring data jpa homework solution Repo
+- Spring Data JPA Reference Repo
+- Spring Data JPA Template Repo
+- Homework
+   - Spring Data JPA Homework Repo
+- Homework Solution
+   - Spring Data JPA Homework Solution Repo
 
 ----------------------------
 
@@ -65,10 +65,10 @@
 
 #### Transaction Reference Repo
 #### Transaction Template Repo
-#### homework
-- transaction homework Repo
-#### homework solution 
-- transaction homework solution Repo
+#### Homework
+- Transaction Homework Repo
+#### Homework Solution 
+- Transaction Homework Solution Repo
 
 -------------------------------
 
@@ -76,29 +76,29 @@
 
 #### Testing Reference Repo
 #### Testing Template Repo
-#### 단위 테스트 homework
-- JUnit testing homework Repo
-- 단위 테스트 homework solution
-   - JUnit testing homework solution Repo
-#### 슬라이스 테스트 homework
-- slice testing homework Repo
-- 슬라이스 테스트 homework solution
-   - slice testing homework solution Repo
-#### testing mock homework
-- testing mock homework Repo
-- testing mock homework solution
-    - testing mock homework solution Repo
+#### 단위 테스트 Homework
+- JUnit Testing Homework Repo
+- 단위 테스트 Homework Solution
+   - JUnit Testing Homework Solution Repo
+#### 슬라이스 테스트 Homework
+- Slice Testing Homework Repo
+- 슬라이스 테스트 Homework Solution
+   - Slice Testing Homework Solution Repo
+#### Testing Mock Homework
+- Testing Mock Homework Repo
+- Testing mock homework solution
+    - Testing Mock Homework Solution Repo
 
 ---------------------------------------
   
 ### 7. API 문서화
 
-#### API documentation Reference Repo
-#### API documentation Template Repo
-#### homework
-- api documentation homework Repo
-#### homework solution
-- api documentation homework solution Repo
+#### API Documentation Reference Repo
+#### API Documentation Template Repo
+#### Homework
+- API Documentation Homework Repo
+#### Homework Solution
+- API Documentation Homework Solution Repo
 
 -----------------------------------
 
@@ -106,7 +106,7 @@
 
 #### Build Reference Repo
 #### Build Template Repo
-#### homework
-- build homework Repo
-#### homework solution
-- build homework Repo
+#### Homework
+- Build Homework Repo
+#### Homework Solution
+- Build Homework Repo
