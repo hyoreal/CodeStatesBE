@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dd79998-fbd0-4b43-b270-14b020a14edb" name="변경" comment="" />
+    <list default="true" id="4dd79998-fbd0-4b43-b270-14b020a14edb" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/controller_solution/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/src/main/java/com/codestates/Section3Week1SolutionControllerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/src/main/java/com/codestates/Section3Week1SolutionControllerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/src/main/java/com/codestates/coffee/CoffeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/src/main/java/com/codestates/coffee/CoffeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/src/main/java/com/codestates/member/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/src/main/java/com/codestates/member/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/src/main/java/com/codestates/order/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/src/main/java/com/codestates/order/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_solution/src/test/java/com/codestates/Section3Week1SolutionControllerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_mvc/solution/controller_solution/src/test/java/com/codestates/Section3Week1SolutionControllerApplicationTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
