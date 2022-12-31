@@ -31,12 +31,15 @@
 
 #### Homework
 
+- (Optional) 심화 실습 - 치킨의 민족 프로그램(객체지향) Repo
+
+
 - (Optional) 심화 실습 - 레스토랑 키오스크 프로그램(객체지향) Repo
 
 
 - (Optional) 심화 실습 - 텍스트 스타크래프트 프로그램 (this.) Repo
 
 
-
 #### Reference
 
+- [실습] BurgerQueen 주문 프로그램 만들기 Reference Repo
