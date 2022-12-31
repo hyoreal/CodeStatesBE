@@ -1,3 +1,3 @@
 # CodeStatesBE
 
-### Stringify-json Repo
+### Stringify-json Repository
