@@ -1,0 +1,5 @@
+rootProject.name = 'section4-week4-template-webflux'
+include 'spring_mvc_sample'
+include 'spring_mvc_outbound-sample'
+include 'spring_mvc_outbound_sample'
+
