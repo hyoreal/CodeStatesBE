@@ -45,7 +45,7 @@ public class MemberService {
     public Mono<Member> updateMember(Member member) {
         return findVerifiedMember(member.getMemberId())
                 .map(findMember -> beanUtils.copyNonNullProperties(member, findMember))
-                .flatMap(updatingMember -> memberRepository.save(updatingMember));
+                .flatMap(memberRepository::save);
     }
 
     @Transactional(readOnly = true)
