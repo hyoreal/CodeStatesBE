@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8cbd8ad3-22c2-4171-9e1f-b83ccee8ce01" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/Section3AdvancedSsrServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/Section3AdvancedSsrServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/advice/GlobalExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/advice/GlobalExceptionAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/audit/Auditable.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/audit/Auditable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/controller/CoffeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/controller/CoffeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/dto/CoffeePatchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/dto/CoffeePatchDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/dto/CoffeePostDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/dto/CoffeePostDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/dto/CoffeeResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/dto/CoffeeResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/entity/Coffee.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/entity/Coffee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/mapper/CoffeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/mapper/CoffeeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/repository/CoffeeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/repository/CoffeeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/coffee/service/CoffeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/coffee/service/CoffeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/dto/MultiResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/dto/MultiResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/dto/PageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/dto/PageInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/dto/SingleResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/dto/SingleResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/exception/BusinessLogicException.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/exception/BusinessLogicException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/exception/ExceptionCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/exception/ExceptionCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/dto/MemberPatchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/dto/MemberPatchDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/dto/MemberPostDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/dto/MemberPostDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/dto/MemberResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/dto/MemberResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/entity/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/mapper/MemberMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/mapper/MemberMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/member/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderCoffeeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderCoffeeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderCoffeeResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderCoffeeResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderPatchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderPatchDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderPostDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderPostDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/dto/OrderResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/entity/OrderCoffee.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/entity/OrderCoffee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/mapper/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/mapper/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/response/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/response/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/stamp/Stamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/stamp/Stamp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/validator/NotSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/validator/NotSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/java/com/codestates/validator/NotSpaceValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/java/com/codestates/validator/NotSpaceValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/main/resources/templates/coffee.html" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/main/resources/templates/coffee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssr_server_reference/src/test/java/com/codestates/Section3AdvancedSsrServerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/ssr/ssr_server_reference/src/test/java/com/codestates/Section3AdvancedSsrServerApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2JgKx5hQPXlQJd8A2Tvwg5hllJB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/hyore/DeskTop/project/CodeStatesBE"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hyore\DeskTop\project\CodeStatesBE\api_communication\ssr" />
+      <recent name="C:\Users\hyore\DeskTop\project\CodeStatesBE\api_communication\csr" />
+      <recent name="C:\Users\hyore\DeskTop\project\CodeStatesBE\api_communication\CSR" />
+      <recent name="C:\Users\hyore\DeskTop\백엔드 부트캠프\CodeStatesBE\spring_mvc\8_build\homework" />
+      <recent name="C:\Users\hyore\DeskTop\백엔드 부트캠프\CodeStatesBE\spring_mvc\8_build" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="CodeStatesBE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="CodeStatesBE" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="8cbd8ad3-22c2-4171-9e1f-b83ccee8ce01" name="변경" comment="" />
+      <created>1672494534223</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1672494534223</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
