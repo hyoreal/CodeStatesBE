@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8cbd8ad3-22c2-4171-9e1f-b83ccee8ce01" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csr_client_reference/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/csr/csr_client_reference/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csr_client_reference/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/csr/csr_client_reference/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csr_client_reference/.idea/section3-advanced-csr-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/csr/csr_client_reference/.idea/section3-advanced-csr-client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csr_client_reference/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/csr/csr_client_reference/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csr_client_reference/coffee.html" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/csr/csr_client_reference/coffee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csr_client_reference/coffee.js" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/csr/csr_client_reference/coffee.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,12 +29,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/hyore/DeskTop/project/CodeStatesBE"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hyore\DeskTop\백엔드 부트캠프\CodeStatesBE\spring_mvc\8_build\homework" />
