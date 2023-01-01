@@ -1,5 +1,17 @@
 # CodeStatesBE
 
+## API 통신 Reference
+
+### CSR (Client Side Rendering) 방식
+
+#### CSR Client Reference Repository
+
+#### CSR Server Reference Repository
+
+### SSR (Server Side Rendering) 방식
+
+#### SSR Server Reference Repository
+
 ## Section3 Live Session Resources
 
 ## Spring MVC
