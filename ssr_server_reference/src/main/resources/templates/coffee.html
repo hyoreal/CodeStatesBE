@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>커피 등록</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-lg">
+    <h3>커피 등록(SSR 방식)</h3>
+    <hr/>
+    <div>
+        <form id="coffeeForm" method="POST" action="/coffees">
+            <div class="mb-3">
+                <label for="korName" class="form-label">커피명(한글)</label>
+                <input type="text" name="korName" class="form-control" id="korName" placeholder="커피명(한글)을 입력해 주세요">
+            </div>
+            <div class="mb-3">
+                <label for="engName" class="form-label">커피명(영문)</label>
+                <input type="text" name="engName" class="form-control" id="engName" placeholder="커피명(영문)을 입력해 주세요">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">가격</label>
+                <input type="number" step="1000" name="price" id="price" class="form-control" placeholder="가격을 입력해 주세요">
+            </div>
+            <div class="mb-3">
+                <label for="coffeeCode" class="form-label">커피 코드</label>
+                <input type="text" name="coffeeCode" class="form-control" id="coffeeCode" placeholder="커피코드(영문 3자리)를 입력해 주세요">
+            </div>
+            <div>
+                <button type="button" class="btn btn-outline-primary" id="btnReg" onclick="registerCoffee()">등록</button>
+            </div>
+        </form>
+    </div>
+    <p>&nbsp;</p>
+    <hr/>
+    <p>&nbsp;</p>
+    <div>
+        <h4>커피 목록</h4>
+        <hr/>
+        <table id="coffeeList" class="table table-light table-striped">
+            <thead>
+            <tr class="table table-success">
+                <td align="center">커피 이름</td>
+                <td align="center">가격</td>
+                <td align="center">판매 상태</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${coffees == null || coffees.size == 0}">
+                    <td align="center" colspan="3">등록된 커피가 없습니다.</td>
+                </tr>
+                <tr th:each="coffee: ${coffees}">
+                    <td th:text="|${coffee.korName}(${coffee.engName})|"></td>
+                    <td th:text="${coffee.price}"></td>
+                    <td th:text="${coffee.coffeeStatus}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <script>
+        function registerCoffee(){
+            let korName = document.getElementById("korName").value;
+            let engName = document.getElementById("engName").value;
+            let price = document.getElementById("price").value;
+            let coffeeCode = document.getElementById("coffeeCode").value;
+
+            if(!korName){
+                alert("커피 이름(한글)을 입력해주세요.");
+                return false;
+            }
+
+            if(!engName){
+                alert("커피 이름(영문)을 입력해주세요.");
+                return false;
+            }
+
+            if(!price){
+                alert("가격을 입력해주세요.");
+                return false;
+            }
+
+            if(!coffeeCode){
+                alert("커피 코드를 입력해주세요.");
+                return false;
+            }
+
+            var form = document.getElementById("coffeeForm");
+            form.submit();
+
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+</html>
