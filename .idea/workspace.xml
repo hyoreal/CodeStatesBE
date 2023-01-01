@@ -4,43 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8cbd8ad3-22c2-4171-9e1f-b83ccee8ce01" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/java/com/codestates/docker_test/DockerTestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/java/com/codestates/docker_test/DockerTestApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/java/com/codestates/docker_test/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/java/com/codestates/docker_test/controller/TestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/die.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/die.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/die.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/die.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eatghost.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eatghost.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eatghost.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eatghost.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eating.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eating.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eating.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eating.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eating.short.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eating.short.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eating.short.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eating.short.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eatpill.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eatpill.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/eatpill.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/eatpill.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/extra lives.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/extra lives.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/extra lives.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/extra lives.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/intermission.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/intermission.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/intermission.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/intermission.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/opening_song.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/opening_song.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/opening_song.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/opening_song.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/siren.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/siren.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/siren.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/siren.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/vcs_90.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/vcs_90.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/audio/vcs_90.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/audio/vcs_90.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/modernizr-1.5.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/modernizr-1.5.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/static/pacman.js" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/static/pacman.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacman_canvas/src/test/java/com/codestates/docker_test/DockerTestApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/docker/game_server/pacman_canvas/src/test/java/com/codestates/docker_test/DockerTestApplicationTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="8cbd8ad3-22c2-4171-9e1f-b83ccee8ce01" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
