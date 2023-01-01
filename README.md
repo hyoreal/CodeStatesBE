@@ -1,5 +1,7 @@
 # CodeStatesBE
 
+## Section3 Live Session Resources
+
 ## Spring MVC
 
 ### 1. Api 계층
