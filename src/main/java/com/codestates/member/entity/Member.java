@@ -23,6 +23,10 @@ public class Member extends Auditable {
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
+    // (1) 추가
+    @Column(length = 100, nullable = false)
+    private String password;
+
     @Column(length = 100, nullable = false)
     private String name;
 
@@ -35,6 +39,9 @@ public class Member extends Auditable {
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
     // 수정된 부분
     @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
