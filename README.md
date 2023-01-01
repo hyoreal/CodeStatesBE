@@ -6,6 +6,7 @@
 - Deploy Client Repository
 - Deploy Server Repository
 
+---------------------
 
 ## Docker
 
@@ -13,6 +14,7 @@
 - Pacman Canvas Repository
 - SpaceInvaders Repository
 
+-----------------------
 
 ## Spring Security
 
@@ -44,6 +46,8 @@
 - Spring Security Oauth2 Template Repository
 - Spring Security Oauth2 Template Training Repository
 
+-----------------------
+
 ## Spring WebFlux
 
 #### WebFlux Homework
@@ -74,5 +78,7 @@
 #### Template
 - Spring Reactive Template Repository
 - Spring Reactive Template Training Repository
+
+-----------------------
 
 ### Spring Send Email Reference Repository
